@@ -34,7 +34,7 @@ public class ColdSnapHorde implements ModInitializer {
 	public static boolean isCalyxLoaded;
 	public static boolean isInHolidayWindow;
 	public static Horde Horde;
-	public static final CreativeModeTab TAB = FabricItemGroupBuilder.build(new ResourceLocation(ColdSnapHorde.MOD_ID, "immortuostab"), () -> new ItemStack(Register.ROCKYSNOWBALL));
+	public static final CreativeModeTab TAB = FabricItemGroupBuilder.build(new ResourceLocation(ColdSnapHorde.MOD_ID, "coldgroup"), () -> new ItemStack(Register.ROCKYSNOWBALL));
 	public static ColdSnapConfig config;
 
 	@Override

@@ -68,6 +68,6 @@
   "item.coldsnaphorde.pgifter_spawn_egg": "Plague Horde Gifter Spawn Egg",
   "item.coldsnaphorde.pzapper_spawn_egg": "Plague Horde Zapper Spawn Egg",
   "item.coldsnaphorde.pbrawler_spawn_egg": "Plague Horde Brawler Spawn Egg",
-  "itemGroup.ColdSnapHorde": "Cold Snap Horde",
+  "itemGroup.coldsnaphorde.coldgroup": "Cold Snap Horde",
   "info.coldsnaphorde.holiday": "Happy Holidays! All entities now have a low chance to drop presents, and horde members have a higher chance of dropping presents!"
 }

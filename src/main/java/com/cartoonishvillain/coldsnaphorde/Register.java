@@ -16,6 +16,7 @@ import com.cartoonishvillain.coldsnaphorde.items.SlushBlock;
 import com.cartoonishvillain.coldsnaphorde.items.Snowglobe;
 import com.cartoonishvillain.coldsnaphorde.items.ToolsOrOther.IceSword;
 import com.cartoonishvillain.coldsnaphorde.items.ToolsOrOther.Materials;
+import com.cartoonishvillain.immortuoscalyx.ImmortuosCalyx;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -29,6 +30,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -81,6 +83,37 @@ public class Register {
     public static final EntityType<PlagueHorde.PlagueZapper> PCOLDSNAPZAPPER = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "pcoldsnapzapper"), FabricEntityTypeBuilder.create(MobCategory.MONSTER, PlagueHorde.PlagueZapper::new).dimensions(EntityDimensions.fixed(0.6f, 1.95f)).build());
     public static final EntityType<PlagueHorde.PlagueBrawler> PCOLDSNAPBRAWLER = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "pcoldsnapbrawler"), FabricEntityTypeBuilder.create(MobCategory.MONSTER, PlagueHorde.PlagueBrawler::new).dimensions(EntityDimensions.fixed(0.6f, 1.95f)).build());
 
+
+
+    public static final Item COLDSNAPGUNNERSPAWN = new SpawnEggItem(COLDSNAPGUNNER, 14804727, 0, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item COLDSNAPSTABBERSPAWN = new SpawnEggItem(COLDSNAPSTABBER, 14804727, 8585216, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item COLDSNAPSNOWBALLERSPAWN = new SpawnEggItem(COLDSNAPSNOWBALLER, 14804727, 25753, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item COLDSNAPGIFTERSPAWN = new SpawnEggItem(COLDSNAPGIFTER, 14804727, 26671, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item COLDSNAPZAPPERSPAWN = new SpawnEggItem(COLDSNAPZAPPER, 14804727, 9802549, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item COLDSNAPBRAWLERSPAWN = new SpawnEggItem(COLDSNAPBRAWLER, 14804727, 6229378, new Item.Properties().tab(ColdSnapHorde.TAB));
+
+    public static final Item NCOLDSNAPGUNNERSPAWN = new SpawnEggItem(NCOLDSNAPGUNNER, 4926000, 0, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item NCOLDSNAPSTABBERSPAWN = new SpawnEggItem(NCOLDSNAPSTABBER, 4926000, 8585216, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item NCOLDSNAPSNOWBALLERSPAWN = new SpawnEggItem(NCOLDSNAPSNOWBALLER, 4926000, 25753, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item NCOLDSNAPGIFTERSPAWN = new SpawnEggItem(NCOLDSNAPGIFTER, 4926000, 26671, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item NCOLDSNAPZAPPERSPAWN = new SpawnEggItem(NCOLDSNAPZAPPER, 4926000, 9802549, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item NCOLDSNAPBRAWLERSPAWN = new SpawnEggItem(NCOLDSNAPBRAWLER, 4926000, 6229378, new Item.Properties().tab(ColdSnapHorde.TAB));
+
+    public static final Item ECOLDSNAPGUNNERSPAWN = new SpawnEggItem(ECOLDSNAPGUNNER, 15332272, 0, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item ECOLDSNAPSTABBERSPAWN = new SpawnEggItem(ECOLDSNAPSTABBER, 15332272, 8585216, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item ECOLDSNAPSNOWBALLERSPAWN = new SpawnEggItem(ECOLDSNAPSNOWBALLER, 15332272, 25753, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item ECOLDSNAPGIFTERSPAWN = new SpawnEggItem(ECOLDSNAPGIFTER, 15332272, 26671, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item ECOLDSNAPZAPPERSPAWN = new SpawnEggItem(ECOLDSNAPZAPPER, 15332272, 9802549, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item ECOLDSNAPBRAWLERSPAWN = new SpawnEggItem(ECOLDSNAPBRAWLER, 15332272, 6229378, new Item.Properties().tab(ColdSnapHorde.TAB));
+
+    public static final Item PCOLDSNAPGUNNERSPAWN = new SpawnEggItem(PCOLDSNAPGUNNER, 14804727, 0, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item PCOLDSNAPSTABBERSPAWN = new SpawnEggItem(PCOLDSNAPSTABBER, 14804727, 8585216, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item PCOLDSNAPSNOWBALLERSPAWN = new SpawnEggItem(PCOLDSNAPSNOWBALLER, 14804727, 25753, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item PCOLDSNAPGIFTERSPAWN = new SpawnEggItem(PCOLDSNAPGIFTER, 14804727, 26671, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item PCOLDSNAPZAPPERSPAWN = new SpawnEggItem(PCOLDSNAPZAPPER, 14804727, 9802549, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item PCOLDSNAPBRAWLERSPAWN = new SpawnEggItem(PCOLDSNAPBRAWLER, 14804727, 6229378, new Item.Properties().tab(ColdSnapHorde.TAB));
+
+
     public static final EntityType<GunnerProjectileEntity> GUNNERPROJECTILE = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "gunnerprojectile"), FabricEntityTypeBuilder.<GunnerProjectileEntity>create(MobCategory.MISC, GunnerProjectileEntity::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).build());
     public static final EntityType<RockSnowballEntity> ROCKSNOWBALLPROJECTILE = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "rocksnowballprojectile"), FabricEntityTypeBuilder.<RockSnowballEntity>create(MobCategory.MISC, RockSnowballEntity::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).build());
     public static final EntityType<ThrownChorusEntity> THROWNCHORUSPROJECTILE = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "thrownchorusprojectile"), FabricEntityTypeBuilder.<ThrownChorusEntity>create(MobCategory.MISC, ThrownChorusEntity::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).build());
@@ -88,6 +121,7 @@ public class Register {
     public static final EntityType<LightningSnowEntity> LIGHTNINGSNOWBALLPROJECTILE = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "lightningsnowballprojectile"), FabricEntityTypeBuilder.<LightningSnowEntity>create(MobCategory.MISC, LightningSnowEntity::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).build());
 
     public static final EntityType<ColdSnapCow> COLDSNAPCOW = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "frostycow"), FabricEntityTypeBuilder.<ColdSnapCow>create(MobCategory.CREATURE, ColdSnapCow::new).dimensions(EntityDimensions.fixed(0.9f, 1.4f)).build());
+    public static final Item COLDSNAPCOWSPAWN = new SpawnEggItem(COLDSNAPCOW, 14804727, 1840384, new Item.Properties().tab(ColdSnapHorde.TAB));
 
     public static final Block SLUSH = new SlushBlock(BlockBehaviour.Properties.of(Material.SNOW).strength(0).sound(SoundType.SNOW));
     public static final Item SLUSHITEM = new BlockItem(SLUSH, new Item.Properties().tab(ColdSnapHorde.TAB));
@@ -118,6 +152,39 @@ public class Register {
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "present"), PRESENT);
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "ice_sword"), ICESWORD);
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "tophat"), TOPHAT);
+
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "frostcow_spawn_egg"), COLDSNAPCOWSPAWN);
+
+
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "gunner_spawn_egg"), COLDSNAPGUNNERSPAWN);
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "stabber_spawn_egg"), COLDSNAPSTABBERSPAWN);
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "snowballer_spawn_egg"), COLDSNAPSNOWBALLERSPAWN);
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "zapper_spawn_egg"), COLDSNAPZAPPERSPAWN);
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "gifter_spawn_egg"), COLDSNAPGIFTERSPAWN);
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "brawler_spawn_egg"), COLDSNAPBRAWLERSPAWN);
+
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "ngunner_spawn_egg"), NCOLDSNAPGUNNERSPAWN);
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "nstabber_spawn_egg"), NCOLDSNAPSTABBERSPAWN);
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "nsnowballer_spawn_egg"), NCOLDSNAPSNOWBALLERSPAWN);
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "nzapper_spawn_egg"), NCOLDSNAPZAPPERSPAWN);
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "ngifter_spawn_egg"), NCOLDSNAPGIFTERSPAWN);
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "nbrawler_spawn_egg"), NCOLDSNAPBRAWLERSPAWN);
+
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "egunner_spawn_egg"), ECOLDSNAPGUNNERSPAWN);
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "estabber_spawn_egg"), ECOLDSNAPSTABBERSPAWN);
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "esnowballer_spawn_egg"), ECOLDSNAPSNOWBALLERSPAWN);
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "ezapper_spawn_egg"), ECOLDSNAPZAPPERSPAWN);
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "egifter_spawn_egg"), ECOLDSNAPGIFTERSPAWN);
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "ebrawler_spawn_egg"), ECOLDSNAPBRAWLERSPAWN);
+
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "pgunner_spawn_egg"), PCOLDSNAPGUNNERSPAWN);
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "pstabber_spawn_egg"), PCOLDSNAPSTABBERSPAWN);
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "psnowballer_spawn_egg"), PCOLDSNAPSNOWBALLERSPAWN);
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "pzapper_spawn_egg"), PCOLDSNAPZAPPERSPAWN);
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "pgifter_spawn_egg"), PCOLDSNAPGIFTERSPAWN);
+        Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "pbrawler_spawn_egg"), PCOLDSNAPBRAWLERSPAWN);
+
+
 
 
 
