@@ -37,17 +37,17 @@ public class ColdSnapConfig implements ConfigData {
         @Comment("Changes the spawn weight of the Brawler in the Overworld")
         public int BRAWLER = 8;
         @Comment("Changes the spawn weight of the Stabber other dimensions")
-        public int DSTABBER = 20;
+        public int DSTABBER = 2;
         @Comment("Changes the spawn weight of the Gunner other dimensions")
-        public int DGUNNER = 20;
+        public int DGUNNER = 2;
         @Comment("Changes the spawn weight of the Snowballer other dimensions")
-        public int DSNOWBALLER = 20;
+        public int DSNOWBALLER = 2;
         @Comment("Changes the spawn weight of the Gifter other dimensions")
-        public int DGIFTER = 10;
+        public int DGIFTER = 1;
         @Comment("Changes the spawn weight of the Zapper other dimensions")
-        public int DZAPPER = 6;
+        public int DZAPPER = 1;
         @Comment("Changes the spawn weight of the Brawler other dimensions")
-        public int DBRAWLER = 8;
+        public int DBRAWLER = 1;
     }
 
     public static class ColdSnapSettings{

@@ -2,6 +2,7 @@ package com.cartoonishvillain.coldsnaphorde;
 
 import com.cartoonishvillain.coldsnaphorde.component.WorldCooldownComponent;
 import com.cartoonishvillain.coldsnaphorde.config.ColdSnapConfig;
+import com.cartoonishvillain.coldsnaphorde.entities.Spawns;
 import com.cartoonishvillain.coldsnaphorde.events.Horde;
 import io.netty.buffer.Unpooled;
 import me.shedaniel.autoconfig.AutoConfig;
@@ -49,6 +50,8 @@ public class ColdSnapHorde implements ModInitializer {
 		ServerLifecycleEvents.SERVER_STARTING.register(ServerStartListener.getInstance());
 
 		ServerTickEvents.END_WORLD_TICK.register(WorldTickListener.getInstance());
+
+		Spawns.initSpawns();
 	}
 
 	public static class ServerStartListener implements ServerLifecycleEvents.ServerStarting{

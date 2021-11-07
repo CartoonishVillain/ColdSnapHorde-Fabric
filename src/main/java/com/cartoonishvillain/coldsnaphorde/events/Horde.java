@@ -19,6 +19,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -152,7 +153,7 @@ public class Horde {
                         center = serverPlayer.blockPosition();
                         updateCenter = ColdSnapHorde.config.coldSnapSettings.UPDATETICK;
                         if (!world.dimension().toString().contains("nether") && !world.dimension().toString().contains("end")) {
-                            if (world.getBiome(center).toString().contains("swamp")) {
+                            if (world.getBiome(center).getBiomeCategory().equals(Biome.BiomeCategory.SWAMP)) {
                                 bossInfo.setColor(BossEvent.BossBarColor.GREEN);
                                 bossInfo.setName(new TextComponent("Cold Snap Horde").withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD));
                             } else {
@@ -353,7 +354,7 @@ public class Horde {
 
 
     private boolean biomeCheck(ServerLevel world, BlockPos pos) {
-        if (world.getBiome(pos).toString().contains("swamp")) {
+        if (world.getBiome(pos).getBiomeCategory().equals(Biome.BiomeCategory.SWAMP)) {
             return true;
         }
         if (!world.dimension().toString().contains("over")) {
@@ -464,8 +465,8 @@ public class Horde {
 
     private ColdSnapGunner gunnerSpawnRules(ServerLevel world, BlockPos pos) {
         ColdSnapGunner coldSnapGunner = null;
-        String BiomeName = world.getBiome(pos).toString();
-        if (BiomeName.contains("swamp")) {
+        boolean swamp = world.getBiome(pos).getBiomeCategory().equals(Biome.BiomeCategory.SWAMP);
+        if (swamp) {
             coldSnapGunner = new PlagueHorde.PlagueGunner(Register.PCOLDSNAPGUNNER, world);
         } else if (world.dimension().toString().contains("end")) {
             coldSnapGunner = new EndHorde.EndGunner(Register.ECOLDSNAPGUNNER, world);
@@ -501,8 +502,8 @@ public class Horde {
 
     private ColdSnapStabber stabberSpawnRules(ServerLevel world, BlockPos pos) {
         ColdSnapStabber coldSnapStabber = null;
-        String BiomeName = world.getBiome(pos).toString();
-        if (BiomeName.contains("swamp")) {
+        boolean swamp = world.getBiome(pos).getBiomeCategory().equals(Biome.BiomeCategory.SWAMP);
+        if (swamp) {
             coldSnapStabber = new PlagueHorde.PlagueStabber(Register.PCOLDSNAPSTABBER, world);
         } else if (world.dimension().toString().contains("end")) {
             coldSnapStabber = new EndHorde.EndStabber(Register.ECOLDSNAPSTABBER, world);
@@ -539,8 +540,8 @@ public class Horde {
 
     private ColdSnapSnowballer snowballerSpawnRules(ServerLevel world, BlockPos pos) {
         ColdSnapSnowballer coldSnapSnowballer = null;
-        String BiomeName = world.getBiome(pos).toString();
-        if (BiomeName.contains("swamp")) {
+        boolean swamp = world.getBiome(pos).getBiomeCategory().equals(Biome.BiomeCategory.SWAMP);
+        if (swamp) {
             coldSnapSnowballer = new PlagueHorde.PlagueSnowballer(Register.PCOLDSNAPSNOWBALLER, world);
         } else if (world.dimension().toString().contains("end")) {
             coldSnapSnowballer = new EndHorde.EndSnowballer(Register.ECOLDSNAPSNOWBALLER, world);
@@ -576,8 +577,8 @@ public class Horde {
 
     private ColdSnapGifter gifterSpawnRules(ServerLevel world, BlockPos pos){
         ColdSnapGifter coldSnapGifter = null;
-        String BiomeName = world.getBiome(pos).toString();
-        if (BiomeName.contains("swamp")){
+        boolean swamp = world.getBiome(pos).getBiomeCategory().equals(Biome.BiomeCategory.SWAMP);
+        if (swamp){
             coldSnapGifter = new PlagueHorde.PlagueGifter(Register.PCOLDSNAPGIFTER, world);
         }else if(world.dimension().toString().contains("end")){
             coldSnapGifter = new EndHorde.EndGifter(Register.ECOLDSNAPGIFTER, world);
@@ -607,8 +608,8 @@ public class Horde {
 
     private ColdSnapZapper zapperSpawnRules(ServerLevel world, BlockPos pos){
         ColdSnapZapper coldSnapZapper = null;
-        String BiomeName = world.getBiome(pos).toString();
-        if (BiomeName.contains("swamp")){coldSnapZapper = new PlagueHorde.PlagueZapper(Register.PCOLDSNAPZAPPER, world);
+        boolean swamp = world.getBiome(pos).getBiomeCategory().equals(Biome.BiomeCategory.SWAMP);
+        if (swamp){coldSnapZapper = new PlagueHorde.PlagueZapper(Register.PCOLDSNAPZAPPER, world);
         }else if(world.dimension().toString().contains("end")){
             coldSnapZapper = new EndHorde.EndZapper(Register.ECOLDSNAPZAPPER, world);
         }else if(world.dimension().toString().contains("nether")){
@@ -637,8 +638,8 @@ public class Horde {
 
     private ColdSnapBrawler brawlerSpawnRules(ServerLevel world, BlockPos pos){
         ColdSnapBrawler coldSnapBrawler = null;
-        String BiomeName = world.getBiome(pos).toString();
-        if (BiomeName.contains("swamp")){
+        boolean swamp = world.getBiome(pos).getBiomeCategory().equals(Biome.BiomeCategory.SWAMP);
+        if (swamp){
             coldSnapBrawler = new PlagueHorde.PlagueBrawler(Register.PCOLDSNAPBRAWLER, world);
         }else if(world.dimension().toString().contains("end")){
             coldSnapBrawler = new EndHorde.EndBrawler(Register.ECOLDSNAPBRAWLER, world);

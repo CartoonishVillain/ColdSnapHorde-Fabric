@@ -1,10 +1,200 @@
 package com.cartoonishvillain.coldsnaphorde.entities;
 
-//Todo: Convert all of *this* into the fabric equivalent.
+
+import com.cartoonishvillain.coldsnaphorde.ColdSnapHorde;
+import com.cartoonishvillain.coldsnaphorde.Register;
+import net.fabricmc.fabric.mixin.object.builder.SpawnRestrictionAccessor;
+import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.random.WeightedRandomList;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.levelgen.Heightmap;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Spawns {
+
+    public static void initSpawns() {
+        final String BiomeList = ColdSnapHorde.config.spawnconfig.BiomeExclusion;
+        String[] biomeExclusion = BiomeList.split(",");
+        int exclusionLength = biomeExclusion.length;
+        ResourceLocation[] finalBiomeExclusion = new ResourceLocation[exclusionLength];
+        int counter = 0;
+        for (String i : biomeExclusion) {
+            ResourceLocation newResource = new ResourceLocation(i);
+            finalBiomeExclusion[counter] = newResource;
+            counter++;
+        }
+
+        MobSpawnSettings.SpawnerData spawners = new MobSpawnSettings.SpawnerData(Register.COLDSNAPSTABBER, ColdSnapHorde.config.spawnconfig.STABBER, 1, 1);
+        MobSpawnSettings.SpawnerData spawners1 = new MobSpawnSettings.SpawnerData(Register.COLDSNAPGUNNER, ColdSnapHorde.config.spawnconfig.GUNNER, 1, 1);
+        MobSpawnSettings.SpawnerData spawners2 = new MobSpawnSettings.SpawnerData(Register.COLDSNAPSNOWBALLER, ColdSnapHorde.config.spawnconfig.SNOWBALLER, 1, 1);
+        MobSpawnSettings.SpawnerData spawners3 = new MobSpawnSettings.SpawnerData(Register.COLDSNAPGIFTER, ColdSnapHorde.config.spawnconfig.GIFTER, 1, 1);
+        MobSpawnSettings.SpawnerData spawners4 = new MobSpawnSettings.SpawnerData(Register.COLDSNAPZAPPER, ColdSnapHorde.config.spawnconfig.ZAPPER, 1, 1);
+        MobSpawnSettings.SpawnerData spawners5 = new MobSpawnSettings.SpawnerData(Register.COLDSNAPBRAWLER, ColdSnapHorde.config.spawnconfig.BRAWLER, 1, 1);
+        MobSpawnSettings.SpawnerData spawners6 = new MobSpawnSettings.SpawnerData(Register.COLDSNAPCOW, 8, 4, 4);
+
+
+        MobSpawnSettings.SpawnerData nspawners = new MobSpawnSettings.SpawnerData(Register.NCOLDSNAPSTABBER, ColdSnapHorde.config.spawnconfig.DSTABBER, 1, 1);
+        MobSpawnSettings.SpawnerData nspawners1 = new MobSpawnSettings.SpawnerData(Register.NCOLDSNAPGUNNER, ColdSnapHorde.config.spawnconfig.DGUNNER, 1, 1);
+        MobSpawnSettings.SpawnerData nspawners2 = new MobSpawnSettings.SpawnerData(Register.NCOLDSNAPSNOWBALLER, ColdSnapHorde.config.spawnconfig.DSNOWBALLER, 1, 1);
+        MobSpawnSettings.SpawnerData nspawners3 = new MobSpawnSettings.SpawnerData(Register.NCOLDSNAPGIFTER, ColdSnapHorde.config.spawnconfig.DGIFTER, 1, 1);
+        MobSpawnSettings.SpawnerData nspawners4 = new MobSpawnSettings.SpawnerData(Register.NCOLDSNAPZAPPER, ColdSnapHorde.config.spawnconfig.DZAPPER, 1, 1);
+        MobSpawnSettings.SpawnerData nspawners5 = new MobSpawnSettings.SpawnerData(Register.NCOLDSNAPBRAWLER, ColdSnapHorde.config.spawnconfig.DBRAWLER, 1, 1);
+
+        MobSpawnSettings.SpawnerData espawners = new MobSpawnSettings.SpawnerData(Register.ECOLDSNAPSTABBER, ColdSnapHorde.config.spawnconfig.DSTABBER, 1, 1);
+        MobSpawnSettings.SpawnerData espawners1 = new MobSpawnSettings.SpawnerData(Register.ECOLDSNAPGUNNER, ColdSnapHorde.config.spawnconfig.DGUNNER, 1, 1);
+        MobSpawnSettings.SpawnerData espawners2 = new MobSpawnSettings.SpawnerData(Register.ECOLDSNAPSNOWBALLER, ColdSnapHorde.config.spawnconfig.DSNOWBALLER, 1, 1);
+        MobSpawnSettings.SpawnerData espawners3 = new MobSpawnSettings.SpawnerData(Register.ECOLDSNAPGIFTER, ColdSnapHorde.config.spawnconfig.DGIFTER, 1, 1);
+        MobSpawnSettings.SpawnerData espawners4 = new MobSpawnSettings.SpawnerData(Register.ECOLDSNAPZAPPER, ColdSnapHorde.config.spawnconfig.DZAPPER, 1, 1);
+        MobSpawnSettings.SpawnerData espawners5 = new MobSpawnSettings.SpawnerData(Register.ECOLDSNAPBRAWLER, ColdSnapHorde.config.spawnconfig.DBRAWLER, 1, 1);
+
+        MobSpawnSettings.SpawnerData pspawners = new MobSpawnSettings.SpawnerData(Register.PCOLDSNAPSTABBER, ColdSnapHorde.config.spawnconfig.STABBER, 1, 1);
+        MobSpawnSettings.SpawnerData pspawners1 = new MobSpawnSettings.SpawnerData(Register.PCOLDSNAPGUNNER, ColdSnapHorde.config.spawnconfig.GUNNER, 1, 1);
+        MobSpawnSettings.SpawnerData pspawners2 = new MobSpawnSettings.SpawnerData(Register.PCOLDSNAPSNOWBALLER, ColdSnapHorde.config.spawnconfig.SNOWBALLER, 1, 1);
+        MobSpawnSettings.SpawnerData pspawners3 = new MobSpawnSettings.SpawnerData(Register.PCOLDSNAPGIFTER, ColdSnapHorde.config.spawnconfig.GIFTER, 1, 1);
+        MobSpawnSettings.SpawnerData pspawners4 = new MobSpawnSettings.SpawnerData(Register.PCOLDSNAPZAPPER, ColdSnapHorde.config.spawnconfig.ZAPPER, 1, 1);
+        MobSpawnSettings.SpawnerData pspawners5 = new MobSpawnSettings.SpawnerData(Register.PCOLDSNAPBRAWLER, ColdSnapHorde.config.spawnconfig.BRAWLER, 1, 1);
+
+        for (Biome event : BuiltinRegistries.BIOME) {
+            if (BiomeExclusion(finalBiomeExclusion, event.toString()) && !event.toString().contains("swamp") && !(event.getBiomeCategory() == Biome.BiomeCategory.NETHER || event.getBiomeCategory() == Biome.BiomeCategory.THEEND)) {
+                if (ColdSnapHorde.config.spawnconfig.SPAWNTEMPS == 0 && event.getBaseTemperature() < 0.3f) {
+                    List<MobSpawnSettings.SpawnerData> spawnersList = event.getMobSettings().spawners.get(MobCategory.MONSTER).unwrap();
+                    ArrayList<MobSpawnSettings.SpawnerData> newSpawnerList = new ArrayList<>(spawnersList);
+                    newSpawnerList.add(spawners);
+                    newSpawnerList.add(spawners1);
+                    newSpawnerList.add(spawners2);
+                    newSpawnerList.add(spawners3);
+                    newSpawnerList.add(spawners4);
+                    newSpawnerList.add(spawners5);
+                    newSpawnerList.add(spawners6);
+                    HashMap<MobCategory, WeightedRandomList<MobSpawnSettings.SpawnerData>> newSpawnerMap = new HashMap<>(event.getMobSettings().spawners);
+                    newSpawnerMap.put(MobCategory.MONSTER, WeightedRandomList.create(newSpawnerList));
+                    event.getMobSettings().spawners = newSpawnerMap;
+                } else if (ColdSnapHorde.config.spawnconfig.SPAWNTEMPS == 1 && event.getBaseTemperature() < 0.9f) {
+                    List<MobSpawnSettings.SpawnerData> spawnersList = event.getMobSettings().spawners.get(MobCategory.MONSTER).unwrap();
+                    ArrayList<MobSpawnSettings.SpawnerData> newSpawnerList = new ArrayList<>(spawnersList);
+                    newSpawnerList.add(spawners);
+                    newSpawnerList.add(spawners1);
+                    newSpawnerList.add(spawners2);
+                    newSpawnerList.add(spawners3);
+                    newSpawnerList.add(spawners4);
+                    newSpawnerList.add(spawners5);
+                    newSpawnerList.add(spawners6);
+                    HashMap<MobCategory, WeightedRandomList<MobSpawnSettings.SpawnerData>> newSpawnerMap = new HashMap<>(event.getMobSettings().spawners);
+                    newSpawnerMap.put(MobCategory.MONSTER, WeightedRandomList.create(newSpawnerList));
+                    event.getMobSettings().spawners = newSpawnerMap;
+                } else if (ColdSnapHorde.config.spawnconfig.SPAWNTEMPS == 2 && event.getBaseTemperature() < 1.5f) {
+                    List<MobSpawnSettings.SpawnerData> spawnersList = event.getMobSettings().spawners.get(MobCategory.MONSTER).unwrap();
+                    ArrayList<MobSpawnSettings.SpawnerData> newSpawnerList = new ArrayList<>(spawnersList);
+                    newSpawnerList.add(spawners);
+                    newSpawnerList.add(spawners1);
+                    newSpawnerList.add(spawners2);
+                    newSpawnerList.add(spawners3);
+                    newSpawnerList.add(spawners4);
+                    newSpawnerList.add(spawners5);
+                    newSpawnerList.add(spawners6);
+                    HashMap<MobCategory, WeightedRandomList<MobSpawnSettings.SpawnerData>> newSpawnerMap = new HashMap<>(event.getMobSettings().spawners);
+                    newSpawnerMap.put(MobCategory.MONSTER, WeightedRandomList.create(newSpawnerList));
+                    event.getMobSettings().spawners = newSpawnerMap;
+
+                } else if (ColdSnapHorde.config.spawnconfig.SPAWNTEMPS == 3) {
+                    List<MobSpawnSettings.SpawnerData> spawnersList = event.getMobSettings().spawners.get(MobCategory.MONSTER).unwrap();
+                    ArrayList<MobSpawnSettings.SpawnerData> newSpawnerList = new ArrayList<>(spawnersList);
+                    newSpawnerList.add(spawners);
+                    newSpawnerList.add(spawners1);
+                    newSpawnerList.add(spawners2);
+                    newSpawnerList.add(spawners3);
+                    newSpawnerList.add(spawners4);
+                    newSpawnerList.add(spawners5);
+                    newSpawnerList.add(spawners6);
+                    HashMap<MobCategory, WeightedRandomList<MobSpawnSettings.SpawnerData>> newSpawnerMap = new HashMap<>(event.getMobSettings().spawners);
+                    newSpawnerMap.put(MobCategory.MONSTER, WeightedRandomList.create(newSpawnerList));
+                    event.getMobSettings().spawners = newSpawnerMap;
+                }
+            } else if (event.toString().contains("swamp")) {
+                List<MobSpawnSettings.SpawnerData> spawnersList = event.getMobSettings().spawners.get(MobCategory.MONSTER).unwrap();
+                ArrayList<MobSpawnSettings.SpawnerData> newSpawnerList = new ArrayList<>(spawnersList);
+                newSpawnerList.add(pspawners);
+                newSpawnerList.add(pspawners1);
+                newSpawnerList.add(pspawners2);
+                newSpawnerList.add(pspawners3);
+                newSpawnerList.add(pspawners4);
+                newSpawnerList.add(pspawners5);
+                HashMap<MobCategory, WeightedRandomList<MobSpawnSettings.SpawnerData>> newSpawnerMap = new HashMap<>(event.getMobSettings().spawners);
+                newSpawnerMap.put(MobCategory.MONSTER, WeightedRandomList.create(newSpawnerList));
+                event.getMobSettings().spawners = newSpawnerMap;
+            } else if (event.getBiomeCategory() == Biome.BiomeCategory.NETHER) {
+                List<MobSpawnSettings.SpawnerData> spawnersList = event.getMobSettings().spawners.get(MobCategory.MONSTER).unwrap();
+                ArrayList<MobSpawnSettings.SpawnerData> newSpawnerList = new ArrayList<>(spawnersList);
+                newSpawnerList.add(nspawners);
+                newSpawnerList.add(nspawners1);
+                newSpawnerList.add(nspawners2);
+                newSpawnerList.add(nspawners3);
+                newSpawnerList.add(nspawners4);
+                newSpawnerList.add(nspawners5);
+                HashMap<MobCategory, WeightedRandomList<MobSpawnSettings.SpawnerData>> newSpawnerMap = new HashMap<>(event.getMobSettings().spawners);
+                newSpawnerMap.put(MobCategory.MONSTER, WeightedRandomList.create(newSpawnerList));
+                event.getMobSettings().spawners = newSpawnerMap;
+            } else if (event.getBiomeCategory() == Biome.BiomeCategory.THEEND) {
+                List<MobSpawnSettings.SpawnerData> spawnersList = event.getMobSettings().spawners.get(MobCategory.MONSTER).unwrap();
+                ArrayList<MobSpawnSettings.SpawnerData> newSpawnerList = new ArrayList<>(spawnersList);
+                newSpawnerList.add(espawners);
+                newSpawnerList.add(espawners1);
+                newSpawnerList.add(espawners2);
+                newSpawnerList.add(espawners3);
+                newSpawnerList.add(espawners4);
+                newSpawnerList.add(espawners5);
+                HashMap<MobCategory, WeightedRandomList<MobSpawnSettings.SpawnerData>> newSpawnerMap = new HashMap<>(event.getMobSettings().spawners);
+                newSpawnerMap.put(MobCategory.MONSTER, WeightedRandomList.create(newSpawnerList));
+                event.getMobSettings().spawners = newSpawnerMap;
+            }
+        }
+        SpawnRestrictionAccessor.callRegister(Register.COLDSNAPSTABBER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.COLDSNAPSNOWBALLER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.COLDSNAPGUNNER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.COLDSNAPGIFTER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.COLDSNAPZAPPER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.COLDSNAPBRAWLER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.NCOLDSNAPSTABBER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.NCOLDSNAPSNOWBALLER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.NCOLDSNAPGUNNER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.NCOLDSNAPGIFTER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.NCOLDSNAPZAPPER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.NCOLDSNAPBRAWLER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.ECOLDSNAPSTABBER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.ECOLDSNAPSNOWBALLER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.ECOLDSNAPGUNNER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.ECOLDSNAPGIFTER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.ECOLDSNAPZAPPER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.ECOLDSNAPBRAWLER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.PCOLDSNAPSTABBER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.PCOLDSNAPSNOWBALLER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.PCOLDSNAPGUNNER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.PCOLDSNAPGIFTER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.PCOLDSNAPZAPPER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.PCOLDSNAPBRAWLER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        SpawnRestrictionAccessor.callRegister(Register.COLDSNAPCOW,SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
+    }
+
+
+        public static Boolean BiomeExclusion(ResourceLocation[] BiomeExclusion, String name){
+        for (ResourceLocation i : BiomeExclusion){
+            if (i.toString().equals(name)){return false;}
+        }
+        return true;
+
+
+    }
 //    public static void SnowmanSpawner(BiomeLoadingEvent event){
-//        final String BiomeList = ColdSnapHorde.cconfig.BiomeExclusion.get();
+//        final String BiomeList = ColdSnapHorde.config.spawnconfig.BiomeExclusion;
 //        String[] biomeExclusion = BiomeList.split(",");
 //        int exclusionLength = biomeExclusion.length;
 //        ResourceLocation[] finalBiomeExclusion = new ResourceLocation[exclusionLength];
@@ -14,98 +204,98 @@ public class Spawns {
 //            finalBiomeExclusion[counter] = newResource;
 //            counter++;
 //        }
-//        MobSpawnSettings.SpawnerData spawners = new MobSpawnSettings.SpawnerData(Register.COLDSNAPSTABBER.get(), ColdSnapHorde.cconfig.STABBER.get(), 1, 1);
-//        MobSpawnSettings.SpawnerData spawners1 = new MobSpawnSettings.SpawnerData(Register.COLDSNAPGUNNER.get(), ColdSnapHorde.cconfig.GUNNER.get(), 1, 1);
-//        MobSpawnSettings.SpawnerData spawners2 = new MobSpawnSettings.SpawnerData(Register.COLDSNAPSNOWBALLER.get(), ColdSnapHorde.cconfig.SNOWBALLER.get(), 1, 1);
-//        MobSpawnSettings.SpawnerData spawners3 = new MobSpawnSettings.SpawnerData(Register.COLDSNAPGIFTER.get(), ColdSnapHorde.cconfig.GIFTER.get(), 1, 1);
-//        MobSpawnSettings.SpawnerData spawners4 = new MobSpawnSettings.SpawnerData(Register.COLDSNAPZAPPER.get(), ColdSnapHorde.cconfig.ZAPPER.get(), 1, 1);
-//        MobSpawnSettings.SpawnerData spawners5 = new MobSpawnSettings.SpawnerData(Register.COLDSNAPBRAWLER.get(), ColdSnapHorde.cconfig.BRAWLER.get(), 1, 1);
-//        MobSpawnSettings.SpawnerData spawners6 = new MobSpawnSettings.SpawnerData(Register.COLDSNAPCOW.get(), 8,4, 4);
+//        MobSpawnSettings.SpawnerData spawners = new MobSpawnSettings.SpawnerData(Register.COLDSNAPSTABBER, ColdSnapHorde.config.spawnconfig.STABBER, 1, 1);
+//        MobSpawnSettings.SpawnerData spawners1 = new MobSpawnSettings.SpawnerData(Register.COLDSNAPGUNNER, ColdSnapHorde.config.spawnconfig.GUNNER, 1, 1);
+//        MobSpawnSettings.SpawnerData spawners2 = new MobSpawnSettings.SpawnerData(Register.COLDSNAPSNOWBALLER, ColdSnapHorde.config.spawnconfig.SNOWBALLER, 1, 1);
+//        MobSpawnSettings.SpawnerData spawners3 = new MobSpawnSettings.SpawnerData(Register.COLDSNAPGIFTER, ColdSnapHorde.config.spawnconfig.GIFTER, 1, 1);
+//        MobSpawnSettings.SpawnerData spawners4 = new MobSpawnSettings.SpawnerData(Register.COLDSNAPZAPPER, ColdSnapHorde.config.spawnconfig.ZAPPER, 1, 1);
+//        MobSpawnSettings.SpawnerData spawners5 = new MobSpawnSettings.SpawnerData(Register.COLDSNAPBRAWLER, ColdSnapHorde.config.spawnconfig.BRAWLER, 1, 1);
+//        MobSpawnSettings.SpawnerData spawners6 = new MobSpawnSettings.SpawnerData(Register.COLDSNAPCOW, 8,4, 4);
 //
 //
-//        MobSpawnSettings.SpawnerData nspawners = new MobSpawnSettings.SpawnerData(Register.NCOLDSNAPSTABBER.get(), ColdSnapHorde.cconfig.DSTABBER.get(), 1, 1);
-//        MobSpawnSettings.SpawnerData nspawners1 = new MobSpawnSettings.SpawnerData(Register.NCOLDSNAPGUNNER.get(), ColdSnapHorde.cconfig.DGUNNER.get(), 1, 1);
-//        MobSpawnSettings.SpawnerData nspawners2 = new MobSpawnSettings.SpawnerData(Register.NCOLDSNAPSNOWBALLER.get(), ColdSnapHorde.cconfig.DSNOWBALLER.get(), 1, 1);
-//        MobSpawnSettings.SpawnerData nspawners3 = new MobSpawnSettings.SpawnerData(Register.NCOLDSNAPGIFTER.get(), ColdSnapHorde.cconfig.DGIFTER.get(), 1, 1);
-//        MobSpawnSettings.SpawnerData nspawners4 = new MobSpawnSettings.SpawnerData(Register.NCOLDSNAPZAPPER.get(), ColdSnapHorde.cconfig.DZAPPER.get(), 1, 1);
-//        MobSpawnSettings.SpawnerData nspawners5 = new MobSpawnSettings.SpawnerData(Register.NCOLDSNAPBRAWLER.get(), ColdSnapHorde.cconfig.DBRAWLER.get(), 1, 1);
+//        MobSpawnSettings.SpawnerData nspawners = new MobSpawnSettings.SpawnerData(Register.NCOLDSNAPSTABBER, ColdSnapHorde.config.spawnconfig.DSTABBER, 1, 1);
+//        MobSpawnSettings.SpawnerData nspawners1 = new MobSpawnSettings.SpawnerData(Register.NCOLDSNAPGUNNER, ColdSnapHorde.config.spawnconfig.DGUNNER, 1, 1);
+//        MobSpawnSettings.SpawnerData nspawners2 = new MobSpawnSettings.SpawnerData(Register.NCOLDSNAPSNOWBALLER, ColdSnapHorde.config.spawnconfig.DSNOWBALLER, 1, 1);
+//        MobSpawnSettings.SpawnerData nspawners3 = new MobSpawnSettings.SpawnerData(Register.NCOLDSNAPGIFTER, ColdSnapHorde.config.spawnconfig.DGIFTER, 1, 1);
+//        MobSpawnSettings.SpawnerData nspawners4 = new MobSpawnSettings.SpawnerData(Register.NCOLDSNAPZAPPER, ColdSnapHorde.config.spawnconfig.DZAPPER, 1, 1);
+//        MobSpawnSettings.SpawnerData nspawners5 = new MobSpawnSettings.SpawnerData(Register.NCOLDSNAPBRAWLER, ColdSnapHorde.config.spawnconfig.DBRAWLER, 1, 1);
 //
-//        MobSpawnSettings.SpawnerData espawners = new MobSpawnSettings.SpawnerData(Register.ECOLDSNAPSTABBER.get(), ColdSnapHorde.cconfig.DSTABBER.get(), 1, 1);
-//        MobSpawnSettings.SpawnerData espawners1 = new MobSpawnSettings.SpawnerData(Register.ECOLDSNAPGUNNER.get(), ColdSnapHorde.cconfig.DGUNNER.get(), 1, 1);
-//        MobSpawnSettings.SpawnerData espawners2 = new MobSpawnSettings.SpawnerData(Register.ECOLDSNAPSNOWBALLER.get(), ColdSnapHorde.cconfig.DSNOWBALLER.get(), 1, 1);
-//        MobSpawnSettings.SpawnerData espawners3 = new MobSpawnSettings.SpawnerData(Register.ECOLDSNAPGIFTER.get(), ColdSnapHorde.cconfig.DGIFTER.get(), 1, 1);
-//        MobSpawnSettings.SpawnerData espawners4 = new MobSpawnSettings.SpawnerData(Register.ECOLDSNAPZAPPER.get(), ColdSnapHorde.cconfig.DZAPPER.get(), 1, 1);
-//        MobSpawnSettings.SpawnerData espawners5 = new MobSpawnSettings.SpawnerData(Register.ECOLDSNAPBRAWLER.get(), ColdSnapHorde.cconfig.DBRAWLER.get(), 1, 1);
+//        MobSpawnSettings.SpawnerData espawners = new MobSpawnSettings.SpawnerData(Register.ECOLDSNAPSTABBER, ColdSnapHorde.config.spawnconfig.DSTABBER, 1, 1);
+//        MobSpawnSettings.SpawnerData espawners1 = new MobSpawnSettings.SpawnerData(Register.ECOLDSNAPGUNNER, ColdSnapHorde.config.spawnconfig.DGUNNER, 1, 1);
+//        MobSpawnSettings.SpawnerData espawners2 = new MobSpawnSettings.SpawnerData(Register.ECOLDSNAPSNOWBALLER, ColdSnapHorde.config.spawnconfig.DSNOWBALLER, 1, 1);
+//        MobSpawnSettings.SpawnerData espawners3 = new MobSpawnSettings.SpawnerData(Register.ECOLDSNAPGIFTER, ColdSnapHorde.config.spawnconfig.DGIFTER, 1, 1);
+//        MobSpawnSettings.SpawnerData espawners4 = new MobSpawnSettings.SpawnerData(Register.ECOLDSNAPZAPPER, ColdSnapHorde.config.spawnconfig.DZAPPER, 1, 1);
+//        MobSpawnSettings.SpawnerData espawners5 = new MobSpawnSettings.SpawnerData(Register.ECOLDSNAPBRAWLER, ColdSnapHorde.config.spawnconfig.DBRAWLER, 1, 1);
 //
-//        MobSpawnSettings.SpawnerData pspawners = new MobSpawnSettings.SpawnerData(Register.PCOLDSNAPSTABBER.get(), ColdSnapHorde.cconfig.STABBER.get(), 1, 1);
-//        MobSpawnSettings.SpawnerData pspawners1 = new MobSpawnSettings.SpawnerData(Register.PCOLDSNAPGUNNER.get(), ColdSnapHorde.cconfig.GUNNER.get(), 1, 1);
-//        MobSpawnSettings.SpawnerData pspawners2 = new MobSpawnSettings.SpawnerData(Register.PCOLDSNAPSNOWBALLER.get(), ColdSnapHorde.cconfig.SNOWBALLER.get(), 1, 1);
-//        MobSpawnSettings.SpawnerData pspawners3 = new MobSpawnSettings.SpawnerData(Register.PCOLDSNAPGIFTER.get(), ColdSnapHorde.cconfig.GIFTER.get(), 1, 1);
-//        MobSpawnSettings.SpawnerData pspawners4 = new MobSpawnSettings.SpawnerData(Register.PCOLDSNAPZAPPER.get(), ColdSnapHorde.cconfig.ZAPPER.get(), 1, 1);
-//        MobSpawnSettings.SpawnerData pspawners5 = new MobSpawnSettings.SpawnerData(Register.PCOLDSNAPBRAWLER.get(), ColdSnapHorde.cconfig.BRAWLER.get(), 1, 1);
+//        MobSpawnSettings.SpawnerData pspawners = new MobSpawnSettings.SpawnerData(Register.PCOLDSNAPSTABBER, ColdSnapHorde.config.spawnconfig.STABBER, 1, 1);
+//        MobSpawnSettings.SpawnerData pspawners1 = new MobSpawnSettings.SpawnerData(Register.PCOLDSNAPGUNNER, ColdSnapHorde.config.spawnconfig.GUNNER, 1, 1);
+//        MobSpawnSettings.SpawnerData pspawners2 = new MobSpawnSettings.SpawnerData(Register.PCOLDSNAPSNOWBALLER, ColdSnapHorde.config.spawnconfig.SNOWBALLER, 1, 1);
+//        MobSpawnSettings.SpawnerData pspawners3 = new MobSpawnSettings.SpawnerData(Register.PCOLDSNAPGIFTER, ColdSnapHorde.config.spawnconfig.GIFTER, 1, 1);
+//        MobSpawnSettings.SpawnerData pspawners4 = new MobSpawnSettings.SpawnerData(Register.PCOLDSNAPZAPPER, ColdSnapHorde.config.spawnconfig.ZAPPER, 1, 1);
+//        MobSpawnSettings.SpawnerData pspawners5 = new MobSpawnSettings.SpawnerData(Register.PCOLDSNAPBRAWLER, ColdSnapHorde.config.spawnconfig.BRAWLER, 1, 1);
 //
 //        if (BiomeExclusion(finalBiomeExclusion, event.getName()) && !event.getName().toString().contains("swamp") && !(event.getCategory() == Biome.BiomeCategory.NETHER || event.getCategory() == Biome.BiomeCategory.THEEND)){
-//            if(ColdSnapHorde.cconfig.SPAWNTEMPS.get() == 0 && event.getClimate().temperature < 0.3f){
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners);
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners1);
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners2);
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners3);
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners4);
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners5);
-//                event.getSpawns().addSpawn(MobCategory.CREATURE, spawners6);
+//            if(ColdSnapHorde.config.spawnconfig.SPAWNTEMPS == 0 && event.getTemperature().temperature < 0.3f){
+//                newSpawnerList.add(MobCategory.MONSTER, spawners);
+//                newSpawnerList.add(MobCategory.MONSTER, spawners1);
+//                newSpawnerList.add(MobCategory.MONSTER, spawners2);
+//                newSpawnerList.add(MobCategory.MONSTER, spawners3);
+//                newSpawnerList.add(MobCategory.MONSTER, spawners4);
+//                newSpawnerList.add(MobCategory.MONSTER, spawners5);
+//                newSpawnerList.add(MobCategory.CREATURE, spawners6);
 //            }
-//            else if (ColdSnapHorde.cconfig.SPAWNTEMPS.get() == 1 && event.getClimate().temperature < 0.9f){
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners);
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners1);
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners2);
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners3);
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners4);
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners5);
-//                event.getSpawns().addSpawn(MobCategory.CREATURE, spawners6);
+//            else if (ColdSnapHorde.config.spawnconfig.SPAWNTEMPS == 1 && event.getTemperature().temperature < 0.9f){
+//                newSpawnerList.add(MobCategory.MONSTER, spawners);
+//                newSpawnerList.add(MobCategory.MONSTER, spawners1);
+//                newSpawnerList.add(MobCategory.MONSTER, spawners2);
+//                newSpawnerList.add(MobCategory.MONSTER, spawners3);
+//                newSpawnerList.add(MobCategory.MONSTER, spawners4);
+//                newSpawnerList.add(MobCategory.MONSTER, spawners5);
+//                newSpawnerList.add(MobCategory.CREATURE, spawners6);
 //            }
-//            else if (ColdSnapHorde.cconfig.SPAWNTEMPS.get() == 2 && event.getClimate().temperature < 1.5f){
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners);
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners1);
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners2);
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners3);
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners4);
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners5);
-//                event.getSpawns().addSpawn(MobCategory.CREATURE, spawners6);
+//            else if (ColdSnapHorde.config.spawnconfig.SPAWNTEMPS == 2 && event.getTemperature().temperature < 1.5f){
+//                newSpawnerList.add(MobCategory.MONSTER, spawners);
+//                newSpawnerList.add(MobCategory.MONSTER, spawners1);
+//                newSpawnerList.add(MobCategory.MONSTER, spawners2);
+//                newSpawnerList.add(MobCategory.MONSTER, spawners3);
+//                newSpawnerList.add(MobCategory.MONSTER, spawners4);
+//                newSpawnerList.add(MobCategory.MONSTER, spawners5);
+//                newSpawnerList.add(MobCategory.CREATURE, spawners6);
 //
 //            }
-//            else if (ColdSnapHorde.cconfig.SPAWNTEMPS.get() == 3){
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners);
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners1);
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners2);
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners3);
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners4);
-//                event.getSpawns().addSpawn(MobCategory.MONSTER, spawners5);
-//                event.getSpawns().addSpawn(MobCategory.CREATURE, spawners6);
+//            else if (ColdSnapHorde.config.spawnconfig.SPAWNTEMPS == 3){
+//                newSpawnerList.add(MobCategory.MONSTER, spawners);
+//                newSpawnerList.add(MobCategory.MONSTER, spawners1);
+//                newSpawnerList.add(MobCategory.MONSTER, spawners2);
+//                newSpawnerList.add(MobCategory.MONSTER, spawners3);
+//                newSpawnerList.add(MobCategory.MONSTER, spawners4);
+//                newSpawnerList.add(MobCategory.MONSTER, spawners5);
+//                newSpawnerList.add(MobCategory.CREATURE, spawners6);
 //            }
 //        }
 //        else if(event.getName().toString().contains("swamp")){
-//            event.getSpawns().addSpawn(MobCategory.MONSTER, pspawners);
-//            event.getSpawns().addSpawn(MobCategory.MONSTER, pspawners1);
-//            event.getSpawns().addSpawn(MobCategory.MONSTER, pspawners2);
-//            event.getSpawns().addSpawn(MobCategory.MONSTER, pspawners3);
-//            event.getSpawns().addSpawn(MobCategory.MONSTER, pspawners4);
-//            event.getSpawns().addSpawn(MobCategory.MONSTER, pspawners5);
+//            newSpawnerList.add(MobCategory.MONSTER, pspawners);
+//            newSpawnerList.add(MobCategory.MONSTER, pspawners1);
+//            newSpawnerList.add(MobCategory.MONSTER, pspawners2);
+//            newSpawnerList.add(MobCategory.MONSTER, pspawners3);
+//            newSpawnerList.add(MobCategory.MONSTER, pspawners4);
+//            newSpawnerList.add(MobCategory.MONSTER, pspawners5);
 //        }
-//        else if(event.getCategory() == Biome.BiomeCategory.NETHER && ColdSnapHorde.cconfig.DSPAWN.get()){
-//            event.getSpawns().addSpawn(MobCategory.MONSTER, nspawners);
-//            event.getSpawns().addSpawn(MobCategory.MONSTER, nspawners1);
-//            event.getSpawns().addSpawn(MobCategory.MONSTER, nspawners2);
-//            event.getSpawns().addSpawn(MobCategory.MONSTER, nspawners3);
-//            event.getSpawns().addSpawn(MobCategory.MONSTER, nspawners4);
-//            event.getSpawns().addSpawn(MobCategory.MONSTER, nspawners5);
+//        else if(event.getCategory() == Biome.BiomeCategory.NETHER && ColdSnapHorde.config.spawnconfig.DSPAWN){
+//            newSpawnerList.add(MobCategory.MONSTER, nspawners);
+//            newSpawnerList.add(MobCategory.MONSTER, nspawners1);
+//            newSpawnerList.add(MobCategory.MONSTER, nspawners2);
+//            newSpawnerList.add(MobCategory.MONSTER, nspawners3);
+//            newSpawnerList.add(MobCategory.MONSTER, nspawners4);
+//            newSpawnerList.add(MobCategory.MONSTER, nspawners5);
 //        }
-//        else if(event.getCategory() == Biome.BiomeCategory.THEEND && ColdSnapHorde.cconfig.DSPAWN.get()){
-//            event.getSpawns().addSpawn(MobCategory.MONSTER, espawners);
-//            event.getSpawns().addSpawn(MobCategory.MONSTER, espawners1);
-//            event.getSpawns().addSpawn(MobCategory.MONSTER, espawners2);
-//            event.getSpawns().addSpawn(MobCategory.MONSTER, espawners3);
-//            event.getSpawns().addSpawn(MobCategory.MONSTER, espawners4);
-//            event.getSpawns().addSpawn(MobCategory.MONSTER, espawners5);
+//        else if(event.getCategory() == Biome.BiomeCategory.THEEND && ColdSnapHorde.config.spawnconfig.DSPAWN){
+//            newSpawnerList.add(MobCategory.MONSTER, espawners);
+//            newSpawnerList.add(MobCategory.MONSTER, espawners1);
+//            newSpawnerList.add(MobCategory.MONSTER, espawners2);
+//            newSpawnerList.add(MobCategory.MONSTER, espawners3);
+//            newSpawnerList.add(MobCategory.MONSTER, espawners4);
+//            newSpawnerList.add(MobCategory.MONSTER, espawners5);
 //        }
 //
 //    }
@@ -113,31 +303,31 @@ public class Spawns {
 //
 //
 //    public static void PlacementManager(){
-//        SpawnPlacements.register(Register.COLDSNAPSTABBER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.COLDSNAPSNOWBALLER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.COLDSNAPGUNNER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.COLDSNAPGIFTER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.COLDSNAPZAPPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.COLDSNAPBRAWLER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.NCOLDSNAPSTABBER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.NCOLDSNAPSNOWBALLER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.NCOLDSNAPGUNNER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.NCOLDSNAPGIFTER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.NCOLDSNAPZAPPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.NCOLDSNAPBRAWLER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.ECOLDSNAPSTABBER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.ECOLDSNAPSNOWBALLER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.ECOLDSNAPGUNNER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.ECOLDSNAPGIFTER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.ECOLDSNAPZAPPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.ECOLDSNAPBRAWLER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.PCOLDSNAPSTABBER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.PCOLDSNAPSNOWBALLER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.PCOLDSNAPGUNNER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.PCOLDSNAPGIFTER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.PCOLDSNAPZAPPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.PCOLDSNAPBRAWLER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-//        SpawnPlacements.register(Register.COLDSNAPCOW.get(),SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.COLDSNAPSTABBER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.COLDSNAPSNOWBALLER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.COLDSNAPGUNNER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.COLDSNAPGIFTER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.COLDSNAPZAPPER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.COLDSNAPBRAWLER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.NCOLDSNAPSTABBER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.NCOLDSNAPSNOWBALLER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.NCOLDSNAPGUNNER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.NCOLDSNAPGIFTER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.NCOLDSNAPZAPPER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.NCOLDSNAPBRAWLER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.ECOLDSNAPSTABBER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.ECOLDSNAPSNOWBALLER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.ECOLDSNAPGUNNER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.ECOLDSNAPGIFTER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.ECOLDSNAPZAPPER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.ECOLDSNAPBRAWLER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.PCOLDSNAPSTABBER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.PCOLDSNAPSNOWBALLER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.PCOLDSNAPGUNNER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.PCOLDSNAPGIFTER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.PCOLDSNAPZAPPER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.PCOLDSNAPBRAWLER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+//        SpawnRestrictionAccessor.callRegister(Register.COLDSNAPCOW,SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
 //    }
 //
 //    public static Boolean BiomeExclusion(ResourceLocation[] BiomeExclusion, ResourceLocation name){
