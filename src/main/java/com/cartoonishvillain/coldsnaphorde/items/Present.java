@@ -121,6 +121,7 @@ public class Present extends Item {
         if(entity instanceof Axolotl axolotl){
             axolotl.setBaby(true);
             axolotl.setPos(playerEntity.getX(), playerEntity.getY(), playerEntity.getZ());
+            //TODO: Accessor mixin fix.
 //            SynchedEntityData synchedEntityData = ObfuscationReflectionHelper.getPrivateValue(Entity.class, axolotl, "f_19804_");
 //            EntityDataAccessor<Integer> entityDataAccessor = ObfuscationReflectionHelper.getPrivateValue(Axolotl.class, axolotl, "f_149096_");
 //            synchedEntityData.set(entityDataAccessor, world.random.nextInt(5));
@@ -197,8 +198,8 @@ public class Present extends Item {
                 ItemSpawner(playerEntity.blockPosition(), world, Items.CARROT_ON_A_STICK, 1, 1);
                 break;
             case "candycane":
-//                if(world.random.nextInt() % 2 == 0) ItemSpawner(playerEntity.blockPosition(), world, Register.REDCANDYCANEITEM.get(), 10, 20);
-//                else ItemSpawner(playerEntity.blockPosition(), world, Register.GREENCANDYCANEITEM.get(), 10, 20);
+                if(world.random.nextInt() % 2 == 0) ItemSpawner(playerEntity.blockPosition(), world, Register.REDCANDYCANEITEM, 10, 20);
+                else ItemSpawner(playerEntity.blockPosition(), world, Register.GREENCANDYCANEITEM, 10, 20);
                 break;
             case "axolotl":
                 Axolotl axolotl = new Axolotl(EntityType.AXOLOTL, world);

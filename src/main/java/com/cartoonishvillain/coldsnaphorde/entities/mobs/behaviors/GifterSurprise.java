@@ -1,5 +1,6 @@
 package com.cartoonishvillain.coldsnaphorde.entities.mobs.behaviors;
 
+import com.cartoonishvillain.coldsnaphorde.Register;
 import com.cartoonishvillain.coldsnaphorde.entities.mobs.basemob.GenericHordeMember;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.damagesource.DamageSource;
@@ -10,6 +11,7 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
@@ -17,8 +19,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 
 import static com.cartoonishvillain.coldsnaphorde.entities.mobs.basemob.GenericHordeMember.Infection;
-
-//TODO: Fix commented out bit
 
 public class GifterSurprise {
 
@@ -113,10 +113,10 @@ public class GifterSurprise {
             } else{
                 for (BlockPos blockPos : blockPosArrayList){
                     if(world.getBlockState(blockPos).equals(Blocks.AIR.defaultBlockState())){
-//                        BlockState blockstate = Register.SLUSH.get().defaultBlockState();
-//                        if(blockstate.canSurvive(world, blockPos)){
-//                            world.setBlockAndUpdate(blockPos, blockstate);
-//                        }
+                        BlockState blockstate = Register.SLUSH.defaultBlockState();
+                        if(blockstate.canSurvive(world, blockPos)){
+                            world.setBlockAndUpdate(blockPos, blockstate);
+                        }
 
                     }
                 }

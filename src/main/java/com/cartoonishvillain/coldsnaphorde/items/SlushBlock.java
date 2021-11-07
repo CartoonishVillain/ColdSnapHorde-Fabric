@@ -11,6 +11,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -31,7 +32,10 @@ public class SlushBlock extends Block {
         return p_60526_.getBlockState(blockpos).isFaceSturdy(p_60526_, blockpos, Direction.UP);
     }
 
-
+    @Override
+    public PushReaction getPistonPushReaction(BlockState blockState) {
+        return PushReaction.DESTROY;
+    }
 
     @Override
     public boolean isRandomlyTicking(BlockState state) {

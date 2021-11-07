@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#I#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:snowball"
+    },
+    "I": {
+      "item": "coldsnaphorde:iceshard"
+    }
+  },
+  "result": {
+    "item": "coldsnaphorde:freezeball",
+    "count": 4
+  }
+}

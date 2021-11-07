@@ -30,7 +30,6 @@ import org.jetbrains.annotations.Nullable;
 
 import static com.cartoonishvillain.immortuoscalyx.component.ComponentStarter.INFECTION;
 
-//TODO: Fix commented out bits
 
 public class GenericHordeMember extends Monster implements SnowCreature {
     private BlockPos target = null;
@@ -190,9 +189,9 @@ public class GenericHordeMember extends Monster implements SnowCreature {
             if (this.getEntityData().get(variant) == 0 || this.getEntityData().get(variant) == 3) {
                 blockstate = Blocks.SNOW.defaultBlockState();
             }
-//            if (this.getEntityData().get(variant) == 1) {
-//                blockstate = Register.SLUSH.get().defaultBlockState();
-//            }
+            if (this.getEntityData().get(variant) == 1) {
+                blockstate = Register.SLUSH.defaultBlockState();
+            }
 
 
             if (blockstate == Blocks.SNOW.defaultBlockState()) {
@@ -205,16 +204,15 @@ public class GenericHordeMember extends Monster implements SnowCreature {
                         this.level.setBlockAndUpdate(blockpos, blockstate);
                     }
                 }
-//            } else if (blockstate == Register.SLUSH.get().defaultBlockState()) {
-//                for (int l = 0; l < 4; ++l) {
-//                    i = Mth.floor(this.getX() + (double) ((float) (l % 2 * 2 - 1) * 0.25F));
-//                    j = Mth.floor(this.getY());
-//                    k = Mth.floor(this.getZ() + (double) ((float) (l / 2 % 2 * 2 - 1) * 0.25F));
-//                    BlockPos blockpos = new BlockPos(i, j, k);
-//                    if (this.level.getBlockState(blockpos).equals(Blocks.AIR.defaultBlockState()) && (blockstate.canSurvive(this.level, blockpos)))
-//                        this.level.setBlockAndUpdate(blockpos, blockstate);
-//                }
-//            }
+            } else if (blockstate == Register.SLUSH.defaultBlockState()) {
+                for (int l = 0; l < 4; ++l) {
+                    i = Mth.floor(this.getX() + (double) ((float) (l % 2 * 2 - 1) * 0.25F));
+                    j = Mth.floor(this.getY());
+                    k = Mth.floor(this.getZ() + (double) ((float) (l / 2 % 2 * 2 - 1) * 0.25F));
+                    BlockPos blockpos = new BlockPos(i, j, k);
+                    if (this.level.getBlockState(blockpos).equals(Blocks.AIR.defaultBlockState()) && (blockstate.canSurvive(this.level, blockpos)))
+                        this.level.setBlockAndUpdate(blockpos, blockstate);
+                }
             }
         }
     }

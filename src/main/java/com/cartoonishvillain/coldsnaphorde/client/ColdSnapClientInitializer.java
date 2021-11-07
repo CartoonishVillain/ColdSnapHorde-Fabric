@@ -4,15 +4,29 @@ import com.cartoonishvillain.coldsnaphorde.Register;
 import com.cartoonishvillain.coldsnaphorde.client.models.endmodel.EndColdSnapSnowballerModel;
 import com.cartoonishvillain.coldsnaphorde.client.models.nethermodel.*;
 import com.cartoonishvillain.coldsnaphorde.client.models.standardmodel.*;
+import com.cartoonishvillain.coldsnaphorde.client.renderers.TopHatRenderer;
 import com.cartoonishvillain.coldsnaphorde.client.renderers.endrenders.RenderEndColdSnapSnowballer;
 import com.cartoonishvillain.coldsnaphorde.client.renderers.netherrenders.*;
 import com.cartoonishvillain.coldsnaphorde.client.renderers.standardrenders.*;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.impl.client.rendering.ArmorRendererRegistryImpl;
+import net.fabricmc.fabric.impl.client.rendering.EntityModelLayerImpl;
+import net.fabricmc.fabric.mixin.client.rendering.EntityModelLayersAccessor;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+
+import java.util.Map;
 
 public class ColdSnapClientInitializer implements ClientModInitializer {
     public static ModelLayerLocation COLDSNAPSTABBER = new ModelLayerLocation( new ResourceLocation("coldsnaphorde:stabber"), "stabber");
@@ -30,10 +44,14 @@ public class ColdSnapClientInitializer implements ClientModInitializer {
     public static ModelLayerLocation NCOLDSNAPZAPPER = new ModelLayerLocation( new ResourceLocation("coldsnaphorde:nzapper"), "nzapper");
 
     public static ModelLayerLocation ECOLDSNAPSNOWBALLER = new ModelLayerLocation( new ResourceLocation("coldsnaphorde:esnowballer"), "esnowballer");
-    public static ModelLayerLocation TOPHAT = new ModelLayerLocation( new ResourceLocation("minecraft:player"), "tophat");
+    public static ModelLayerLocation TOPHAT = new ModelLayerLocation(new ResourceLocation("coldsnaphorde:tophat"), "main");
+
+
 
     @Override
     public void onInitializeClient() {
+
+
         EntityRendererRegistry.register(Register.COLDSNAPSTABBER, RenderColdSnapStabber::new);
         EntityRendererRegistry.register(Register.COLDSNAPGUNNER, RenderColdSnapGunner::new);
         EntityRendererRegistry.register(Register.COLDSNAPSNOWBALLER, RenderColdSnapSnowballer::new);
@@ -85,5 +103,16 @@ public class ColdSnapClientInitializer implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(NCOLDSNAPBRAWLER, NetherColdSnapBrawlerModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(TOPHAT, TopHatModel::createLayer);
 
+        ArmorRenderer.register(new TopHatRenderer(), Register.TOPHAT);
+
+
     }
+
+//    public static void AddToPlayerModels(Map<String, EntityRenderer<? extends Player>> map){
+//        for(Map.Entry<String, EntityRenderer<? extends Player>> entry : map.entrySet()){
+//            if(entry.getValue() instanceof LivingEntityRenderer livingEntityRenderer){
+//                livingEntityRenderer.addLayer(new TopHatLayer(livingEntityRenderer));
+//            }
+//        }
+//    }
 }

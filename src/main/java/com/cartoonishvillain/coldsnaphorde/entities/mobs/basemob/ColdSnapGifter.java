@@ -69,7 +69,7 @@ public class ColdSnapGifter extends GenericHordeMember {
         if (livingEntity != null) {
             double distance = this.distanceToSqr(livingEntity);
             if (distance < 4.5D && !level.isClientSide()) {
-                if(!exploding){this.playSound(SoundEvents.TNT_PRIMED, 1F, 1F);}
+                if(!exploding){this.playSound(SoundEvents.TNT_PRIMED, 1F, 1F); this.playSound(Register.GIFTERATTACK, 1F, 1F);}
                 exploding = true;
                 this.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 50, 10, false, false));
             }

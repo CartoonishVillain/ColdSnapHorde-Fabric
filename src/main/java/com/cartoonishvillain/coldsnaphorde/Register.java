@@ -12,9 +12,11 @@ import com.cartoonishvillain.coldsnaphorde.items.Present;
 import com.cartoonishvillain.coldsnaphorde.items.Projectiles.LightningSnowball;
 import com.cartoonishvillain.coldsnaphorde.items.Projectiles.RockySnowball;
 import com.cartoonishvillain.coldsnaphorde.items.Projectiles.SnowierSnowball;
+import com.cartoonishvillain.coldsnaphorde.items.SlushBlock;
 import com.cartoonishvillain.coldsnaphorde.items.Snowglobe;
 import com.cartoonishvillain.coldsnaphorde.items.ToolsOrOther.IceSword;
 import com.cartoonishvillain.coldsnaphorde.items.ToolsOrOther.Materials;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.Registry;
@@ -24,8 +26,14 @@ import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
 
 import static com.cartoonishvillain.coldsnaphorde.ColdSnapHorde.MOD_ID;
 
@@ -81,11 +89,23 @@ public class Register {
 
     public static final EntityType<ColdSnapCow> COLDSNAPCOW = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "frostycow"), FabricEntityTypeBuilder.<ColdSnapCow>create(MobCategory.CREATURE, ColdSnapCow::new).dimensions(EntityDimensions.fixed(0.9f, 1.4f)).build());
 
+    public static final Block SLUSH = new SlushBlock(BlockBehaviour.Properties.of(Material.SNOW).strength(0).sound(SoundType.SNOW));
+    public static final Item SLUSHITEM = new BlockItem(SLUSH, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Block GREENCANDYCANEBLOCK = new Block(FabricBlockSettings.copyOf(Blocks.BONE_BLOCK));
+    public static final Item GREENCANDYCANEITEM = new BlockItem(GREENCANDYCANEBLOCK, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Block REDCANDYCANEBLOCK = new Block(FabricBlockSettings.copyOf(Blocks.BONE_BLOCK));
+    public static final Item REDCANDYCANEITEM = new BlockItem(REDCANDYCANEBLOCK, new Item.Properties().tab(ColdSnapHorde.TAB));
 
     public static final ResourceLocation gifter_laugh_id = new ResourceLocation(MOD_ID, "gifter_attack");
     public static final SoundEvent GIFTERATTACK = new SoundEvent(gifter_laugh_id);
 
     public static void init(){
+        Registry.register(Registry.BLOCK, new ResourceLocation(MOD_ID, "slush"), SLUSH);
+        Registry.register(Registry.BLOCK, new ResourceLocation(MOD_ID, "greencandycane"), GREENCANDYCANEBLOCK);
+        Registry.register(Registry.BLOCK, new ResourceLocation(MOD_ID, "redcandycane"), REDCANDYCANEBLOCK);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "slush"), new BlockItem(SLUSH, new Item.Properties().tab(ColdSnapHorde.TAB)));
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "greencandycane"), new BlockItem(GREENCANDYCANEBLOCK, new Item.Properties().tab(ColdSnapHorde.TAB)));
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "redcandycane"), new BlockItem(REDCANDYCANEBLOCK, new Item.Properties().tab(ColdSnapHorde.TAB)));
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "rockysnowball"), ROCKYSNOWBALL);
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "freezeball"), SNOWIERSNOWBALL);
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "iceshard"), ICESHARD);
@@ -98,6 +118,8 @@ public class Register {
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "present"), PRESENT);
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "ice_sword"), ICESWORD);
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "tophat"), TOPHAT);
+
+
 
         Registry.register(Registry.SOUND_EVENT, gifter_laugh_id, GIFTERATTACK);
 
