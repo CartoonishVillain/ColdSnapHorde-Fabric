@@ -51,7 +51,7 @@ public class Present extends Item {
         possibilities.add("rollercoaster"); weights.add(10f);
         possibilities.add("horse"); weights.add(10f);
         possibilities.add("pig"); weights.add(10f);
-        possibilities.add("candycane"); weights.add(10f);
+        possibilities.add("candycane"); weights.add(1000f);
         possibilities.add("axolotl"); weights.add(10f);
         possibilities.add("screamgoat"); weights.add(5f);
         possibilities.add("panda"); weights.add(5f);
@@ -202,8 +202,8 @@ public class Present extends Item {
                 ItemSpawner(playerEntity.blockPosition(), world, Items.CARROT_ON_A_STICK, 1, 1);
                 break;
             case "candycane":
-                if(world.random.nextInt() % 2 == 0) ItemSpawner(playerEntity.blockPosition(), world, Register.REDCANDYCANEITEM, 10, 20);
-                else ItemSpawner(playerEntity.blockPosition(), world, Register.GREENCANDYCANEITEM, 10, 20);
+                if(world.random.nextInt() % 2 == 0) ItemSpawner(playerEntity.blockPosition(), world, Register.REDCANDYCANEBLOCK.asItem(), 10, 20);
+                else ItemSpawner(playerEntity.blockPosition(), world, Register.GREENCANDYCANEBLOCK.asItem(), 10, 20);
                 break;
             case "axolotl":
                 Axolotl axolotl = new Axolotl(EntityType.AXOLOTL, world);
