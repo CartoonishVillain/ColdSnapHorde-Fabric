@@ -27,6 +27,9 @@
     "main": [
       "com.cartoonishvillain.coldsnaphorde.ColdSnapHorde"
     ],
+    "client": [
+      "com.cartoonishvillain.coldsnaphorde.client.ColdSnapClientInitializer"
+    ],
     "cardinal-components-world": [
       "com.cartoonishvillain.coldsnaphorde.component.ComponentStarter"
     ]

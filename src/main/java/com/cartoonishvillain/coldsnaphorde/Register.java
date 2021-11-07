@@ -1,5 +1,6 @@
 package com.cartoonishvillain.coldsnaphorde;
 
+import com.cartoonishvillain.coldsnaphorde.entities.mobs.basemob.*;
 import com.cartoonishvillain.coldsnaphorde.entities.mobs.hordevariantmanager.EndHorde;
 import com.cartoonishvillain.coldsnaphorde.entities.mobs.hordevariantmanager.NetherHorde;
 import com.cartoonishvillain.coldsnaphorde.entities.mobs.hordevariantmanager.PlagueHorde;
@@ -14,6 +15,7 @@ import com.cartoonishvillain.coldsnaphorde.items.Projectiles.SnowierSnowball;
 import com.cartoonishvillain.coldsnaphorde.items.Snowglobe;
 import com.cartoonishvillain.coldsnaphorde.items.ToolsOrOther.IceSword;
 import com.cartoonishvillain.coldsnaphorde.items.ToolsOrOther.Materials;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -83,7 +85,7 @@ public class Register {
 
     public static void init(){
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "rockysnowball"), ROCKYSNOWBALL);
-        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "snowiersnowball"), SNOWIERSNOWBALL);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "freezeball"), SNOWIERSNOWBALL);
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "iceshard"), ICESHARD);
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "icecore"), ICECORE);
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "transposerpiece"), LIGHTNINGTRANSPOSERPIECE);
@@ -95,5 +97,33 @@ public class Register {
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "ice_sword"), ICESWORD);
 
         Registry.register(Registry.SOUND_EVENT, gifter_laugh_id, GIFTERATTACK);
+
+        FabricDefaultAttributeRegistry.register(COLDSNAPSTABBER, ColdSnapStabber.customAttributes());
+        FabricDefaultAttributeRegistry.register(COLDSNAPGUNNER, ColdSnapGunner.customAttributes());
+        FabricDefaultAttributeRegistry.register(COLDSNAPSNOWBALLER, ColdSnapSnowballer.customAttributes());
+        FabricDefaultAttributeRegistry.register(COLDSNAPGIFTER, ColdSnapGifter.customAttributes());
+        FabricDefaultAttributeRegistry.register(COLDSNAPZAPPER, ColdSnapZapper.customAttributes());
+        FabricDefaultAttributeRegistry.register(COLDSNAPBRAWLER, ColdSnapBrawler.customAttributes());
+
+        FabricDefaultAttributeRegistry.register(NCOLDSNAPSTABBER, ColdSnapStabber.customAttributes());
+        FabricDefaultAttributeRegistry.register(NCOLDSNAPGUNNER, ColdSnapGunner.customAttributes());
+        FabricDefaultAttributeRegistry.register(NCOLDSNAPSNOWBALLER, ColdSnapSnowballer.customAttributes());
+        FabricDefaultAttributeRegistry.register(NCOLDSNAPGIFTER, ColdSnapGifter.customAttributes());
+        FabricDefaultAttributeRegistry.register(NCOLDSNAPZAPPER, ColdSnapZapper.customAttributes());
+        FabricDefaultAttributeRegistry.register(NCOLDSNAPBRAWLER, ColdSnapBrawler.customAttributes());
+
+        FabricDefaultAttributeRegistry.register(ECOLDSNAPSTABBER, ColdSnapStabber.customAttributes());
+        FabricDefaultAttributeRegistry.register(ECOLDSNAPGUNNER, ColdSnapGunner.customAttributes());
+        FabricDefaultAttributeRegistry.register(ECOLDSNAPSNOWBALLER, ColdSnapSnowballer.customAttributes());
+        FabricDefaultAttributeRegistry.register(ECOLDSNAPGIFTER, ColdSnapGifter.customAttributes());
+        FabricDefaultAttributeRegistry.register(ECOLDSNAPZAPPER, ColdSnapZapper.customAttributes());
+        FabricDefaultAttributeRegistry.register(ECOLDSNAPBRAWLER, ColdSnapBrawler.customAttributes());
+
+        FabricDefaultAttributeRegistry.register(PCOLDSNAPSTABBER, ColdSnapStabber.customAttributes());
+        FabricDefaultAttributeRegistry.register(PCOLDSNAPGUNNER, ColdSnapGunner.customAttributes());
+        FabricDefaultAttributeRegistry.register(PCOLDSNAPSNOWBALLER, ColdSnapSnowballer.customAttributes());
+        FabricDefaultAttributeRegistry.register(PCOLDSNAPGIFTER, ColdSnapGifter.customAttributes());
+        FabricDefaultAttributeRegistry.register(PCOLDSNAPZAPPER, ColdSnapZapper.customAttributes());
+        FabricDefaultAttributeRegistry.register(PCOLDSNAPBRAWLER, ColdSnapBrawler.customAttributes());
     }
 }

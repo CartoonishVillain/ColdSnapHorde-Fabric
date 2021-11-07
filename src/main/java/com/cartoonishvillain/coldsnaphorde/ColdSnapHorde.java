@@ -33,12 +33,13 @@ public class ColdSnapHorde implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		Register.init();
 		AutoConfig.register(ColdSnapConfig.class, JanksonConfigSerializer::new);
 		config = AutoConfig.getConfigHolder(ColdSnapConfig.class).getConfig();
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
-		isCalyxLoaded = FabricLoader.getInstance().isModLoaded("ImmortuosCalyx") && config.coldSnapSettings.PLAGUEIMMORTUOSCOMPAT;
+		isCalyxLoaded = FabricLoader.getInstance().isModLoaded("immortuoscalyx") && config.coldSnapSettings.PLAGUEIMMORTUOSCOMPAT;
 
 		ServerLifecycleEvents.SERVER_STARTING.register(ServerStartListener.getInstance());
 	}
