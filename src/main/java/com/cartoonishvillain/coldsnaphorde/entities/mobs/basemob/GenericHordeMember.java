@@ -37,6 +37,13 @@ public class GenericHordeMember extends Monster implements SnowCreature {
     public static final EntityDataAccessor<Integer> variant = SynchedEntityData.defineId(GenericHordeMember.class, EntityDataSerializers.INT);
 
     @Override
+    public boolean hurt(DamageSource damageSource, float f) {
+        if((damageSource.equals(DamageSource.ON_FIRE) || damageSource.equals(DamageSource.IN_FIRE) || damageSource.equals(DamageSource.LAVA)) && ColdSnapHorde.config.coldSnapSettings.HORDETAKESMOREFIRE)
+            f = f *2;
+        return super.hurt(damageSource, f);
+    }
+
+    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(3, new HordeMovementGoal<>(this));

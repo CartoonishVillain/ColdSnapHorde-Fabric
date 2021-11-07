@@ -6,7 +6,8 @@
   "mixins": [
     "AxoltolAccessor",
     "EntityAccessor",
-    "GoatAccessor"
+    "GoatAccessor",
+    "LivingDeathMixin"
   ],
   "client": [
   ],

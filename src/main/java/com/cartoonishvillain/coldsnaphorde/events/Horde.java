@@ -119,7 +119,7 @@ public class Horde {
     //So when a player dies the serverPlayer would desync which is... a fun issue
     //This checks for the desync, returns false if the player should not count any longer.
     private boolean checkIfPlayerIsStillValid(ServerPlayer serverPlayer) {
-        return serverPlayer.getHealth() != 0.0f;
+        return serverPlayer.getHealth() != 0.0f && !serverPlayer.hasDisconnected();
     }
 
     public void tick() {
