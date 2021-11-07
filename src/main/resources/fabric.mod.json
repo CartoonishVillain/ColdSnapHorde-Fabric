@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "coldsnaphorde",
+  "version": "${version}",
+
+  "custom": {
+    "cardinal-components": [
+      "coldsnaphorde:cooldown"
+    ]
+  },
+
+  "name": "Cold Snap Horde",
+  "description": "A frosty band of scoundrels now fill colder lands, attacking villagers, golems, and humans alike.",
+  "authors": [
+    "Cartoonish Villain"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+
+  "license": "MIT",
+  "icon": "assets/coldsnaphorde/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.cartoonishvillain.coldsnaphorde.ColdSnapHorde"
+    ],
+    "cardinal-components-world": [
+      "com.cartoonishvillain.coldsnaphorde.component.ComponentStarter"
+    ]
+  },
+  "mixins": [
+    "coldsnaphorde.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.17.x",
+    "java": ">=16"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
