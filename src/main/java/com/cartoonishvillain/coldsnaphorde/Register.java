@@ -79,6 +79,8 @@ public class Register {
     public static final EntityType<SnowierSnowballEntity> SNOWIERSNOWBALLPROJECTILE = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "snowiersnowballprojectile"), FabricEntityTypeBuilder.<SnowierSnowballEntity>create(MobCategory.MISC, SnowierSnowballEntity::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).build());
     public static final EntityType<LightningSnowEntity> LIGHTNINGSNOWBALLPROJECTILE = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "lightningsnowballprojectile"), FabricEntityTypeBuilder.<LightningSnowEntity>create(MobCategory.MISC, LightningSnowEntity::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).build());
 
+    public static final EntityType<ColdSnapCow> COLDSNAPCOW = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "frostycow"), FabricEntityTypeBuilder.<ColdSnapCow>create(MobCategory.CREATURE, ColdSnapCow::new).dimensions(EntityDimensions.fixed(0.9f, 1.4f)).build());
+
 
     public static final ResourceLocation gifter_laugh_id = new ResourceLocation(MOD_ID, "gifter_attack");
     public static final SoundEvent GIFTERATTACK = new SoundEvent(gifter_laugh_id);
@@ -95,6 +97,7 @@ public class Register {
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "snowglobe"), SNOWGLOBE);
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "present"), PRESENT);
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "ice_sword"), ICESWORD);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "tophat"), TOPHAT);
 
         Registry.register(Registry.SOUND_EVENT, gifter_laugh_id, GIFTERATTACK);
 
@@ -125,5 +128,7 @@ public class Register {
         FabricDefaultAttributeRegistry.register(PCOLDSNAPGIFTER, ColdSnapGifter.customAttributes());
         FabricDefaultAttributeRegistry.register(PCOLDSNAPZAPPER, ColdSnapZapper.customAttributes());
         FabricDefaultAttributeRegistry.register(PCOLDSNAPBRAWLER, ColdSnapBrawler.customAttributes());
+
+        FabricDefaultAttributeRegistry.register(COLDSNAPCOW, ColdSnapCow.customAttributes());
     }
 }

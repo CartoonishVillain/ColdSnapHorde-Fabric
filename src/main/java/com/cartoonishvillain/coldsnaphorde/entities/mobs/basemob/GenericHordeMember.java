@@ -201,9 +201,9 @@ public class GenericHordeMember extends Monster implements SnowCreature {
                     j = Mth.floor(this.getY());
                     k = Mth.floor(this.getZ() + (double) ((float) (l / 2 % 2 * 2 - 1) * 0.25F));
                     BlockPos blockpos = new BlockPos(i, j, k);
-//                    if (this.level.isEmptyBlock(blockpos) && !shouldOverHeat(this.level.getBiome(this.blockPosition()).getBaseTemperature(), ColdSnapHorde.cconfig.SNOWTRAIL.get()) && blockstate.canSurvive(this.level, blockpos)) {
-//                        this.level.setBlockAndUpdate(blockpos, blockstate);
-//                    }
+                    if (this.level.isEmptyBlock(blockpos) && !shouldOverHeat(this.level.getBiome(this.blockPosition()).getBaseTemperature(), ColdSnapHorde.config.spawnconfig.SNOWTRAIL) && blockstate.canSurvive(this.level, blockpos)) {
+                        this.level.setBlockAndUpdate(blockpos, blockstate);
+                    }
                 }
 //            } else if (blockstate == Register.SLUSH.get().defaultBlockState()) {
 //                for (int l = 0; l < 4; ++l) {

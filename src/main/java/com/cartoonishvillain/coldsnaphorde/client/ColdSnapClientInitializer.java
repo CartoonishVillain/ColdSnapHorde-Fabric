@@ -62,7 +62,7 @@ public class ColdSnapClientInitializer implements ClientModInitializer {
         EntityRendererRegistry.register(Register.PCOLDSNAPZAPPER, RenderColdSnapZapper::new);
         EntityRendererRegistry.register(Register.PCOLDSNAPBRAWLER, RenderColdSnapBrawler::new);
 
-//        EntityRendererRegistry.register(Register.COLDSNAPCOW, RenderColdSnapCow::new);
+        EntityRendererRegistry.register(Register.COLDSNAPCOW, RenderColdSnapCow::new);
         EntityRendererRegistry.register(Register.GUNNERPROJECTILE, ThrownItemRenderer::new);
         EntityRendererRegistry.register(Register.LIGHTNINGSNOWBALLPROJECTILE, ThrownItemRenderer::new);
         EntityRendererRegistry.register(Register.ROCKSNOWBALLPROJECTILE, ThrownItemRenderer::new);
