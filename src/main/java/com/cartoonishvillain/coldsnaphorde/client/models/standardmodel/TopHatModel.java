@@ -16,8 +16,7 @@ public class TopHatModel extends HumanoidModel<LivingEntity> {
 
     public TopHatModel(ModelPart part){
         super(part);
-//        hat = part.getChild(HAT);
-//        hat.setPos(0, -7,0);
+
     }
 
     public static LayerDefinition createLayer() {
@@ -29,15 +28,5 @@ public class TopHatModel extends HumanoidModel<LivingEntity> {
                 .texOffs(0,24).addBox(-5.0F, -2.0F, -5.0F, 10.0F, 2.0F, 10.0F, cubeDeformation), PartPose.offset(0, -7, 0));
         return LayerDefinition.create(meshdefinition, 64, 64);
     }
-//
-//    @Override
-//    public void setupAnim(LivingEntity p_102618_, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-//        this.hat.yRot = netHeadYaw * ((float)Math.PI / 180F);
-//        this.hat.xRot = headPitch * ((float)Math.PI / 180F);
-//    }
-//
-//    @Override
-//    public void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-//        hat.render(matrixStack, buffer, packedLight, packedOverlay);
-//    }
+
 }

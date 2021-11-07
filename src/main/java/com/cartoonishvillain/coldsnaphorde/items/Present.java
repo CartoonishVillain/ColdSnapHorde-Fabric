@@ -1,7 +1,12 @@
 package com.cartoonishvillain.coldsnaphorde.items;
 
 import com.cartoonishvillain.coldsnaphorde.Register;
+import com.cartoonishvillain.coldsnaphorde.mixin.AxoltolAccessor;
+import com.cartoonishvillain.coldsnaphorde.mixin.EntityAccessor;
+import com.cartoonishvillain.coldsnaphorde.mixin.GoatAccessor;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -121,18 +126,17 @@ public class Present extends Item {
         if(entity instanceof Axolotl axolotl){
             axolotl.setBaby(true);
             axolotl.setPos(playerEntity.getX(), playerEntity.getY(), playerEntity.getZ());
-            //TODO: Accessor mixin fix.
-//            SynchedEntityData synchedEntityData = ObfuscationReflectionHelper.getPrivateValue(Entity.class, axolotl, "f_19804_");
-//            EntityDataAccessor<Integer> entityDataAccessor = ObfuscationReflectionHelper.getPrivateValue(Axolotl.class, axolotl, "f_149096_");
-//            synchedEntityData.set(entityDataAccessor, world.random.nextInt(5));
+            SynchedEntityData synchedEntityData = ((EntityAccessor) axolotl).getEntityData();
+            EntityDataAccessor<Integer> entityDataAccessor = ((AxoltolAccessor) axolotl).getDATA_VARIANT();
+            synchedEntityData.set(entityDataAccessor, world.random.nextInt(5));
             world.addFreshEntity(axolotl);
         }
         if(entity instanceof Goat goat){
             goat.setBaby(true);
             goat.setPos(playerEntity.getX(), playerEntity.getY(), playerEntity.getZ());
-//            SynchedEntityData synchedEntityData = ObfuscationReflectionHelper.getPrivateValue(Entity.class, goat, "f_19804_");
-//            EntityDataAccessor<Boolean> entityDataAccessor = ObfuscationReflectionHelper.getPrivateValue(Goat.class, goat, "f_149347_");
-//            synchedEntityData.set(entityDataAccessor, true);
+            SynchedEntityData synchedEntityData = ((EntityAccessor) goat).getEntityData();
+            EntityDataAccessor<Boolean> entityDataAccessor = ((GoatAccessor) goat).getDATA_IS_SCREAMING_GOAT();
+            synchedEntityData.set(entityDataAccessor, true);
             world.addFreshEntity(goat);
         }
         if (entity instanceof Panda panda){

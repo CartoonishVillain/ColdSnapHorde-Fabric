@@ -4,9 +4,11 @@
   "package": "com.cartoonishvillain.coldsnaphorde.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "AxoltolAccessor",
+    "EntityAccessor",
+    "GoatAccessor"
   ],
   "client": [
-
   ],
   "injectors": {
     "defaultRequire": 1
