@@ -64,7 +64,7 @@ public class Spawns {
         MobSpawnSettings.SpawnerData pspawners5 = new MobSpawnSettings.SpawnerData(Register.PCOLDSNAPBRAWLER, ColdSnapHorde.config.spawnconfig.BRAWLER, 1, 1);
 
         for (Biome event : BuiltinRegistries.BIOME) {
-            if (BiomeExclusion(finalBiomeExclusion, event.toString()) && !event.toString().contains("swamp") && !(event.getBiomeCategory() == Biome.BiomeCategory.NETHER || event.getBiomeCategory() == Biome.BiomeCategory.THEEND)) {
+            if (BiomeExclusion(finalBiomeExclusion, event.toString()) && !event.toString().contains("swamp") && !(event.getBiomeCategory() == Biome.BiomeCategory.NETHER || event.getBiomeCategory() == Biome.BiomeCategory.THEEND || event.getBiomeCategory() == Biome.BiomeCategory.MUSHROOM)) {
                 if (ColdSnapHorde.config.spawnconfig.SPAWNTEMPS == 0 && event.getBaseTemperature() < 0.3f) {
                     List<MobSpawnSettings.SpawnerData> spawnersList = event.getMobSettings().spawners.get(MobCategory.MONSTER).unwrap();
                     ArrayList<MobSpawnSettings.SpawnerData> newSpawnerList = new ArrayList<>(spawnersList);
