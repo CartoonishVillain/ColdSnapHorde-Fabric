@@ -17,7 +17,7 @@ public class Thermometer extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
         if(!level.isClientSide && interactionHand.equals(InteractionHand.MAIN_HAND)){
-            float temp = player.level.getBiomeManager().getBiome(player.blockPosition()).getTemperature(player.blockPosition());
+            float temp = player.level.getBiomeManager().getBiome(player.blockPosition()).getBaseTemperature();
             String code = "MISSING";
             if (temp < 0.3){code = "Cold";}
             else if(temp >= 0.3 && temp < 0.9){code = "Neutral";}

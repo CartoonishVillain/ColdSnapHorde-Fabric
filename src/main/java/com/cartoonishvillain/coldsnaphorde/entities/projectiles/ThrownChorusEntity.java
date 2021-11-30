@@ -92,7 +92,7 @@ public class ThrownChorusEntity extends ThrowableItemProjectile {
         BlockState blockstate = Blocks.SNOW_BLOCK.defaultBlockState();
         int snowchance = random.nextInt(20);
         BlockPos blockpos = new BlockPos(result.getLocation());
-        if (this.level.isEmptyBlock(blockpos) && this.level.getBiome(blockpos).getTemperature(blockpos) < 0.8F && blockstate.canSurvive(this.level, blockpos) && level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) && snowchance == 1 && !level.isClientSide()) {
+        if (this.level.isEmptyBlock(blockpos) && this.level.getBiome(blockpos).getBaseTemperature() < 0.8F && blockstate.canSurvive(this.level, blockpos) && level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) && snowchance == 1 && !level.isClientSide()) {
             this.level.setBlockAndUpdate(blockpos, blockstate);
         }
         this.remove(RemovalReason.DISCARDED);

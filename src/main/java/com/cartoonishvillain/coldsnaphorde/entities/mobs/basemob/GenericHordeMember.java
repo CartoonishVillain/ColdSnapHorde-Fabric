@@ -3,7 +3,6 @@ package com.cartoonishvillain.coldsnaphorde.entities.mobs.basemob;
 import com.cartoonishvillain.coldsnaphorde.ColdSnapHorde;
 import com.cartoonishvillain.coldsnaphorde.Register;
 import com.cartoonishvillain.coldsnaphorde.entities.mobs.behaviors.HordeMovementGoal;
-import com.cartoonishvillain.immortuoscalyx.component.InfectionComponent;
 import com.cartoonishvillain.immortuoscalyx.component.InfectionHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -27,8 +26,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
-
-import static com.cartoonishvillain.immortuoscalyx.component.ComponentStarter.INFECTION;
 
 
 public class GenericHordeMember extends Monster implements SnowCreature {
