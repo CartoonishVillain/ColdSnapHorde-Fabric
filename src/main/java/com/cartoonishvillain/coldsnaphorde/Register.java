@@ -103,12 +103,12 @@ public class Register {
     public static final Item ECOLDSNAPZAPPERSPAWN = new SpawnEggItem(ECOLDSNAPZAPPER, 15332272, 9802549, new Item.Properties().tab(ColdSnapHorde.TAB));
     public static final Item ECOLDSNAPBRAWLERSPAWN = new SpawnEggItem(ECOLDSNAPBRAWLER, 15332272, 6229378, new Item.Properties().tab(ColdSnapHorde.TAB));
 
-    public static final Item PCOLDSNAPGUNNERSPAWN = new SpawnEggItem(PCOLDSNAPGUNNER, 14804727, 0, new Item.Properties().tab(ColdSnapHorde.TAB));
-    public static final Item PCOLDSNAPSTABBERSPAWN = new SpawnEggItem(PCOLDSNAPSTABBER, 14804727, 8585216, new Item.Properties().tab(ColdSnapHorde.TAB));
-    public static final Item PCOLDSNAPSNOWBALLERSPAWN = new SpawnEggItem(PCOLDSNAPSNOWBALLER, 14804727, 25753, new Item.Properties().tab(ColdSnapHorde.TAB));
-    public static final Item PCOLDSNAPGIFTERSPAWN = new SpawnEggItem(PCOLDSNAPGIFTER, 14804727, 26671, new Item.Properties().tab(ColdSnapHorde.TAB));
-    public static final Item PCOLDSNAPZAPPERSPAWN = new SpawnEggItem(PCOLDSNAPZAPPER, 14804727, 9802549, new Item.Properties().tab(ColdSnapHorde.TAB));
-    public static final Item PCOLDSNAPBRAWLERSPAWN = new SpawnEggItem(PCOLDSNAPBRAWLER, 14804727, 6229378, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item PCOLDSNAPGUNNERSPAWN = new SpawnEggItem(PCOLDSNAPGUNNER, 7444, 0, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item PCOLDSNAPSTABBERSPAWN = new SpawnEggItem(PCOLDSNAPSTABBER, 7444, 8585216, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item PCOLDSNAPSNOWBALLERSPAWN = new SpawnEggItem(PCOLDSNAPSNOWBALLER, 7444, 25753, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item PCOLDSNAPGIFTERSPAWN = new SpawnEggItem(PCOLDSNAPGIFTER, 7444, 26671, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item PCOLDSNAPZAPPERSPAWN = new SpawnEggItem(PCOLDSNAPZAPPER, 7444, 9802549, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item PCOLDSNAPBRAWLERSPAWN = new SpawnEggItem(PCOLDSNAPBRAWLER, 7444, 6229378, new Item.Properties().tab(ColdSnapHorde.TAB));
 
 
     public static final EntityType<GunnerProjectileEntity> GUNNERPROJECTILE = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "gunnerprojectile"), FabricEntityTypeBuilder.<GunnerProjectileEntity>create(MobCategory.MISC, GunnerProjectileEntity::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).build());
