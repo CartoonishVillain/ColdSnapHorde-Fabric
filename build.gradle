@@ -46,6 +46,8 @@ dependencies {
 
 	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:4.0.0"
 	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:4.0.0"
+	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:4.0.0"
+	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-world:4.0.0"
 	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-world:4.0.0"
 	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-world:4.0.0"
 
@@ -53,9 +55,8 @@ dependencies {
 		exclude(group: "net.fabricmc.fabric-api")
 
 
-		modImplementation("io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:4.0.0")
-		modImplementation ("curse.maven:immortuos-411857:3542021")
-//	modCompileOnly ("curse.maven:immortuos-411857:3542021")
+//		modImplementation ("curse.maven:immortuos-411857:3542021")
+	modCompileOnly ("curse.maven:immortuos-411857:3542021")
 	}
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.

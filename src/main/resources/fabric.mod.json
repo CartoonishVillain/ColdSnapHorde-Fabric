@@ -5,7 +5,8 @@
 
   "custom": {
     "cardinal-components": [
-      "coldsnaphorde:cooldown"
+      "coldsnaphorde:cooldown",
+      "coldsnaphorde:playercooldown"
     ]
   },
 
@@ -34,6 +35,9 @@
       "com.cartoonishvillain.coldsnaphorde.client.ColdSnapClientInitializer"
     ],
     "cardinal-components-world": [
+      "com.cartoonishvillain.coldsnaphorde.component.ComponentStarter"
+    ],
+    "cardinal-components-entity": [
       "com.cartoonishvillain.coldsnaphorde.component.ComponentStarter"
     ]
   },

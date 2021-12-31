@@ -2,6 +2,8 @@ package com.cartoonishvillain.coldsnaphorde.entities.mobs.basemob;
 
 import com.cartoonishvillain.coldsnaphorde.ColdSnapHorde;
 import com.cartoonishvillain.coldsnaphorde.Register;
+import com.cartoonishvillain.coldsnaphorde.component.ComponentStarter;
+import com.cartoonishvillain.coldsnaphorde.component.PlayerCooldownComponent;
 import com.cartoonishvillain.coldsnaphorde.entities.mobs.behaviors.HordeMovementGoal;
 import com.cartoonishvillain.immortuoscalyx.component.InfectionHandler;
 import net.minecraft.core.BlockPos;
@@ -20,6 +22,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
@@ -238,17 +241,44 @@ public class GenericHordeMember extends Monster implements SnowCreature {
         if(ColdSnapHorde.isCalyxLoaded){
             InfectionHandler.infectEntity(entity, 15, 1);
         }else{
-            int chance = entity.getRandom().nextInt(10);
-            switch (chance){
-                default -> {}
-                case 3 -> {entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20*20, 0));}
-                case 4 -> {entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20*20, 0)); entity.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 20*20, 0));}
-                case 5 -> {entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20*40, 0)); entity.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 20*40, 0));}
-                case 6 -> {entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20*30, 0)); entity.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 20*30, 0)); entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 20*10, 0));}
-                case 7 -> {entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20*25, 1)); entity.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 20*25, 1)); entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 20*20, 0));}
-                case 8 -> {entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20*30, 1)); entity.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 20*30, 1)); entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 20*20, 0)); entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 20*30, 0));}
-                case 9 -> {entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20*30, 1)); entity.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 20*30, 1)); entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 20*20, 0)); entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 20*30, 1));}
+            if (entity instanceof Player){
+                PlayerCooldownComponent h = ComponentStarter.PLAYERCOMPONENT.get(entity);
+                if(h.getCooldownTicks() == 0) {
+                    int chance = entity.getRandom().nextInt(10);
+                    switch (chance) {
+                        default -> {
+                        }
+                        case 3 -> {
+                            entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 20, 0));
+                            h.setCooldownTicks(20*60);
+                        }
+                        case 4 -> {
+                            entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 20, 0));
+                            entity.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 20 * 20, 0));
+                            h.setCooldownTicks(20*60);
+                        }
+                        case 5 -> {
+                            entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 40, 0));
+                            entity.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 20 * 40, 0));
+                            h.setCooldownTicks(20*60);
+                        }
+                        case 6 -> {
+                            entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 30, 0));
+                            entity.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 20 * 30, 0));
+                            entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 20 * 10, 0));
+                            h.setCooldownTicks(20*60);
+                        }
+                        case 7 -> {
+                            entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 25, 1));
+                            entity.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 20 * 25, 1));
+                            entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 20 * 20, 0));
+                            h.setCooldownTicks(20*60);
+                        }
+                    }
+                }
+
             }
+
         }
     }
 }
