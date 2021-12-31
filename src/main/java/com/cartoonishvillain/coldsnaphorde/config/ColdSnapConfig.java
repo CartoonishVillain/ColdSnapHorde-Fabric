@@ -48,6 +48,8 @@ public class ColdSnapConfig implements ConfigData {
         public int DZAPPER = 1;
         @Comment("Changes the spawn weight of the Brawler other dimensions")
         public int DBRAWLER = 1;
+        @Comment("Changes the spawn weight of the Frosty Cow.")
+        public int SNOWCOW = 4;
     }
 
     public static class ColdSnapSettings{
