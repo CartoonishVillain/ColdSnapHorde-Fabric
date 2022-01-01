@@ -4,7 +4,6 @@ package com.cartoonishvillain.coldsnaphorde.client.models.standardmodel;
 // Paste this class into your mod and generate all required imports
 
 
-import com.cartoonishvillain.coldsnaphorde.entities.mobs.basemob.GenericHordeMember;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
@@ -13,8 +12,9 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
 
-public class ColdSnapGunnerModel<T extends GenericHordeMember> extends EntityModel<T> {
+public class ColdSnapGunnerModel<T extends LivingEntity> extends EntityModel<T> {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "coldsnapgunnermodel"), "main");
     private final ModelPart lowbody;

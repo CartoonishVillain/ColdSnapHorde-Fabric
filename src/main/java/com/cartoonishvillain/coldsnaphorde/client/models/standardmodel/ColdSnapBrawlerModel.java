@@ -3,15 +3,15 @@ package com.cartoonishvillain.coldsnaphorde.client.models.standardmodel;// Made 
 // Paste this class into your mod and generate all required imports
 
 
-import com.cartoonishvillain.coldsnaphorde.entities.mobs.basemob.GenericHordeMember;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.world.entity.LivingEntity;
 
-public class ColdSnapBrawlerModel<T extends GenericHordeMember> extends EntityModel<T> {
+public class ColdSnapBrawlerModel<T extends LivingEntity> extends EntityModel<T> {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
     //public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "custom_model"), "main");
     private final ModelPart lowbody;
