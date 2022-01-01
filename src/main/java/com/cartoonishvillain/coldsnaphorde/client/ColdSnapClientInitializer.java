@@ -50,8 +50,6 @@ public class ColdSnapClientInitializer implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-
-
         EntityRendererRegistry.register(Register.COLDSNAPSTABBER, RenderColdSnapStabber::new);
         EntityRendererRegistry.register(Register.COLDSNAPGUNNER, RenderColdSnapGunner::new);
         EntityRendererRegistry.register(Register.COLDSNAPSNOWBALLER, RenderColdSnapSnowballer::new);
@@ -104,6 +102,11 @@ public class ColdSnapClientInitializer implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(TOPHAT, TopHatModel::createLayer);
 
         ArmorRenderer.register(new TopHatRenderer(), Register.TOPHAT);
+        ArmorRenderer.register(new TopHatRenderer(), Register.REDTOPHAT);
+        ArmorRenderer.register(new TopHatRenderer(), Register.BLUETOPHAT);
+        ArmorRenderer.register(new TopHatRenderer(), Register.GREENTOPHAT);
+        ArmorRenderer.register(new TopHatRenderer(), Register.PURPLETOPHAT);
+
 
 
     }

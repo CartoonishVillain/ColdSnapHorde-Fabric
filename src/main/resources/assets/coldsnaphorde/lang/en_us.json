@@ -1,4 +1,5 @@
 {
+  "itemGroup.coldsnaphorde.coldgroup": "Cold Snap Horde",
   "entity.coldsnaphorde.coldsnapgunner": "Horde Gunner",
   "entity.coldsnaphorde.coldsnapstabber": "Horde Stabber",
   "entity.coldsnaphorde.coldsnapsnowballer": "Horde Snowballer",
@@ -30,6 +31,10 @@
   "entity.coldsnaphorde.frostycow": "Frosty Cow",
   "item.coldsnaphorde.rockysnowball": "Snow Covered Rock",
   "item.coldsnaphorde.tophat": "Top Hat",
+  "item.coldsnaphorde.redtophat": "Red Top Hat",
+  "item.coldsnaphorde.bluetophat": "Blue Top Hat",
+  "item.coldsnaphorde.greentophat": "Green Top Hat",
+  "item.coldsnaphorde.purpletophat": "Purple Top Hat",
   "item.coldsnaphorde.iceshard": "Frost Shard",
   "item.coldsnaphorde.icecore": "Frost Core",
   "item.coldsnaphorde.thermometer": "Thermometer",
@@ -68,6 +73,6 @@
   "item.coldsnaphorde.pgifter_spawn_egg": "Plague Horde Gifter Spawn Egg",
   "item.coldsnaphorde.pzapper_spawn_egg": "Plague Horde Zapper Spawn Egg",
   "item.coldsnaphorde.pbrawler_spawn_egg": "Plague Horde Brawler Spawn Egg",
-  "itemGroup.coldsnaphorde.coldgroup": "Cold Snap Horde",
+  "itemGroup.ColdSnapHorde": "Cold Snap Horde",
   "info.coldsnaphorde.holiday": "Happy Holidays! All entities now have a low chance to drop presents, and horde members have a higher chance of dropping presents!"
 }

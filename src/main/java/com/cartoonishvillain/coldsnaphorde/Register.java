@@ -34,11 +34,19 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.cartoonishvillain.coldsnaphorde.ColdSnapHorde.MOD_ID;
 
 public class Register {
 
     public static final Item TOPHAT = new TopHat(ArmorMaterials.HAT, EquipmentSlot.HEAD, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item REDTOPHAT = new TopHat(ArmorMaterials.HAT, EquipmentSlot.HEAD, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item BLUETOPHAT = new TopHat(ArmorMaterials.HAT, EquipmentSlot.HEAD, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item GREENTOPHAT = new TopHat(ArmorMaterials.HAT, EquipmentSlot.HEAD, new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item PURPLETOPHAT = new TopHat(ArmorMaterials.HAT, EquipmentSlot.HEAD, new Item.Properties().tab(ColdSnapHorde.TAB));
+
     public static final Item ROCKYSNOWBALL = new RockySnowball();
     public static final Item SNOWIERSNOWBALL = new SnowierSnowball();
     public static final Item LIGHTNINGSNOWBALL = new LightningSnowball();
@@ -149,6 +157,10 @@ public class Register {
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "present"), PRESENT);
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "ice_sword"), ICESWORD);
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "tophat"), TOPHAT);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "redtophat"), REDTOPHAT);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "bluetophat"), BLUETOPHAT);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "greentophat"), GREENTOPHAT);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "purpletophat"), PURPLETOPHAT);
 
         Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "frostcow_spawn_egg"), COLDSNAPCOWSPAWN);
 
@@ -216,5 +228,8 @@ public class Register {
         FabricDefaultAttributeRegistry.register(PCOLDSNAPBRAWLER, ColdSnapBrawler.customAttributes());
 
         FabricDefaultAttributeRegistry.register(COLDSNAPCOW, ColdSnapCow.customAttributes());
+
+        ColdSnapHorde.TOPHATS = new ArrayList<>(List.of(Register.TOPHAT, Register.REDTOPHAT, Register.BLUETOPHAT, Register.GREENTOPHAT, Register.PURPLETOPHAT));
+
     }
 }

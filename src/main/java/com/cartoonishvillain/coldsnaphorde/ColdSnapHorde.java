@@ -24,11 +24,13 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
@@ -41,6 +43,7 @@ public class ColdSnapHorde implements ModInitializer {
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LogManager.getLogger("coldsnaphorde");
 	public static final String MOD_ID = "coldsnaphorde";
+	public static ArrayList<Item> TOPHATS = new ArrayList<>();
 	public static boolean isCalyxLoaded;
 	public static boolean isInHolidayWindow;
 	public static Horde Horde;
