@@ -32,7 +32,7 @@ public class ColdSnapStabber extends GenericHordeMember {
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 0.5D));
-        this.targetSelector.addGoal(1, new FloatGoal(this));
+        this.goalSelector.addGoal(1, new FloatGoal(this));
         this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 1D, false));
         this.goalSelector.addGoal(2, new LeapAtTargetGoal(this, 0.5F));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, this::shouldAttack));

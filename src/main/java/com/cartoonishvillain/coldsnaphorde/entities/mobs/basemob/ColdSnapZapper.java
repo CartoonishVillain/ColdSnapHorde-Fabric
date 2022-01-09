@@ -42,10 +42,10 @@ public class ColdSnapZapper extends GenericHordeMember {
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 0.5D));
-        this.targetSelector.addGoal(1, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, PathfinderMob.class, 6.0F, 0.75D, 0.75D, this::avoid));
-        this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, Player.class, 6.0F, 1.0D, 1.2D, this::avoid));
-        this.goalSelector.addGoal(2, new CustomMeleeAttackGoal(this, 0.75D, false));
+        this.goalSelector.addGoal(1, new FloatGoal(this));
+        this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, PathfinderMob.class, 6.0F, 0.75D, 0.75D, this::avoid));
+        this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Player.class, 6.0F, 1.0D, 1.2D, this::avoid));
+        this.goalSelector.addGoal(3, new CustomMeleeAttackGoal(this, 0.75D, false));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, this::shouldAttack));
         this.targetSelector.addGoal(7, new NearestAttackableTargetGoal<>(this, Villager.class, 10, true, false, this::shouldAttack));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, IronGolem.class, 10, true, false, this::shouldAttack));
