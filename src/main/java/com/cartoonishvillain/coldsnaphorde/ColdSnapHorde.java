@@ -17,11 +17,14 @@ import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.ChatFormatting;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -133,6 +136,18 @@ public class ColdSnapHorde implements ModInitializer {
 					h.addCooldownTicks(-1);
 				}
 			ColdSnapHorde.Horde.tick();
+		}
+	}
+
+	public static void giveAdvancement(ServerPlayer player, MinecraftServer server, ResourceLocation advancementResource){
+		Advancement advancement = server.getAdvancements().getAdvancement(advancementResource);
+		if(advancement != null) {
+			AdvancementProgress advancementprogress = player.getAdvancements().getOrStartProgress(advancement);
+			if (!advancementprogress.isDone()) {
+				for(String s : advancementprogress.getRemainingCriteria()) {
+					player.getAdvancements().award(advancement, s);
+				}
+			}
 		}
 	}
 }

@@ -48,7 +48,7 @@ public class GenericHordeMember extends Monster implements SnowCreature {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers(GenericHordeMember.class));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this, GenericHordeMember.class).setAlertOthers(GenericHordeMember.class));
         this.goalSelector.addGoal(3, new HordeMovementGoal<>(this));
         this.goalSelector.addGoal(1, new FloatGoal(this));
         this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, ColdSnapGifter.class, 6.0F, 1.0D, 1.2D, this::avoid));

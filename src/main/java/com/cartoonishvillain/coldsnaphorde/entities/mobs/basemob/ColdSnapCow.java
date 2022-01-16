@@ -6,7 +6,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -22,6 +24,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+
+import static com.cartoonishvillain.coldsnaphorde.ColdSnapHorde.giveAdvancement;
 
 public class ColdSnapCow extends Cow implements SnowCreature {
 
@@ -39,6 +43,9 @@ public class ColdSnapCow extends Cow implements SnowCreature {
             ItemStack newBucket = ItemUtils.createFilledResult(itemStack, p_28298_, Items.POWDER_SNOW_BUCKET.getDefaultInstance());
             p_28298_.setItemInHand(p_28299_, newBucket);
             setHarvestTimer(ColdSnapHorde.config.coldSnapSettings.FROSTYHARVESTCOOLDOWN);
+            if(p_28298_.getServer() != null) {
+                giveAdvancement((ServerPlayer) p_28298_, p_28298_.getServer(), new ResourceLocation(ColdSnapHorde.MOD_ID, "snow_farmer"));
+            }
             return InteractionResult.sidedSuccess(this.level.isClientSide);
         }else return super.mobInteract(p_28298_, p_28299_);
     }

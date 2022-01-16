@@ -17,7 +17,9 @@ import com.cartoonishvillain.coldsnaphorde.items.ToolsOrOther.Materials;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Registry;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityDimensions;
@@ -129,11 +131,8 @@ public class Register {
     public static final Item COLDSNAPCOWSPAWN = new SpawnEggItem(COLDSNAPCOW, 14804727, 1840384, new Item.Properties().tab(ColdSnapHorde.TAB));
 
     public static final Block SLUSH = new SlushBlock(BlockBehaviour.Properties.of(Material.SNOW).strength(0).sound(SoundType.SNOW));
-    public static final Item SLUSHITEM = new BlockItem(SLUSH, new Item.Properties().tab(ColdSnapHorde.TAB));
     public static final Block GREENCANDYCANEBLOCK = new Block(FabricBlockSettings.copyOf(Blocks.BONE_BLOCK));
-    public static final Item GREENCANDYCANEITEM = new BlockItem(GREENCANDYCANEBLOCK, new Item.Properties().tab(ColdSnapHorde.TAB));
     public static final Block REDCANDYCANEBLOCK = new Block(FabricBlockSettings.copyOf(Blocks.BONE_BLOCK));
-    public static final Item REDCANDYCANEITEM = new BlockItem(REDCANDYCANEBLOCK, new Item.Properties().tab(ColdSnapHorde.TAB));
 
     public static final ResourceLocation gifter_laugh_id = new ResourceLocation(MOD_ID, "gifter_attack");
     public static final SoundEvent GIFTERATTACK = new SoundEvent(gifter_laugh_id);
@@ -143,8 +142,8 @@ public class Register {
         Registry.register(Registry.BLOCK, new ResourceLocation(MOD_ID, "greencandycane"), GREENCANDYCANEBLOCK);
         Registry.register(Registry.BLOCK, new ResourceLocation(MOD_ID, "redcandycane"), REDCANDYCANEBLOCK);
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "slush"), new BlockItem(SLUSH, new Item.Properties().tab(ColdSnapHorde.TAB)));
-        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "greencandycane"), new BlockItem(GREENCANDYCANEBLOCK, new Item.Properties().tab(ColdSnapHorde.TAB)));
-        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "redcandycane"), new BlockItem(REDCANDYCANEBLOCK, new Item.Properties().tab(ColdSnapHorde.TAB)));
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "greencandycane"), new LoredBlockItem(GREENCANDYCANEBLOCK, new Item.Properties().tab(ColdSnapHorde.TAB), new TranslatableComponent("itemtooltip.candycane.1").withStyle(ChatFormatting.AQUA), new TranslatableComponent("itemtooltip.candycane.2").withStyle(ChatFormatting.AQUA)));
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "redcandycane"), new LoredBlockItem(REDCANDYCANEBLOCK, new Item.Properties().tab(ColdSnapHorde.TAB), new TranslatableComponent("itemtooltip.candycane.1").withStyle(ChatFormatting.AQUA), new TranslatableComponent("itemtooltip.candycane.2").withStyle(ChatFormatting.AQUA)));
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "rockysnowball"), ROCKYSNOWBALL);
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "freezeball"), SNOWIERSNOWBALL);
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "iceshard"), ICESHARD);

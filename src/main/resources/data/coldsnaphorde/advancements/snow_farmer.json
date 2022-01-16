@@ -1,0 +1,25 @@
+{
+    "display": {
+        "title": {
+            "text": "Snow Farmer",
+            "color": "aqua"
+        },
+        "description": {
+            "text": "Get powdered snow out of a Frosty Cow.",
+            "color": "aqua"
+        },
+        "icon": {
+            "item": "minecraft:powder_snow_bucket"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "Impossible": {
+            "trigger": "minecraft:impossible"
+        }
+    },
+    "parent": "coldsnaphorde:root"
+}

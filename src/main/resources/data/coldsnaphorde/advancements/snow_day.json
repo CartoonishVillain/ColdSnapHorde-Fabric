@@ -1,0 +1,25 @@
+{
+    "display": {
+        "title": {
+            "text": "Snow Day",
+            "color": "aqua"
+        },
+        "description": {
+            "text": "Anger the Cold Snap Horde by shaking a Snow Globe!",
+            "color": "aqua"
+        },
+        "icon": {
+            "item": "coldsnaphorde:snowglobe"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "Impossible": {
+            "trigger": "minecraft:impossible"
+        }
+    },
+    "parent": "coldsnaphorde:root"
+}

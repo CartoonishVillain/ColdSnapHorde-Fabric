@@ -31,6 +31,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.*;
 
+import static com.cartoonishvillain.coldsnaphorde.ColdSnapHorde.giveAdvancement;
 import static com.cartoonishvillain.coldsnaphorde.component.ComponentStarter.WORLDCOMPONENT;
 
 public class Horde {
@@ -59,9 +60,9 @@ public class Horde {
         if(Alive <= 0) {
             broadcast(server, new TranslatableComponent("message.coldsnaphorde.hordevictory").withStyle(ChatFormatting.AQUA));
             for(ServerPlayer player : players) {
-                giveAdvancement(player);
+                giveAdvancement(player, server, new ResourceLocation(ColdSnapHorde.MOD_ID, "sliced_snowmen"));
             }
-            giveAdvancement(serverPlayer);
+            giveAdvancement(serverPlayer, server, new ResourceLocation(ColdSnapHorde.MOD_ID, "sliced_snowmen"));
         } else {
             broadcast(server, new TranslatableComponent("message.coldsnaphorde.hordedefeat").withStyle(ChatFormatting.RED));
         }
@@ -76,19 +77,6 @@ public class Horde {
 
         WorldCooldownComponent h = WORLDCOMPONENT.get(world);
         h.setCooldownTicks(ColdSnapHorde.config.coldSnapSettings.GLOBALHORDECOOLDOWN * 20);
-    }
-
-    private void giveAdvancement(ServerPlayer player){
-        ResourceLocation resourcelocation = new ResourceLocation("coldsnaphorde:root");
-        Advancement advancement = server.getAdvancements().getAdvancement(resourcelocation);
-        if(advancement != null) {
-            AdvancementProgress advancementprogress = player.getAdvancements().getOrStartProgress(advancement);
-            if (!advancementprogress.isDone()) {
-                for(String s : advancementprogress.getRemainingCriteria()) {
-                    player.getAdvancements().award(advancement, s);
-                }
-            }
-        }
     }
 
     public Boolean getHordeActive() {
@@ -129,6 +117,8 @@ public class Horde {
 
             WorldCooldownComponent h = WORLDCOMPONENT.get(world);
                 h.setCooldownTicks(-1);
+
+            giveAdvancement(serverPlayer, server, new ResourceLocation(ColdSnapHorde.MOD_ID, "snow_day"));
 
             broadcast(server, new TranslatableComponent("message.coldsnaphorde.hordestart", serverPlayer.getDisplayName()).withStyle(ChatFormatting.AQUA));
         }

@@ -11,6 +11,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -31,6 +33,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+
+import static com.cartoonishvillain.coldsnaphorde.ColdSnapHorde.giveAdvancement;
 
 public class Present extends Item {
     public Present(Properties properties) {super(properties);}
@@ -80,6 +84,10 @@ public class Present extends Item {
         if(select == possibilities.size()) select = select - 1;
         String selected = possibilities.get(select);
         RewardDispenser(worldIn, playerIn, selected);}
+
+        if(playerIn.getServer() != null) {
+            giveAdvancement((ServerPlayer) playerIn, playerIn.getServer(), new ResourceLocation(ColdSnapHorde.MOD_ID, "unboxing"));
+        }
 
         return super.use(worldIn, playerIn, handIn);
     }

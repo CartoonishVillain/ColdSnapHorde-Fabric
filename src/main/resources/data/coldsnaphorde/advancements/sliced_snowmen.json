@@ -1,0 +1,31 @@
+{
+    "display": {
+        "title": {
+            "text": "Sliced Snowmen",
+            "color": "aqua",
+            "italic": true
+        },
+        "description": {
+            "text": "Defeat the Cold Snap Horde!",
+            "color": "aqua",
+            "bold": false,
+            "italic": true
+        },
+        "icon": {
+            "item": "coldsnaphorde:ice_sword"
+        },
+        "frame": "challenge",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "Impossible": {
+            "trigger": "minecraft:impossible"
+        }
+    },
+    "rewards": {
+        "experience": 50
+    },
+    "parent": "coldsnaphorde:snow_day"
+}
