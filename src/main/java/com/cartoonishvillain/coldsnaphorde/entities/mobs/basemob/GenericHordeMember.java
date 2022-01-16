@@ -20,6 +20,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
@@ -49,13 +50,13 @@ public class GenericHordeMember extends Monster implements SnowCreature {
         super.registerGoals();
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers(GenericHordeMember.class));
         this.goalSelector.addGoal(3, new HordeMovementGoal<>(this));
-        this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, ColdSnapGifter.class, 6.0F, 1.0D, 1.2D, this::avoid));
+        this.goalSelector.addGoal(1, new FloatGoal(this));
+        this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, ColdSnapGifter.class, 6.0F, 1.0D, 1.2D, this::avoid));
     }
 
     private boolean avoid(@Nullable LivingEntity entity) {
         if (entity instanceof ColdSnapGifter) {
-            int timer = ((ColdSnapGifter) entity).getTimer();
-            return timer < 50;
+            return ((ColdSnapGifter) entity).isExploding();
         }
         return false;
     }
