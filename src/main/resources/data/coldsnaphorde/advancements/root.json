@@ -1,0 +1,27 @@
+{
+  "display": {
+    "title": {
+      "text": "Slicing Snowmen"
+    },
+    "description": {
+      "text": "Defeat the Cold Snap Horde",
+      "italic": true
+    },
+    "icon": {
+      "item": "coldsnaphorde:ice_sword"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "coldsnaphorde:textures/blocks/slush.png"
+  },
+  "criteria": {
+    "Impossible": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "experience": 20
+  }
+}
