@@ -39,7 +39,7 @@ public class ColdSnapGunner extends GenericHordeMember implements RangedAttackMo
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 0.5D));
         this.goalSelector.addGoal(1, new FloatGoal(this));
-        this.goalSelector.addGoal(3, new RangedBowAttackGoal<>(this, 0.75D, 30, 25.0F));
+        this.goalSelector.addGoal(3, new RangedBowAttackGoal<>(this, 0.65D, 30, 25.0F));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, this::shouldAttack));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Villager.class, 10, true, false, this::shouldAttack));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, 10, true, false, this::shouldAttack));
