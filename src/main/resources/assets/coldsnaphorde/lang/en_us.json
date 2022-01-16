@@ -74,5 +74,8 @@
   "item.coldsnaphorde.pzapper_spawn_egg": "Plague Horde Zapper Spawn Egg",
   "item.coldsnaphorde.pbrawler_spawn_egg": "Plague Horde Brawler Spawn Egg",
   "itemGroup.ColdSnapHorde": "Cold Snap Horde",
-  "info.coldsnaphorde.holiday": "Happy Holidays! All entities now have a low chance to drop presents, and horde members have a higher chance of dropping presents!"
+  "info.coldsnaphorde.holiday": "Happy Holidays! All entities now have a low chance to drop presents, and horde members have a higher chance of dropping presents!",
+  "message.coldsnaphorde.hordevictory": "The Cold Snap Horde was defeated!",
+  "message.coldsnaphorde.hordedefeat": "Those who challenged the Cold Snap Horde were unsuccessful in their efforts.",
+  "message.coldsnaphorde.hordestart": "%1$s angered the Cold Snap Horde!"
 }
