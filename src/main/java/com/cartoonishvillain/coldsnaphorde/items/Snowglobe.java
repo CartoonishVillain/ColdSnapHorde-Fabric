@@ -2,8 +2,11 @@ package com.cartoonishvillain.coldsnaphorde.items;
 
 import com.cartoonishvillain.coldsnaphorde.ColdSnapHorde;
 import com.cartoonishvillain.coldsnaphorde.component.WorldCooldownComponent;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -12,8 +15,11 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.cartoonishvillain.coldsnaphorde.component.ComponentStarter.WORLDCOMPONENT;
@@ -80,5 +86,14 @@ public class Snowglobe extends Item {
             timer += ")";
         }
         return timer;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack p_41421_, @Nullable Level p_41422_, List<Component> p_41423_, TooltipFlag p_41424_) {
+        super.appendHoverText(p_41421_, p_41422_, p_41423_, p_41424_);
+        p_41423_.add(new TranslatableComponent("itemtooltip.snowglobe.1").withStyle(ChatFormatting.AQUA));
+        p_41423_.add(new TranslatableComponent("itemtooltip.snowglobe.2").withStyle(ChatFormatting.AQUA));
+        p_41423_.add(new TranslatableComponent("itemtooltip.snowglobe.3").withStyle(ChatFormatting.RED));
+        p_41423_.add(new TranslatableComponent("itemtooltip.snowglobe.4").withStyle(ChatFormatting.RED));
     }
 }

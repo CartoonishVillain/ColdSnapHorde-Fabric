@@ -1,10 +1,14 @@
 package com.cartoonishvillain.coldsnaphorde.items;
 
+import com.cartoonishvillain.coldsnaphorde.ColdSnapHorde;
 import com.cartoonishvillain.coldsnaphorde.Register;
 import com.cartoonishvillain.coldsnaphorde.mixin.AxoltolAccessor;
 import com.cartoonishvillain.coldsnaphorde.mixin.EntityAccessor;
 import com.cartoonishvillain.coldsnaphorde.mixin.GoatAccessor;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
@@ -19,14 +23,13 @@ import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class Present extends Item {
@@ -241,5 +244,16 @@ public class Present extends Item {
         int select = random.nextInt(music.size());
         if(select == music.size()) select--;
         return music.get(select);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack p_41421_, @Nullable Level p_41422_, List<Component> p_41423_, TooltipFlag p_41424_) {
+        super.appendHoverText(p_41421_, p_41422_, p_41423_, p_41424_);
+        p_41423_.add(new TranslatableComponent("itemtooltip.present.1").withStyle(ChatFormatting.AQUA));
+        p_41423_.add(new TranslatableComponent("itemtooltip.present.2").withStyle(ChatFormatting.AQUA));
+        p_41423_.add(new TranslatableComponent("itemtooltip.present.3").withStyle(ChatFormatting.AQUA));
+        if(ColdSnapHorde.isInHolidayWindow) {
+            p_41423_.add(new TranslatableComponent("itemtooltip.present.special").withStyle(ChatFormatting.BLUE));
+        }
     }
 }

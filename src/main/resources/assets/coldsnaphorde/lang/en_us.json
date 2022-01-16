@@ -77,5 +77,17 @@
   "info.coldsnaphorde.holiday": "Happy Holidays! All entities now have a low chance to drop presents, and horde members have a higher chance of dropping presents!",
   "message.coldsnaphorde.hordevictory": "The Cold Snap Horde was defeated!",
   "message.coldsnaphorde.hordedefeat": "Those who challenged the Cold Snap Horde were unsuccessful in their efforts.",
-  "message.coldsnaphorde.hordestart": "%1$s angered the Cold Snap Horde!"
+  "message.coldsnaphorde.hordestart": "%1$s angered the Cold Snap Horde!",
+  "itemtooltip.present.1": "Right click to open for a surprise!",
+  "itemtooltip.present.2": "Obtained by killing horde members during the horde event.",
+  "itemtooltip.present.3": "See the Snow Globe for more details!",
+  "itemtooltip.present.special": "Holiday Special! Low chance to drop from any mob!",
+  "itemtooltip.snowglobe.1": "Shake to start the Cold Snap Horde event!",
+  "itemtooltip.snowglobe.2": "Horde members killed from the event may drop presents!",
+  "itemtooltip.snowglobe.3": "WARNING! This is can be a difficult event!",
+  "itemtooltip.snowglobe.4": "Recommended to have a defensible area and gear before starting!",
+  "itemtooltip.tophat.1": "Disguises you as a horde member, good for stray members.",
+  "itemtooltip.tophat.2": "Will not protect you from members from the horde event!",
+  "itemtooltip.icesword.1": "Slows down victims upon impact!",
+  "itemtooltip.icesword.2": "Obtainable from presents!"
 }
