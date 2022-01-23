@@ -34,7 +34,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import static com.cartoonishvillain.coldsnaphorde.ColdSnapHorde.giveAdvancement;
+import static com.cartoonishvillain.coldsnaphorde.ColdSnapHorde.*;
 
 public class Present extends Item {
     public Present(Properties properties) {super(properties);}
@@ -43,46 +43,21 @@ public class Present extends Item {
     public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         if(!worldIn.isClientSide() && handIn == InteractionHand.MAIN_HAND){
         playerIn.getCooldowns().addCooldown(this, 20);
-        ArrayList<String> possibilities = new ArrayList<>();
-        ArrayList<Float> weights = new ArrayList<>();
-        possibilities.add("coal"); weights.add(30f);
-        possibilities.add("snow"); weights.add(15f);
-        possibilities.add("ice"); weights.add(20f);
-        possibilities.add("packedice"); weights.add(15f);
-        possibilities.add("blueice"); weights.add(10f);
-        possibilities.add("doggo"); weights.add(10f);
-        possibilities.add("cats"); weights.add(10f);
-        possibilities.add("birb"); weights.add(10f);
-        possibilities.add("friendsnowman"); weights.add(10f);
-        possibilities.add("music"); weights.add(15f);
-        possibilities.add("rollercoaster"); weights.add(10f);
-        possibilities.add("horse"); weights.add(10f);
-        possibilities.add("pig"); weights.add(10f);
-        possibilities.add("candycane"); weights.add(1000f);
-        possibilities.add("axolotl"); weights.add(10f);
-        possibilities.add("screamgoat"); weights.add(5f);
-        possibilities.add("panda"); weights.add(5f);
-        possibilities.add("icesword"); weights.add(10f);
-        possibilities.add("transposerpiece"); weights.add(10f);
-        possibilities.add("frostshard"); weights.add(15f);
-        possibilities.add("transposer"); weights.add(5f);
-        possibilities.add("frostcore"); weights.add(5f);
-
         playerIn.getMainHandItem().shrink(1);
 
         float Total = 0f;
-        for(float totaling : weights) Total += totaling;
+        for(float totaling : presentWeights) Total += totaling;
         float randomized = 0 + worldIn.random.nextFloat() * (Total-0);
         int select = 0;
 
-        for(Float percentage : weights){
+        for(Float percentage : presentWeights){
             randomized -= percentage;
             if(randomized <= 0) break;
             else select++;
         }
 
-        if(select == possibilities.size()) select = select - 1;
-        String selected = possibilities.get(select);
+        if(select == presentPossibilities.size()) select = select - 1;
+        String selected = presentPossibilities.get(select);
         RewardDispenser(worldIn, playerIn, selected);}
 
         if(playerIn.getServer() != null) {

@@ -91,5 +91,7 @@
   "itemtooltip.icesword.1": "Slows down victims upon impact!",
   "itemtooltip.icesword.2": "Obtainable from presents!",
   "itemtooltip.candycane.1": "Decorative Block",
-  "itemtooltip.candycane.2": "Can be obtained from presents!"
+  "itemtooltip.candycane.2": "Can be obtained from presents!",
+  "message.coldsnaphorde.peaceful": "The horde melts around the challengers, as peaceful mode was enabled.",
+  "message.coldsnaphorde.confused": "The horde is confused by the challengers surroundings, and decides to leave."
 }

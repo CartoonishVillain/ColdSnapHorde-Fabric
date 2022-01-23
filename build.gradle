@@ -28,7 +28,7 @@ repositories {
 	maven { url "https://maven.shedaniel.me/" }
 
 	maven {
-		url "https://cursemaven.com"
+		url "https://cfa2.cursemaven.com"
 		content {
 			includeGroup "curse.maven"
 		}
@@ -57,6 +57,8 @@ dependencies {
 
 //		modImplementation ("curse.maven:immortuos-411857:3542021")
 	modCompileOnly ("curse.maven:immortuos-411857:3542021")
+
+		modImplementation ("curse.maven:hordelib-571315:3620859")
 	}
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.

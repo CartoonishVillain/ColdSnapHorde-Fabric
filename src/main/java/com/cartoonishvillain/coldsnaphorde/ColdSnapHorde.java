@@ -1,12 +1,11 @@
 package com.cartoonishvillain.coldsnaphorde;
 
+import com.cartoonishvillain.cartoonishhorde.EntityHordeData;
 import com.cartoonishvillain.coldsnaphorde.component.WorldCooldownComponent;
 import com.cartoonishvillain.coldsnaphorde.config.ColdSnapConfig;
 import com.cartoonishvillain.coldsnaphorde.entities.Spawns;
-import com.cartoonishvillain.coldsnaphorde.events.Horde;
-import com.cartoonishvillain.immortuoscalyx.ImmortuosCalyx;
-import com.cartoonishvillain.immortuoscalyx.networking.ConfigPacket;
-import io.netty.buffer.Unpooled;
+import com.cartoonishvillain.coldsnaphorde.entities.mobs.basemob.ColdSnapGunner;
+import com.cartoonishvillain.coldsnaphorde.events.ColdSnapHordeEvent;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
@@ -19,7 +18,6 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -49,7 +47,11 @@ public class ColdSnapHorde implements ModInitializer {
 	public static ArrayList<Item> TOPHATS = new ArrayList<>();
 	public static boolean isCalyxLoaded;
 	public static boolean isInHolidayWindow;
-	public static Horde Horde;
+	public static ColdSnapHordeEvent Horde;
+	public static EntityHordeData defaultHordeData;
+
+	public static ArrayList<String> presentPossibilities = new ArrayList<>();
+	public static ArrayList<Float> presentWeights = new ArrayList<>();
 	public static final CreativeModeTab TAB = FabricItemGroupBuilder.build(new ResourceLocation(ColdSnapHorde.MOD_ID, "coldgroup"), () -> new ItemStack(Register.ROCKYSNOWBALL));
 	public static ColdSnapConfig config;
 
@@ -102,12 +104,36 @@ public class ColdSnapHorde implements ModInitializer {
 
 		@Override
 		public void onServerStarting(MinecraftServer server) {
-			Horde = new Horde(server);
+			defaultHordeData = new EntityHordeData(3, 0.5D, 1, Register.COLDSNAPGUNNER, ColdSnapGunner.class);
+			Horde = new ColdSnapHordeEvent(server);
 
 			for(ServerLevel serverWorld : server.getAllLevels()){
 				WorldCooldownComponent h = WORLDCOMPONENT.get(serverWorld);
 					if(h.getCooldownTicks() <= 0){h.setCooldownTicks(config.coldSnapSettings.GLOBALHORDECOOLDOWN * 20);}
 			}
+
+			presentPossibilities.add("coal"); presentWeights.add(30f);
+			presentPossibilities.add("snow"); presentWeights.add(15f);
+			presentPossibilities.add("ice"); presentWeights.add(20f);
+			presentPossibilities.add("packedice"); presentWeights.add(15f);
+			presentPossibilities.add("blueice"); presentWeights.add(10f);
+			presentPossibilities.add("doggo"); presentWeights.add(10f);
+			presentPossibilities.add("cats"); presentWeights.add(10f);
+			presentPossibilities.add("birb"); presentWeights.add(10f);
+			presentPossibilities.add("friendsnowman"); presentWeights.add(10f);
+			presentPossibilities.add("music"); presentWeights.add(15f);
+			presentPossibilities.add("rollercoaster"); presentWeights.add(10f);
+			presentPossibilities.add("horse"); presentWeights.add(10f);
+			presentPossibilities.add("pig"); presentWeights.add(10f);
+			presentPossibilities.add("candycane"); presentWeights.add(20f);
+			presentPossibilities.add("axolotl"); presentWeights.add(10f);
+			presentPossibilities.add("screamgoat"); presentWeights.add(5f);
+			presentPossibilities.add("panda"); presentWeights.add(5f);
+			presentPossibilities.add("icesword"); presentWeights.add(10f);
+			presentPossibilities.add("transposerpiece"); presentWeights.add(10f);
+			presentPossibilities.add("frostshard"); presentWeights.add(15f);
+			presentPossibilities.add("transposer"); presentWeights.add(5f);
+			presentPossibilities.add("frostcore"); presentWeights.add(5f);
 		}
 	}
 
