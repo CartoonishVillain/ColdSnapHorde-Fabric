@@ -15,7 +15,10 @@ public class ColdSnapConfig implements ConfigData {
     @ConfigEntry.Gui.CollapsibleObject
     public ColdSnapSettings coldSnapSettings = new ColdSnapSettings();
 
-    public static class ColdSnapSpawning{
+    @ConfigEntry.Gui.CollapsibleObject
+    public ColdSnapClientSettings coldSnapClientSettings = new ColdSnapClientSettings();
+
+    public static class ColdSnapSpawning {
         @Comment("Changes temperature spawn requirements for standard horde members. 0: Cold, 1: Neutral, 2: Warm, 3: Hot.")
         public int SPAWNTEMPS = 0;
         @Comment("Defines how hot a standard snowmember can get before it melts. 0: Cold, 1: Neutral, 2: Warm, 3: Hot (Recommend matching or being higher than spawnTempRange")
@@ -52,7 +55,7 @@ public class ColdSnapConfig implements ConfigData {
         public int SNOWCOW = 4;
     }
 
-    public static class ColdSnapSettings{
+    public static class ColdSnapSettings {
         @Comment("Enables or disabled technical levels of thermometers. Gives minecraft temperature values instead of adapted ones.")
         public boolean TECHNICALTHERMOMETER = false;
         @Comment("The percent chance that the snowman zapper will stick a transponder on his target if one is available.")
@@ -75,5 +78,10 @@ public class ColdSnapConfig implements ConfigData {
         public int ALIVEHARD = 80;
         @Comment("How often more expensive update ticks occur. This allows new in range players to get the bossbar, and updates the horde with the position of their main target. Higher reduces frequency of these more expensive ticks, but lowers horde responsiveness.")
         public int UPDATETICK = 100;
+    }
+
+    public static class ColdSnapClientSettings {
+        @Comment("Nostalgia mode. If true, snowmen are replaced with their original counterparts where applicable.")
+        public boolean OLD_SNOW = false;
     }
 }

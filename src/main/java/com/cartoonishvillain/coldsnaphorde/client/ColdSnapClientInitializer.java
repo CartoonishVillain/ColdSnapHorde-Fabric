@@ -1,9 +1,12 @@
 package com.cartoonishvillain.coldsnaphorde.client;
 
+import com.cartoonishvillain.coldsnaphorde.ColdSnapHorde;
 import com.cartoonishvillain.coldsnaphorde.Register;
 import com.cartoonishvillain.coldsnaphorde.client.models.endmodel.EndColdSnapSnowballerModel;
 import com.cartoonishvillain.coldsnaphorde.client.models.nethermodel.*;
 import com.cartoonishvillain.coldsnaphorde.client.models.standardmodel.*;
+import com.cartoonishvillain.coldsnaphorde.client.old_snow.old_model.*;
+import com.cartoonishvillain.coldsnaphorde.client.old_snow.old_renders.*;
 import com.cartoonishvillain.coldsnaphorde.client.renderers.TopHatRenderer;
 import com.cartoonishvillain.coldsnaphorde.client.renderers.endrenders.RenderEndColdSnapSnowballer;
 import com.cartoonishvillain.coldsnaphorde.client.renderers.netherrenders.*;
@@ -18,10 +21,7 @@ import net.fabricmc.fabric.mixin.client.rendering.EntityModelLayersAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.entity.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -50,33 +50,63 @@ public class ColdSnapClientInitializer implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        EntityRendererRegistry.register(Register.COLDSNAPSTABBER, RenderColdSnapStabber::new);
-        EntityRendererRegistry.register(Register.COLDSNAPGUNNER, RenderColdSnapGunner::new);
-        EntityRendererRegistry.register(Register.COLDSNAPSNOWBALLER, RenderColdSnapSnowballer::new);
-        EntityRendererRegistry.register(Register.COLDSNAPGIFTER, RenderColdSnapGifter::new);
-        EntityRendererRegistry.register(Register.COLDSNAPZAPPER, RenderColdSnapZapper::new);
-        EntityRendererRegistry.register(Register.COLDSNAPBRAWLER, RenderColdSnapBrawler::new);
+        if(!ColdSnapHorde.config.coldSnapClientSettings.OLD_SNOW) {
+            EntityRendererRegistry.register(Register.COLDSNAPSTABBER, RenderColdSnapStabber::new);
+            EntityRendererRegistry.register(Register.COLDSNAPGUNNER, RenderColdSnapGunner::new);
+            EntityRendererRegistry.register(Register.COLDSNAPSNOWBALLER, RenderColdSnapSnowballer::new);
+            EntityRendererRegistry.register(Register.COLDSNAPGIFTER, RenderColdSnapGifter::new);
+            EntityRendererRegistry.register(Register.COLDSNAPZAPPER, RenderColdSnapZapper::new);
+            EntityRendererRegistry.register(Register.COLDSNAPBRAWLER, RenderColdSnapBrawler::new);
 
-        EntityRendererRegistry.register(Register.NCOLDSNAPSTABBER, RenderNetherColdSnapStabber::new);
-        EntityRendererRegistry.register(Register.NCOLDSNAPGUNNER, RenderNetherColdSnapGunner::new);
-        EntityRendererRegistry.register(Register.NCOLDSNAPSNOWBALLER, RenderNetherColdSnapSnowballer::new);
-        EntityRendererRegistry.register(Register.NCOLDSNAPGIFTER, RenderNetherColdSnapGifter::new);
-        EntityRendererRegistry.register(Register.NCOLDSNAPZAPPER, RenderNetherColdSnapZapper::new);
-        EntityRendererRegistry.register(Register.NCOLDSNAPBRAWLER, RenderNetherColdSnapBrawler::new);
+            EntityRendererRegistry.register(Register.NCOLDSNAPSTABBER, RenderNetherColdSnapStabber::new);
+            EntityRendererRegistry.register(Register.NCOLDSNAPGUNNER, RenderNetherColdSnapGunner::new);
+            EntityRendererRegistry.register(Register.NCOLDSNAPSNOWBALLER, RenderNetherColdSnapSnowballer::new);
+            EntityRendererRegistry.register(Register.NCOLDSNAPGIFTER, RenderNetherColdSnapGifter::new);
+            EntityRendererRegistry.register(Register.NCOLDSNAPZAPPER, RenderNetherColdSnapZapper::new);
+            EntityRendererRegistry.register(Register.NCOLDSNAPBRAWLER, RenderNetherColdSnapBrawler::new);
 
-        EntityRendererRegistry.register(Register.ECOLDSNAPSTABBER, RenderColdSnapStabber::new);
-        EntityRendererRegistry.register(Register.ECOLDSNAPGUNNER, RenderColdSnapGunner::new);
-        EntityRendererRegistry.register(Register.ECOLDSNAPSNOWBALLER, RenderEndColdSnapSnowballer::new);
-        EntityRendererRegistry.register(Register.ECOLDSNAPGIFTER, RenderColdSnapGifter::new);
-        EntityRendererRegistry.register(Register.ECOLDSNAPZAPPER, RenderColdSnapZapper::new);
-        EntityRendererRegistry.register(Register.ECOLDSNAPBRAWLER, RenderColdSnapBrawler::new);
+            EntityRendererRegistry.register(Register.ECOLDSNAPSTABBER, RenderColdSnapStabber::new);
+            EntityRendererRegistry.register(Register.ECOLDSNAPGUNNER, RenderColdSnapGunner::new);
+            EntityRendererRegistry.register(Register.ECOLDSNAPSNOWBALLER, RenderEndColdSnapSnowballer::new);
+            EntityRendererRegistry.register(Register.ECOLDSNAPGIFTER, RenderColdSnapGifter::new);
+            EntityRendererRegistry.register(Register.ECOLDSNAPZAPPER, RenderColdSnapZapper::new);
+            EntityRendererRegistry.register(Register.ECOLDSNAPBRAWLER, RenderColdSnapBrawler::new);
 
-        EntityRendererRegistry.register(Register.PCOLDSNAPSTABBER, RenderColdSnapStabber::new);
-        EntityRendererRegistry.register(Register.PCOLDSNAPGUNNER, RenderColdSnapGunner::new);
-        EntityRendererRegistry.register(Register.PCOLDSNAPSNOWBALLER, RenderColdSnapSnowballer::new);
-        EntityRendererRegistry.register(Register.PCOLDSNAPGIFTER, RenderColdSnapGifter::new);
-        EntityRendererRegistry.register(Register.PCOLDSNAPZAPPER, RenderColdSnapZapper::new);
-        EntityRendererRegistry.register(Register.PCOLDSNAPBRAWLER, RenderColdSnapBrawler::new);
+            EntityRendererRegistry.register(Register.PCOLDSNAPSTABBER, RenderColdSnapStabber::new);
+            EntityRendererRegistry.register(Register.PCOLDSNAPGUNNER, RenderColdSnapGunner::new);
+            EntityRendererRegistry.register(Register.PCOLDSNAPSNOWBALLER, RenderColdSnapSnowballer::new);
+            EntityRendererRegistry.register(Register.PCOLDSNAPGIFTER, RenderColdSnapGifter::new);
+            EntityRendererRegistry.register(Register.PCOLDSNAPZAPPER, RenderColdSnapZapper::new);
+            EntityRendererRegistry.register(Register.PCOLDSNAPBRAWLER, RenderColdSnapBrawler::new);
+        } else {
+            EntityRendererRegistry.register(Register.COLDSNAPSTABBER, OldRenderColdSnapStabber::new);
+            EntityRendererRegistry.register(Register.COLDSNAPGUNNER, OldRenderColdSnapGunner::new);
+            EntityRendererRegistry.register(Register.COLDSNAPSNOWBALLER, OldRenderColdSnapSnowballer::new);
+            EntityRendererRegistry.register(Register.COLDSNAPGIFTER, OldRenderColdSnapGifter::new);
+            EntityRendererRegistry.register(Register.COLDSNAPZAPPER, OldRenderColdSnapZapper::new);
+            EntityRendererRegistry.register(Register.COLDSNAPBRAWLER, OldRenderColdSnapBrawler::new);
+
+            EntityRendererRegistry.register(Register.NCOLDSNAPSTABBER, OldRenderColdSnapStabber::new);
+            EntityRendererRegistry.register(Register.NCOLDSNAPGUNNER, OldRenderColdSnapGunner::new);
+            EntityRendererRegistry.register(Register.NCOLDSNAPSNOWBALLER, OldRenderColdSnapSnowballer::new);
+            EntityRendererRegistry.register(Register.NCOLDSNAPGIFTER, OldRenderColdSnapGifter::new);
+            EntityRendererRegistry.register(Register.NCOLDSNAPZAPPER, OldRenderColdSnapZapper::new);
+            EntityRendererRegistry.register(Register.NCOLDSNAPBRAWLER, OldRenderColdSnapBrawler::new);
+
+            EntityRendererRegistry.register(Register.ECOLDSNAPSTABBER, OldRenderColdSnapStabber::new);
+            EntityRendererRegistry.register(Register.ECOLDSNAPGUNNER, OldRenderColdSnapGunner::new);
+            EntityRendererRegistry.register(Register.ECOLDSNAPSNOWBALLER, OldRenderColdSnapSnowballer::new);
+            EntityRendererRegistry.register(Register.ECOLDSNAPGIFTER, OldRenderColdSnapGifter::new);
+            EntityRendererRegistry.register(Register.ECOLDSNAPZAPPER, OldRenderColdSnapZapper::new);
+            EntityRendererRegistry.register(Register.ECOLDSNAPBRAWLER, OldRenderColdSnapBrawler::new);
+
+            EntityRendererRegistry.register(Register.PCOLDSNAPSTABBER, OldRenderColdSnapStabber::new);
+            EntityRendererRegistry.register(Register.PCOLDSNAPGUNNER, OldRenderColdSnapGunner::new);
+            EntityRendererRegistry.register(Register.PCOLDSNAPSNOWBALLER, OldRenderColdSnapSnowballer::new);
+            EntityRendererRegistry.register(Register.PCOLDSNAPGIFTER, OldRenderColdSnapGifter::new);
+            EntityRendererRegistry.register(Register.PCOLDSNAPZAPPER, OldRenderColdSnapZapper::new);
+            EntityRendererRegistry.register(Register.PCOLDSNAPBRAWLER, OldRenderColdSnapBrawler::new);
+        }
 
         EntityRendererRegistry.register(Register.COLDSNAPCOW, RenderColdSnapCow::new);
         EntityRendererRegistry.register(Register.GUNNERPROJECTILE, ThrownItemRenderer::new);
@@ -99,6 +129,14 @@ public class ColdSnapClientInitializer implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(NCOLDSNAPGIFTER, NetherColdSnapGifterModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(NCOLDSNAPZAPPER, NetherColdSnapZapperModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(NCOLDSNAPBRAWLER, NetherColdSnapBrawlerModel::createBodyLayer);
+
+        EntityModelLayerRegistry.registerModelLayer(OldColdSnapStabberModel.LAYER_LOCATION, OldColdSnapStabberModel::createBodyLayer);
+        EntityModelLayerRegistry.registerModelLayer(OldColdSnapGunnerModel.OLDCOLDSNAPLAYER, OldColdSnapGunnerModel::createBodyLayer);
+        EntityModelLayerRegistry.registerModelLayer(OldColdSnapSnowballerModel.LAYER_LOCATION, OldColdSnapSnowballerModel::createBodyLayer);
+        EntityModelLayerRegistry.registerModelLayer(OldColdSnapGifterModel.LAYER_LOCATION, OldColdSnapGifterModel::createBodyLayer);
+        EntityModelLayerRegistry.registerModelLayer(OldColdSnapZapperModel.LAYER_LOCATION, OldColdSnapZapperModel::createBodyLayer);
+        EntityModelLayerRegistry.registerModelLayer(OldColdSnapBrawler.OLDBRAWLERLAYER, OldColdSnapBrawler::createBodyLayer);
+
         EntityModelLayerRegistry.registerModelLayer(TOPHAT, TopHatModel::createLayer);
 
         ArmorRenderer.register(new TopHatRenderer(), Register.TOPHAT);
