@@ -73,7 +73,7 @@ public class ColdSnapHorde implements ModInitializer {
 		ServerPlayConnectionEvents.JOIN.register(JoinListener.getInstance());
 
 
-		Spawns.initSpawns();
+		Spawns.addSpawns();
 	}
 
 	public static void holidayWindowCheck(){

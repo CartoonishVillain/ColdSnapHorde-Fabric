@@ -53,7 +53,7 @@ public class SnowierSnowballEntity extends ThrowableItemProjectile {
         super.onHit(result);
         BlockState blockstate = Blocks.SNOW_BLOCK.defaultBlockState();
         BlockPos blockpos = new BlockPos(result.getLocation());
-        if (this.level.isEmptyBlock(blockpos) && this.level.getBiome(blockpos).getBaseTemperature() < 0.8F && blockstate.canSurvive(this.level, blockpos) && !level.isClientSide()) {
+        if (this.level.isEmptyBlock(blockpos) && this.level.getBiome(blockpos).value().getBaseTemperature() < 0.8F && blockstate.canSurvive(this.level, blockpos) && !level.isClientSide()) {
             this.level.setBlockAndUpdate(blockpos, blockstate);
         } else if(this.level.getBlockState(blockpos) == Blocks.LAVA.defaultBlockState() && !level.isClientSide()){
             this.level.setBlockAndUpdate(blockpos, Blocks.OBSIDIAN.defaultBlockState());

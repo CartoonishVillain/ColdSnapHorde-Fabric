@@ -57,7 +57,7 @@ public class Snowglobe extends Item {
 
     private boolean biomeCheck(Level world, BlockPos pos){
         int protlvl = ColdSnapHorde.config.spawnconfig.HEATPROT;
-        float temp = world.getBiome(pos).getBaseTemperature();
+        float temp = world.getBiome(pos).value().getBaseTemperature();
         int code = -1;
         if (temp < 0.3){code = 0;}
         else if(temp >= 0.3 && temp < 0.9){code = 1;}

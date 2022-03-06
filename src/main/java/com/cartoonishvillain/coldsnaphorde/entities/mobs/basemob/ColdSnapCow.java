@@ -100,7 +100,7 @@ public class ColdSnapCow extends Cow implements SnowCreature {
     @Override
     public void tick() {
         super.tick();
-        if (shouldOverHeat(this.level.getBiome(this.blockPosition()).getBaseTemperature(), ColdSnapHorde.config.spawnconfig.HEATPROT)) {
+        if (shouldOverHeat(this.level.getBiome(this.blockPosition()).value().getBaseTemperature(), ColdSnapHorde.config.spawnconfig.HEATPROT)) {
             this.hurt(DamageSource.ON_FIRE, 1.0F);
         }
 
