@@ -2,6 +2,7 @@ package com.cartoonishvillain.coldsnaphorde.mixin;
 
 import com.cartoonishvillain.coldsnaphorde.component.ComponentStarter;
 import com.cartoonishvillain.coldsnaphorde.component.PlayerCooldownComponent;
+import com.cartoonishvillain.coldsnaphorde.events.MixinEvents;
 import net.minecraft.server.level.ServerPlayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,5 +16,6 @@ public class PlayerTickMixin {
         private void coldSnapTick(CallbackInfo ci){
             PlayerCooldownComponent h = ComponentStarter.PLAYERCOMPONENT.get((ServerPlayer) (Object) this);
             h.tickCooldown();
+            MixinEvents.PlayerTick((ServerPlayer) (Object) this);
         }
 }

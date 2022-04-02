@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#Y#",
+    "YIY",
+    "#f#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:red_wool"
+    },
+    "Y": {
+      "item": "minecraft:light_blue_wool"
+    },
+    "I": {
+      "item": "coldsnaphorde:present"
+    },
+    "f": {
+      "item": "coldsnaphorde:iceessence"
+    }
+  },
+  "result": {
+    "item": "coldsnaphorde:large_present",
+    "count": 1
+  }
+}

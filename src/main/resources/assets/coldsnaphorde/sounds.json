@@ -1,3 +1,19 @@
 {
-  "gifter_attack": {"sounds": ["coldsnaphorde:giftlaugh"]}
+  "gifter_attack": {"sounds": ["coldsnaphorde:giftlaugh"]},
+  "november_snow": {
+    "sounds": [
+      {
+        "name": "coldsnaphorde:november_snow",
+        "stream": true
+      }
+    ]
+  },
+  "arctic_beat": {
+    "sounds": [
+      {
+        "name": "coldsnaphorde:arctic_beat",
+        "stream": true
+      }
+    ]
+  }
 }

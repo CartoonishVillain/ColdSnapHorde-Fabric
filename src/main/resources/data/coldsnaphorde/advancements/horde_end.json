@@ -1,0 +1,26 @@
+{
+    "__comment": "Made with TheDestruc7i0n's advancements generator: https://advancements.thedestruc7i0n.ca",
+    "display": {
+        "title": {
+            "text": "The Horde at the End of the Game",
+            "color": "aqua"
+        },
+        "description": {
+            "text": "Defeat a Tier 3 Horde in the End",
+            "color": "aqua"
+        },
+        "icon": {
+            "item": "minecraft:ender_eye"
+        },
+        "frame": "challenge",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "criteria": {
+        "Impossible": {
+            "trigger": "minecraft:impossible"
+        }
+    },
+    "parent": "coldsnaphorde:hail_storm"
+}

@@ -1,4 +1,5 @@
 {
+    "__comment": "Made with TheDestruc7i0n's advancements generator: https://advancements.thedestruc7i0n.ca",
     "display": {
         "title": {
             "text": "Cold Snap Horde",
@@ -10,7 +11,7 @@
             "italic": false
         },
         "icon": {
-            "item": "coldsnaphorde:icecore"
+            "item": "coldsnaphorde:small_present"
         },
         "frame": "task",
         "show_toast": false,

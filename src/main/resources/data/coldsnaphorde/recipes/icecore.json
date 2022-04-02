@@ -1,16 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "###",
-    "#I#",
-    "###"
+    "# #",
+    " # ",
+    "# #"
   ],
   "key": {
     "#": {
-      "item": "coldsnaphorde:iceshard"
-    },
-    "I": {
-      "item": "minecraft:ice"
+      "item": "coldsnaphorde:iceessence"
     }
   },
   "result": {

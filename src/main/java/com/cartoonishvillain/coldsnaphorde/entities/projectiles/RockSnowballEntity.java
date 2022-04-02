@@ -29,8 +29,6 @@ import static com.cartoonishvillain.coldsnaphorde.entities.mobs.basemob.GenericH
 
 public class RockSnowballEntity extends ThrowableItemProjectile {
 
-
-
     public RockSnowballEntity(EntityType<? extends ThrowableItemProjectile> type, Level worldIn, LivingEntity entity) {
         super(type, entity, worldIn);}
 

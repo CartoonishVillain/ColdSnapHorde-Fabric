@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IfI",
+    " # ",
+    "I#I"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "I": {
+      "item": "coldsnaphorde:frostessence"
+    },
+    "f": {
+      "item": "coldsnaphorde:icecore"
+    }
+  },
+  "result": {
+    "item": "coldsnaphorde:glacier_staff",
+    "count": 1
+  }
+}

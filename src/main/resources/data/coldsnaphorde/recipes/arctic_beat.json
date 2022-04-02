@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " f ",
+    "I#I",
+    " I "
+  ],
+  "key": {
+    "#": {
+      "tag": "minecraft:music_discs"
+    },
+    "I": {
+      "item": "coldsnaphorde:iceessence"
+    },
+    "f": {
+      "item": "coldsnaphorde:icecore"
+    }
+  },
+  "result": {
+    "item": "coldsnaphorde:arctic_beat",
+    "count": 1
+  }
+}

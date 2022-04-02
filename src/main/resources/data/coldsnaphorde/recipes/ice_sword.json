@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    " f ",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_sword"
+    },
+    "I": {
+      "item": "coldsnaphorde:frostcore"
+    },
+    "f": {
+      "item": "coldsnaphorde:frostessence"
+    }
+  },
+  "result": {
+    "item": "coldsnaphorde:ice_sword",
+    "count": 1
+  }
+}

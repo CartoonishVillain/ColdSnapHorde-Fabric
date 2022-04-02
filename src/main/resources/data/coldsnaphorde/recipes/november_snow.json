@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " f ",
+    "I#I",
+    " I "
+  ],
+  "key": {
+    "#": {
+      "tag": "minecraft:music_discs"
+    },
+    "I": {
+      "item": "coldsnaphorde:frostessence"
+    },
+    "f": {
+      "item": "coldsnaphorde:frostcore"
+    }
+  },
+  "result": {
+    "item": "coldsnaphorde:november_snow",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sis",
+    "i#i",
+    "sis"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:snow_block"
+    },
+    "i": {
+      "item": "coldsnaphorde:iceessence"
+    },
+    "s": {
+      "item": "coldsnaphorde:healing_ball"
+    }
+  },
+  "result": {
+    "item": "coldsnaphorde:greater_healing_ball",
+    "count": 4
+  }
+}

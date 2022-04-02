@@ -1,15 +1,23 @@
 package com.cartoonishvillain.coldsnaphorde;
 
 import com.cartoonishvillain.cartoonishhorde.EntityHordeData;
+import com.cartoonishvillain.coldsnaphorde.commands.GetHordeDefeatedLevel;
+import com.cartoonishvillain.coldsnaphorde.commands.SetHordeDefeatedLevel;
+import com.cartoonishvillain.coldsnaphorde.commands.StartHorde;
+import com.cartoonishvillain.coldsnaphorde.commands.StopHorde;
 import com.cartoonishvillain.coldsnaphorde.component.WorldCooldownComponent;
 import com.cartoonishvillain.coldsnaphorde.config.ColdSnapConfig;
 import com.cartoonishvillain.coldsnaphorde.entities.Spawns;
 import com.cartoonishvillain.coldsnaphorde.entities.mobs.basemob.ColdSnapGunner;
-import com.cartoonishvillain.coldsnaphorde.events.ColdSnapHordeEvent;
+import com.cartoonishvillain.coldsnaphorde.entities.mobs.hordevariantmanager.EndHorde;
+import com.cartoonishvillain.coldsnaphorde.events.HordeEventTier1;
+import com.cartoonishvillain.coldsnaphorde.events.HordeEventTier2;
+import com.cartoonishvillain.coldsnaphorde.events.HordeEventTier3;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
@@ -47,11 +55,17 @@ public class ColdSnapHorde implements ModInitializer {
 	public static ArrayList<Item> TOPHATS = new ArrayList<>();
 	public static boolean isCalyxLoaded;
 	public static boolean isInHolidayWindow;
-	public static ColdSnapHordeEvent Horde;
 	public static EntityHordeData defaultHordeData;
-
-	public static ArrayList<String> presentPossibilities = new ArrayList<>();
-	public static ArrayList<Float> presentWeights = new ArrayList<>();
+	public static HordeEventTier1 hordeTier1;
+	public static HordeEventTier2 hordeTier2;
+	public static HordeEventTier3 hordeTier3;
+	public static HordeDataManager hordeDataManager = null;
+	public static ArrayList<String> tier1PresentPossibilities = new ArrayList<>();
+	public static ArrayList<Float> tier1PresentWeights = new ArrayList<>();
+	public static ArrayList<String> tier2PresentPossibilities = new ArrayList<>();
+	public static ArrayList<Float> tier2PresentWeights = new ArrayList<>();
+	public static ArrayList<String> tier3PresentPossibilities = new ArrayList<>();
+	public static ArrayList<Float> tier3PresentWeights = new ArrayList<>();
 	public static final CreativeModeTab TAB = FabricItemGroupBuilder.build(new ResourceLocation(ColdSnapHorde.MOD_ID, "coldgroup"), () -> new ItemStack(Register.ROCKYSNOWBALL));
 	public static ColdSnapConfig config;
 
@@ -65,6 +79,13 @@ public class ColdSnapHorde implements ModInitializer {
 		// Proceed with mild caution.
 		isCalyxLoaded = FabricLoader.getInstance().isModLoaded("immortuoscalyx") && config.coldSnapSettings.PLAGUEIMMORTUOSCOMPAT;
 		holidayWindowCheck();
+
+		CommandRegistrationCallback.EVENT.register(((dispatcher, dedicated) -> {
+			GetHordeDefeatedLevel.register(dispatcher);
+			SetHordeDefeatedLevel.register(dispatcher);
+			StartHorde.register(dispatcher);
+			StopHorde.register(dispatcher);
+		}));
 
 		ServerLifecycleEvents.SERVER_STARTING.register(ServerStartListener.getInstance());
 
@@ -105,35 +126,67 @@ public class ColdSnapHorde implements ModInitializer {
 		@Override
 		public void onServerStarting(MinecraftServer server) {
 			defaultHordeData = new EntityHordeData(3, 0.5D, 1, Register.COLDSNAPGUNNER, ColdSnapGunner.class);
-			Horde = new ColdSnapHordeEvent(server);
 
 			for(ServerLevel serverWorld : server.getAllLevels()){
 				WorldCooldownComponent h = WORLDCOMPONENT.get(serverWorld);
-					if(h.getCooldownTicks() <= 0){h.setCooldownTicks(config.coldSnapSettings.GLOBALHORDECOOLDOWN * 20);}
+					if(h.getLevelBeaten() <= 0){h.setLevelBeaten(config.coldSnapSettings.GLOBALHORDECOOLDOWN * 20);}
 			}
 
-			presentPossibilities.add("coal"); presentWeights.add(30f);
-			presentPossibilities.add("snow"); presentWeights.add(15f);
-			presentPossibilities.add("ice"); presentWeights.add(20f);
-			presentPossibilities.add("packedice"); presentWeights.add(15f);
-			presentPossibilities.add("blueice"); presentWeights.add(10f);
-			presentPossibilities.add("doggo"); presentWeights.add(10f);
-			presentPossibilities.add("cats"); presentWeights.add(10f);
-			presentPossibilities.add("birb"); presentWeights.add(10f);
-			presentPossibilities.add("friendsnowman"); presentWeights.add(10f);
-			presentPossibilities.add("music"); presentWeights.add(15f);
-			presentPossibilities.add("rollercoaster"); presentWeights.add(10f);
-			presentPossibilities.add("horse"); presentWeights.add(10f);
-			presentPossibilities.add("pig"); presentWeights.add(10f);
-			presentPossibilities.add("candycane"); presentWeights.add(20f);
-			presentPossibilities.add("axolotl"); presentWeights.add(10f);
-			presentPossibilities.add("screamgoat"); presentWeights.add(5f);
-			presentPossibilities.add("panda"); presentWeights.add(5f);
-			presentPossibilities.add("icesword"); presentWeights.add(10f);
-			presentPossibilities.add("transposerpiece"); presentWeights.add(10f);
-			presentPossibilities.add("frostshard"); presentWeights.add(15f);
-			presentPossibilities.add("transposer"); presentWeights.add(5f);
-			presentPossibilities.add("frostcore"); presentWeights.add(5f);
+			hordeTier1 = new HordeEventTier1(server);
+			hordeTier2 = new HordeEventTier2(server);
+			hordeTier3 = new HordeEventTier3(server);
+
+			hordeDataManager = HordeDataManager.getInstance();
+
+			tier1PresentPossibilities.add("coal"); tier1PresentWeights.add(15f);
+			tier1PresentPossibilities.add("snow"); tier1PresentWeights.add(15f);
+			tier1PresentPossibilities.add("ice"); tier1PresentWeights.add(20f);
+			tier1PresentPossibilities.add("packedice"); tier1PresentWeights.add(15f);
+			tier1PresentPossibilities.add("blueice"); tier1PresentWeights.add(5f);
+			tier1PresentPossibilities.add("candycane"); tier1PresentWeights.add(20f);
+			tier1PresentPossibilities.add("iceshard"); tier1PresentWeights.add(10f);
+
+			tier2PresentPossibilities.add("coal"); tier2PresentWeights.add(30f);
+			tier2PresentPossibilities.add("snow"); tier2PresentWeights.add(15f);
+			tier2PresentPossibilities.add("ice"); tier2PresentWeights.add(20f);
+			tier2PresentPossibilities.add("packedice"); tier2PresentWeights.add(15f);
+			tier2PresentPossibilities.add("blueice"); tier2PresentWeights.add(10f);
+			tier2PresentPossibilities.add("doggo"); tier2PresentWeights.add(10f);
+			tier2PresentPossibilities.add("cats"); tier2PresentWeights.add(10f);
+			tier2PresentPossibilities.add("birb"); tier2PresentWeights.add(10f);
+			tier2PresentPossibilities.add("friendsnowman"); tier2PresentWeights.add(10f);
+			tier2PresentPossibilities.add("music"); tier2PresentWeights.add(15f);
+			tier2PresentPossibilities.add("rollercoaster"); tier2PresentWeights.add(10f);
+			tier2PresentPossibilities.add("horse"); tier2PresentWeights.add(10f);
+			tier2PresentPossibilities.add("pig"); tier2PresentWeights.add(10f);
+			tier2PresentPossibilities.add("candycane"); tier2PresentWeights.add(20f);
+			tier2PresentPossibilities.add("axolotl"); tier2PresentWeights.add(10f);
+			tier2PresentPossibilities.add("screamgoat"); tier2PresentWeights.add(5f);
+			tier2PresentPossibilities.add("panda"); tier2PresentWeights.add(5f);
+			tier2PresentPossibilities.add("icesword"); tier2PresentWeights.add(10f);
+			tier2PresentPossibilities.add("transposerpiece"); tier2PresentWeights.add(10f);
+			tier2PresentPossibilities.add("iceshard"); tier2PresentWeights.add(15f);
+			tier2PresentPossibilities.add("transposer"); tier2PresentWeights.add(5f);
+			tier2PresentPossibilities.add("frostcore"); tier2PresentWeights.add(5f);
+
+			tier3PresentPossibilities.add("blueice"); tier3PresentWeights.add(20f);
+			tier3PresentPossibilities.add("doggo"); tier3PresentWeights.add(10f);
+			tier3PresentPossibilities.add("cats"); tier3PresentWeights.add(10f);
+			tier3PresentPossibilities.add("birb"); tier3PresentWeights.add(10f);
+			tier3PresentPossibilities.add("friendsnowman"); tier3PresentWeights.add(10f);
+			tier3PresentPossibilities.add("music"); tier3PresentWeights.add(15f);
+			tier3PresentPossibilities.add("rollercoaster"); tier3PresentWeights.add(10f);
+			tier3PresentPossibilities.add("horse"); tier3PresentWeights.add(10f);
+			tier3PresentPossibilities.add("pig"); tier3PresentWeights.add(10f);
+			tier3PresentPossibilities.add("candycane"); tier3PresentWeights.add(20f);
+			tier3PresentPossibilities.add("axolotl"); tier3PresentWeights.add(10f);
+			tier3PresentPossibilities.add("screamgoat"); tier3PresentWeights.add(5f);
+			tier3PresentPossibilities.add("panda"); tier3PresentWeights.add(5f);
+			tier3PresentPossibilities.add("icesword"); tier3PresentWeights.add(10f);
+			tier3PresentPossibilities.add("transposerpiece"); tier3PresentWeights.add(10f);
+			tier3PresentPossibilities.add("iceshard"); tier3PresentWeights.add(15f);
+			tier3PresentPossibilities.add("transposer"); tier3PresentWeights.add(5f);
+			tier3PresentPossibilities.add("frostcore"); tier3PresentWeights.add(10f);
 		}
 	}
 
@@ -158,10 +211,10 @@ public class ColdSnapHorde implements ModInitializer {
 		public void onEndTick(ServerLevel world) {
 			WorldCooldownComponent h = WORLDCOMPONENT.get(world);
 
-			if(h.getCooldownTicks() > 0){
-					h.addCooldownTicks(-1);
-				}
-			ColdSnapHorde.Horde.tick();
+			hordeDataManager.tickCooldown();
+			hordeTier1.tick();
+			hordeTier2.tick();
+			hordeTier3.tick();
 		}
 	}
 

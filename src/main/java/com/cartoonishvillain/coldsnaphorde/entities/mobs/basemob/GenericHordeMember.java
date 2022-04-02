@@ -2,6 +2,7 @@ package com.cartoonishvillain.coldsnaphorde.entities.mobs.basemob;
 
 import com.cartoonishvillain.cartoonishhorde.CartoonishHorde;
 import com.cartoonishvillain.coldsnaphorde.ColdSnapHorde;
+import com.cartoonishvillain.coldsnaphorde.HordeDataManager;
 import com.cartoonishvillain.coldsnaphorde.Register;
 import com.cartoonishvillain.coldsnaphorde.component.ComponentStarter;
 import com.cartoonishvillain.coldsnaphorde.component.PlayerCooldownComponent;
@@ -113,14 +114,59 @@ public class GenericHordeMember extends Monster implements SnowCreature {
 
     @Override
     public void die(DamageSource cause) {
-        int random = level.random.nextInt(100);
-        int check;
-        if(ColdSnapHorde.isInHolidayWindow) check = 67; else check = 75;
-        if(random > check && !level.isClientSide() && CartoonishHorde.isHordeMember(this)){
-            ItemEntity itemEntity = new ItemEntity(level, this.getX(), this.getY(), this.getZ(), new ItemStack(Register.PRESENT, 1));
-            level.addFreshEntity(itemEntity);
+        if(CartoonishHorde.isHordeMember(this)) {
+            switch (HordeDataManager.getInstance().getCurrentHordeLevel()) {
+                case 1 -> {
+                    tier1Check();
+                }
+                case 2 -> {
+                    tier2Check();
+                }
+                case 3 -> {
+                    tier3Check();
+                }
+            }
         }
         super.die(cause);
+    }
+
+    private void tier1Check() {
+        int chance = level.random.nextInt(6);
+        if(chance == 1) {
+            if(level.random.nextBoolean()) {
+                ItemEntity itemEntity = new ItemEntity(level, this.getX(), this.getY(), this.getZ(), new ItemStack(Register.SMALLPRESENT, 1));
+                level.addFreshEntity(itemEntity);
+            } else {
+                ItemEntity itemEntity = new ItemEntity(level, this.getX(), this.getY(), this.getZ(), new ItemStack(Register.ICESHARD, level.random.nextInt(2)+1));
+                level.addFreshEntity(itemEntity);
+            }
+        }
+    }
+
+    private void tier2Check() {
+        int chance = level.random.nextInt(5);
+        if(chance == 1) {
+            if(level.random.nextBoolean()) {
+                ItemEntity itemEntity = new ItemEntity(level, this.getX(), this.getY(), this.getZ(), new ItemStack(Register.PRESENT, 1));
+                level.addFreshEntity(itemEntity);
+            } else {
+                ItemEntity itemEntity = new ItemEntity(level, this.getX(), this.getY(), this.getZ(), new ItemStack(Register.FROSTESSENCE, level.random.nextInt(2)+1));
+                level.addFreshEntity(itemEntity);
+            }
+        }
+    }
+
+    private void tier3Check() {
+        int chance = level.random.nextInt(4);
+        if(chance == 1) {
+            if(level.random.nextBoolean()) {
+                ItemEntity itemEntity = new ItemEntity(level, this.getX(), this.getY(), this.getZ(), new ItemStack(Register.LARGEPRESENT, 1));
+                level.addFreshEntity(itemEntity);
+            } else {
+                ItemEntity itemEntity = new ItemEntity(level, this.getX(), this.getY(), this.getZ(), new ItemStack(Register.ICEESSENCE, level.random.nextInt(2)+1));
+                level.addFreshEntity(itemEntity);
+            }
+        }
     }
 
     public void updateHordeMember(BlockPos center) {this.target = center;}
@@ -159,9 +205,6 @@ public class GenericHordeMember extends Monster implements SnowCreature {
 
         }
     }
-
-
-
 
     @Nullable
     protected SoundEvent getAmbientSound() {

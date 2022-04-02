@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iIi",
+    "B#B",
+    "iIi"
+  ],
+  "key": {
+    "#": {
+      "item": "coldsnaphorde:glacier_wall_charm"
+    },
+    "I": {
+      "item": "coldsnaphorde:icecore"
+    },
+    "i": {
+      "item": "coldsnaphorde:frostessence"
+    },
+    "B": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "result": {
+    "item": "coldsnaphorde:reinforced_glacier_wall_charm",
+    "count": 1
+  }
+}

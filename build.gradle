@@ -22,6 +22,11 @@ repositories {
 	// for more information about repositories.
 
 	maven {
+		name = "TerraformersMC"
+		url = "https://maven.terraformersmc.com/"
+	}
+
+	maven {
 		name = 'Ladysnake Mods'
 		url = 'https://ladysnake.jfrog.io/artifactory/mods'
 	}
@@ -51,15 +56,18 @@ dependencies {
 	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-world:4.1.1"
 	include "dev.onyxstudios.cardinal-components-api:cardinal-components-world:4.1.1"
 
+
+
 	modApi("me.shedaniel.cloth:cloth-config-fabric:6.0.42") {
 		exclude(group: "net.fabricmc.fabric-api")
-
+	}
 
 //		modImplementation ("curse.maven:immortuos-411857:3542021")
 	modCompileOnly ("curse.maven:immortuos-411857:3542021")
 
-		modImplementation ("curse.maven:hordelib-571315:3620859")
-	}
+	modImplementation ("curse.maven:hordelib-571315:3620859")
+
+	modImplementation "dev.emi:trinkets:${project.trinkets_version}"
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.

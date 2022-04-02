@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iIi",
+    "B#B",
+    "iIi"
+  ],
+  "key": {
+    "#": {
+      "item": "coldsnaphorde:snow_wall_charm"
+    },
+    "I": {
+      "item": "coldsnaphorde:frostcore"
+    },
+    "i": {
+      "item": "coldsnaphorde:iceshard"
+    },
+    "B": {
+      "item": "minecraft:iron_block"
+    }
+  },
+  "result": {
+    "item": "coldsnaphorde:glacier_wall_charm",
+    "count": 1
+  }
+}

@@ -9,11 +9,12 @@ import com.cartoonishvillain.coldsnaphorde.entities.projectiles.*;
 import com.cartoonishvillain.coldsnaphorde.items.*;
 import com.cartoonishvillain.coldsnaphorde.items.Armor.ArmorMaterials;
 import com.cartoonishvillain.coldsnaphorde.items.Armor.TopHat;
-import com.cartoonishvillain.coldsnaphorde.items.Projectiles.LightningSnowball;
-import com.cartoonishvillain.coldsnaphorde.items.Projectiles.RockySnowball;
-import com.cartoonishvillain.coldsnaphorde.items.Projectiles.SnowierSnowball;
+import com.cartoonishvillain.coldsnaphorde.items.Projectiles.*;
+import com.cartoonishvillain.coldsnaphorde.items.Tier;
 import com.cartoonishvillain.coldsnaphorde.items.ToolsOrOther.IceSword;
+import com.cartoonishvillain.coldsnaphorde.items.ToolsOrOther.Icicle;
 import com.cartoonishvillain.coldsnaphorde.items.ToolsOrOther.Materials;
+import com.cartoonishvillain.coldsnaphorde.items.ToolsOrOther.ModMusicDisc;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -26,10 +27,7 @@ import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -52,15 +50,38 @@ public class Register {
     public static final Item ROCKYSNOWBALL = new RockySnowball();
     public static final Item SNOWIERSNOWBALL = new SnowierSnowball();
     public static final Item LIGHTNINGSNOWBALL = new LightningSnowball();
-    public static final Item ICESHARD = new Item(new Item.Properties().tab(ColdSnapHorde.TAB));
-    public static final Item ICECORE = new Item(new Item.Properties().tab(ColdSnapHorde.TAB));
+
     public static final Item LIGHTNINGTRANSPOSERPIECE = new Item(new Item.Properties().tab(ColdSnapHorde.TAB));
     public static final Item LIGHTNINGTRANSPOSER = new Transposer(new Item.Properties().tab(ColdSnapHorde.TAB));
     public static final Item THERMOMETER = new Thermometer(new Item.Properties().tab(ColdSnapHorde.TAB));
-    public static final Item SNOWGLOBE = new Snowglobe(new Item.Properties().tab(ColdSnapHorde.TAB));
-    public static final Item PRESENT = new Present(new Item.Properties().tab(ColdSnapHorde.TAB));
-    public static final Item ICESWORD = new IceSword(Materials.ICE, 0, -2.4f, new Item.Properties().tab(ColdSnapHorde.TAB).rarity(Rarity.UNCOMMON));
 
+    public static final Item ICESHARD = new Item(new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item SNOWGLOBE = new Snowglobe(new Item.Properties().tab(ColdSnapHorde.TAB), Tier.ONE);
+    public static final Item SNOWWALLCHARM = new FrostWallCharm(new Item.Properties().tab(ColdSnapHorde.TAB).stacksTo(1), Tier.ONE);
+    public static final Item SMALLPRESENT = new Present(new Item.Properties().tab(ColdSnapHorde.TAB), Tier.ONE);
+    public static final Item LESSERHEALINGBALL = new HealingSnowball(Tier.ONE);
+    public static final Item ICICLE = new Icicle(Materials.ICICLE, 2, -3.2f, new Item.Properties().tab(ColdSnapHorde.TAB));
+
+    public static final Item FROSTESSENCE = new Item(new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item FROSTCORE = new Item(new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item PRESENT = new Present(new Item.Properties().tab(ColdSnapHorde.TAB), Tier.TWO);
+    public static final Item GLACIERWALLCHARM = new FrostWallCharm(new Item.Properties().tab(ColdSnapHorde.TAB).stacksTo(1), Tier.TWO);
+    public static final Item FROSTCHARM = new FrostCharm(new Item.Properties().tab(ColdSnapHorde.TAB).stacksTo(1), Tier.TWO);
+    public static final Item HEALINGBALL = new HealingSnowball(Tier.TWO);
+    public static final Item ICESWORD = new IceSword(Materials.ICE, 0, -2.4f, new Item.Properties().tab(ColdSnapHorde.TAB).rarity(Rarity.UNCOMMON));
+    public static final Item FROSTEDSNOWGLOBE = new Snowglobe(new Item.Properties().tab(ColdSnapHorde.TAB), Tier.TWO);
+    public static final Item ICESTAFF = new IceStaff(Materials.FROSTESSENCE, new Item.Properties().tab(ColdSnapHorde.TAB), Tier.TWO);
+    public static final Item WANDOFTHEFROSTWALKER = new FrostWalkStaff(Materials.FROSTESSENCE, new Item.Properties().tab(ColdSnapHorde.TAB), Tier.TWO);
+
+    public static final Item ICEESSENCE = new Item(new Item.Properties().tab(ColdSnapHorde.TAB));
+    public static final Item LARGEPRESENT = new Present(new Item.Properties().tab(ColdSnapHorde.TAB), Tier.THREE);
+    public static final Item REINFOCEDGLACIERCHARM = new FrostWallCharm(new Item.Properties().tab(ColdSnapHorde.TAB).stacksTo(1), Tier.THREE);
+    public static final Item ARCTICCHARM = new FrostCharm(new Item.Properties().tab(ColdSnapHorde.TAB).stacksTo(1), Tier.THREE);
+    public static final Item GREATERHEALINGBALL = new HealingSnowball(Tier.THREE);
+    public static final Item FROZENSNOWGLOBE = new Snowglobe(new Item.Properties().tab(ColdSnapHorde.TAB), Tier.THREE);
+    public static final Item GLACIERSTAFF = new IceStaff(Materials.FROSTESSENCE, new Item.Properties().tab(ColdSnapHorde.TAB), Tier.THREE);
+    public static final Item STAFFOFICEFROSTWALKER = new FrostWalkStaff(Materials.FROSTESSENCE, new Item.Properties().tab(ColdSnapHorde.TAB), Tier.THREE);
+    public static final Item ICECORE = new Item(new Item.Properties().tab(ColdSnapHorde.TAB));
 
     public static final EntityType<StandardHorde.StandardGifter> COLDSNAPGIFTER = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "coldsnapgifter"), FabricEntityTypeBuilder.create(MobCategory.MONSTER, StandardHorde.StandardGifter::new).dimensions(EntityDimensions.fixed(0.6f, 1.95f)).build());
     public static final EntityType<StandardHorde.StandardGunner> COLDSNAPGUNNER = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "coldsnapgunner"), FabricEntityTypeBuilder.create(MobCategory.MONSTER, StandardHorde.StandardGunner::new).dimensions(EntityDimensions.fixed(0.6f, 1.95f)).build());
@@ -90,8 +111,6 @@ public class Register {
     public static final EntityType<PlagueHorde.PlagueZapper> PCOLDSNAPZAPPER = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "pcoldsnapzapper"), FabricEntityTypeBuilder.create(MobCategory.MONSTER, PlagueHorde.PlagueZapper::new).dimensions(EntityDimensions.fixed(0.6f, 1.95f)).build());
     public static final EntityType<PlagueHorde.PlagueBrawler> PCOLDSNAPBRAWLER = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "pcoldsnapbrawler"), FabricEntityTypeBuilder.create(MobCategory.MONSTER, PlagueHorde.PlagueBrawler::new).dimensions(EntityDimensions.fixed(0.6f, 1.95f)).build());
 
-
-
     public static final Item COLDSNAPGUNNERSPAWN = new SpawnEggItem(COLDSNAPGUNNER, 14804727, 0, new Item.Properties().tab(ColdSnapHorde.TAB));
     public static final Item COLDSNAPSTABBERSPAWN = new SpawnEggItem(COLDSNAPSTABBER, 14804727, 8585216, new Item.Properties().tab(ColdSnapHorde.TAB));
     public static final Item COLDSNAPSNOWBALLERSPAWN = new SpawnEggItem(COLDSNAPSNOWBALLER, 14804727, 25753, new Item.Properties().tab(ColdSnapHorde.TAB));
@@ -120,12 +139,13 @@ public class Register {
     public static final Item PCOLDSNAPZAPPERSPAWN = new SpawnEggItem(PCOLDSNAPZAPPER, 7444, 9802549, new Item.Properties().tab(ColdSnapHorde.TAB));
     public static final Item PCOLDSNAPBRAWLERSPAWN = new SpawnEggItem(PCOLDSNAPBRAWLER, 7444, 6229378, new Item.Properties().tab(ColdSnapHorde.TAB));
 
-
     public static final EntityType<GunnerProjectileEntity> GUNNERPROJECTILE = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "gunnerprojectile"), FabricEntityTypeBuilder.<GunnerProjectileEntity>create(MobCategory.MISC, GunnerProjectileEntity::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).build());
     public static final EntityType<RockSnowballEntity> ROCKSNOWBALLPROJECTILE = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "rocksnowballprojectile"), FabricEntityTypeBuilder.<RockSnowballEntity>create(MobCategory.MISC, RockSnowballEntity::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).build());
     public static final EntityType<ThrownChorusEntity> THROWNCHORUSPROJECTILE = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "thrownchorusprojectile"), FabricEntityTypeBuilder.<ThrownChorusEntity>create(MobCategory.MISC, ThrownChorusEntity::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).build());
     public static final EntityType<SnowierSnowballEntity> SNOWIERSNOWBALLPROJECTILE = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "snowiersnowballprojectile"), FabricEntityTypeBuilder.<SnowierSnowballEntity>create(MobCategory.MISC, SnowierSnowballEntity::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).build());
     public static final EntityType<LightningSnowEntity> LIGHTNINGSNOWBALLPROJECTILE = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "lightningsnowballprojectile"), FabricEntityTypeBuilder.<LightningSnowEntity>create(MobCategory.MISC, LightningSnowEntity::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).build());
+    public static final EntityType<HealingSnowballEntity> HEALINGSNOWBALLPROJECTILE = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "healingsnowprojectile"), FabricEntityTypeBuilder.<HealingSnowballEntity>create(MobCategory.MISC, HealingSnowballEntity::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).build());
+    public static final EntityType<IceProjectile> ICEPROJECTILE = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "iceprojectile"), FabricEntityTypeBuilder.<IceProjectile>create(MobCategory.MISC, IceProjectile::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).build());
 
     public static final EntityType<ColdSnapCow> COLDSNAPCOW = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MOD_ID, "frostycow"), FabricEntityTypeBuilder.<ColdSnapCow>create(MobCategory.CREATURE, ColdSnapCow::new).dimensions(EntityDimensions.fixed(0.9f, 1.4f)).build());
     public static final Item COLDSNAPCOWSPAWN = new SpawnEggItem(COLDSNAPCOW, 14804727, 1840384, new Item.Properties().tab(ColdSnapHorde.TAB));
@@ -135,7 +155,17 @@ public class Register {
     public static final Block REDCANDYCANEBLOCK = new Block(FabricBlockSettings.copyOf(Blocks.BONE_BLOCK));
 
     public static final ResourceLocation gifter_laugh_id = new ResourceLocation(MOD_ID, "gifter_attack");
+    public static final ResourceLocation november_snow_id = new ResourceLocation(MOD_ID, "november_snow");
+    public static final ResourceLocation arctic_beat_id = new ResourceLocation(MOD_ID, "arctic_beat");
     public static final SoundEvent GIFTERATTACK = new SoundEvent(gifter_laugh_id);
+    public static final SoundEvent NOVEMBERSNOW = new SoundEvent(november_snow_id);
+    public static final SoundEvent ARCTICBEAT = new SoundEvent(arctic_beat_id);
+
+    public static final Item NOVEMBERSNOWDISC = new ModMusicDisc(6, Register.NOVEMBERSNOW, new Item.Properties().tab(ColdSnapHorde.TAB).stacksTo(1));
+    public static final Item ARCTICBEATDISC = new ModMusicDisc(7, Register.ARCTICBEAT, new Item.Properties().tab(ColdSnapHorde.TAB).stacksTo(1));
+
+    public static final FrostStepEffect FROST_EFFECT = new FrostStepEffect();
+
 
     public static void init(){
         Registry.register(Registry.BLOCK, new ResourceLocation(MOD_ID, "slush"), SLUSH);
@@ -160,9 +190,30 @@ public class Register {
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "bluetophat"), BLUETOPHAT);
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "greentophat"), GREENTOPHAT);
         Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "purpletophat"), PURPLETOPHAT);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "snow_wall_charm"), SNOWWALLCHARM);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "small_present"), SMALLPRESENT);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "lesser_healing_ball"), LESSERHEALINGBALL);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "icicle"), ICICLE);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "frostessence"), FROSTESSENCE);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "frostcore"), FROSTCORE);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "glacier_wall_charm"), GLACIERWALLCHARM);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "frost_charm"), FROSTCHARM);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "healing_ball"), HEALINGBALL);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "frosted_snowglobe"), FROSTEDSNOWGLOBE);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "ice_staff"), ICESTAFF);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "wand_of_frost_walker"), WANDOFTHEFROSTWALKER);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "iceessence"), ICEESSENCE);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "reinforced_glacier_wall_charm"), REINFOCEDGLACIERCHARM);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "arctic_wind_charm"), ARCTICCHARM);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "greater_healing_ball"), GREATERHEALINGBALL);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "large_present"), LARGEPRESENT);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "glacier_staff"), GLACIERSTAFF);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "staff_of_ice_walker"), STAFFOFICEFROSTWALKER);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "frozen_snowglobe"), FROZENSNOWGLOBE);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "november_snow"), NOVEMBERSNOWDISC);
+        Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, "arctic_beat"), ARCTICBEATDISC);
 
         Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "frostcow_spawn_egg"), COLDSNAPCOWSPAWN);
-
 
         Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "gunner_spawn_egg"), COLDSNAPGUNNERSPAWN);
         Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "stabber_spawn_egg"), COLDSNAPSTABBERSPAWN);
@@ -192,11 +243,11 @@ public class Register {
         Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "pgifter_spawn_egg"), PCOLDSNAPGIFTERSPAWN);
         Registry.register(Registry.ITEM, new ResourceLocation(ColdSnapHorde.MOD_ID, "pbrawler_spawn_egg"), PCOLDSNAPBRAWLERSPAWN);
 
-
-
-
+        Registry.register(Registry.MOB_EFFECT, new ResourceLocation(ColdSnapHorde.MOD_ID, "frost_step_effect"), FROST_EFFECT);
 
         Registry.register(Registry.SOUND_EVENT, gifter_laugh_id, GIFTERATTACK);
+        Registry.register(Registry.SOUND_EVENT, november_snow_id, NOVEMBERSNOW);
+        Registry.register(Registry.SOUND_EVENT, arctic_beat_id, ARCTICBEAT);
 
         FabricDefaultAttributeRegistry.register(COLDSNAPSTABBER, ColdSnapStabber.customAttributes());
         FabricDefaultAttributeRegistry.register(COLDSNAPGUNNER, ColdSnapGunner.customAttributes());

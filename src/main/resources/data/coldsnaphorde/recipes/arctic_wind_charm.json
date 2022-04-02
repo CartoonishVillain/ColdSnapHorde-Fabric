@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " f ",
+    "I#I",
+    " I "
+  ],
+  "key": {
+    "#": {
+      "item": "coldsnaphorde:frost_charm"
+    },
+    "I": {
+      "item": "coldsnaphorde:iceessence"
+    },
+    "f": {
+      "item": "coldsnaphorde:icecore"
+    }
+  },
+  "result": {
+    "item": "coldsnaphorde:arctic_wind_charm",
+    "count": 1
+  }
+}

@@ -1,11 +1,12 @@
 {
+    "__comment": "Made with TheDestruc7i0n's advancements generator: https://advancements.thedestruc7i0n.ca",
     "display": {
         "title": {
             "text": "Unboxing",
             "color": "aqua"
         },
         "description": {
-            "text": "Open a present.",
+            "text": "Open a present",
             "color": "aqua"
         },
         "icon": {

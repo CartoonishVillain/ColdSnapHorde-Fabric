@@ -1,0 +1,26 @@
+{
+    "__comment": "Made with TheDestruc7i0n's advancements generator: https://advancements.thedestruc7i0n.ca",
+    "display": {
+        "title": {
+            "text": "Horde Breaker",
+            "color": "aqua"
+        },
+        "description": {
+            "text": "Defeat the Tier 3 Cold Snap Horde",
+            "color": "aqua"
+        },
+        "icon": {
+            "item": "coldsnaphorde:frozen_snowglobe"
+        },
+        "frame": "challenge",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "Impossible": {
+            "trigger": "minecraft:impossible"
+        }
+    },
+    "parent": "coldsnaphorde:hail_storm"
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " i#",
+    " I#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "coldsnaphorde:iceshard"
+    },
+    "I": {
+      "item": "minecraft:iron_block"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "coldsnaphorde:snow_wall_charm",
+    "count": 1
+  }
+}

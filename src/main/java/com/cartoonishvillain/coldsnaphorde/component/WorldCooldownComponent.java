@@ -4,23 +4,21 @@ import dev.onyxstudios.cca.api.v3.component.ComponentV3;
 import net.minecraft.nbt.CompoundTag;
 
 public class WorldCooldownComponent implements ComponentV3 {
-    protected int ticks = 0;
+    int levelBeaten = 0;
 
-    public int getCooldownTicks() {return ticks;}
-
-
-    public void setCooldownTicks(int ticks) {this.ticks = ticks;}
+    public int getLevelBeaten() {return levelBeaten;}
 
 
-    public void addCooldownTicks(int ticks) {this.ticks += ticks;}
+    public void setLevelBeaten(int ticks) {this.levelBeaten = ticks;}
+
 
     @Override
     public void readFromNbt(CompoundTag nbt) {
-        ticks = nbt.getInt("cooldown");
+        levelBeaten = nbt.getInt("levelbeaten");
     }
 
     @Override
     public void writeToNbt(CompoundTag tag) {
-        tag.putInt("cooldown", ticks);
+        tag.putInt("levelbeaten", levelBeaten);
     }
 }

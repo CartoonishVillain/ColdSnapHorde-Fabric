@@ -25,6 +25,8 @@ public class ColdSnapConfig implements ConfigData {
         public int HEATPROT = 1;
         @Comment("The hottest biome temperature a snow trail can spawn in, 0: Cold, 1: Neutral, 2: Warm, 3: Hot")
         public int SNOWTRAIL = 1;
+        @Comment("If true, cold snap horde mobs will be restricted to spawning only when unlocked by horde completion. If false, entities will spawn as if the world was through tier 3 already.")
+        public boolean PROGRESSIVESPAWNS = true;
         @Comment("EXPERIMENTAL! MUST BE ALL CHARACTERS FROM [a-z0-9/._-] OR THE GAME WILL CRASH. List the biome names seperated by commas that you want to absolutely exclude the horde from. (eg: minecraft:desert,minecraft:jungle)")
         public String BiomeExclusion = "notabiome";
         @Comment("Changes the spawn weight of the Stabber in the Overworld")
@@ -68,14 +70,30 @@ public class ColdSnapConfig implements ConfigData {
         public int FROSTYHARVESTCOOLDOWN = 1800;
         @Comment("How long in seconds players need to wait inbetween Snowglobe usage (Spawning a notable number of snowmen)")
         public int GLOBALHORDECOOLDOWN = 60;
-        @Comment("How many horde members will a horde attempt to spawn at once. Once this limit is reached, the horde will not spawn more members until the amount of members alive or in range fall below this number")
-        public int HORDESIZE = 10;
-        @Comment("Default amount of horde members needed to be killed on easy difficulty before the horde deactivates with a player victory")
-        public int ALIVEEASY = 50;
-        @Comment("Default amount of horde members needed to be killed on normal difficulty before the horde deactivates with a player victory")
-        public int ALIVENORMAL = 65;
-        @Comment("Default amount of horde members needed to be killed on hard difficulty before the horde deactivates with a player victory")
-        public int ALIVEHARD = 80;
+        @Comment("How many horde members will a tier 1 horde attempt to spawn at once. Once this limit is reached, the horde will not spawn more members until the amount of members alive or in range fall below this number")
+        public int TIER1HORDESIZE = 5;
+        @Comment("Default amount of horde members needed to be killed in a tier 1 horde on easy difficulty before the horde deactivates with a player victory")
+        public int TIER1ALIVEEASY = 20;
+        @Comment("Default amount of horde members needed to be killed in a tier 1 horde on normal difficulty before the horde deactivates with a player victory")
+        public int TIER1ALIVENORMAL = 30;
+        @Comment("Default amount of horde members needed to be killed in a tier 1 horde on hard difficulty before the horde deactivates with a player victory")
+        public int TIER1ALIVEHARD = 40;
+        @Comment("How many horde members will a tier 2 horde attempt to spawn at once. Once this limit is reached, the horde will not spawn more members until the amount of members alive or in range fall below this number")
+        public int TIER2HORDESIZE = 8;
+        @Comment("Default amount of horde members needed to be killed in a tier 2 horde on easy difficulty before the horde deactivates with a player victory")
+        public int TIER2ALIVEEASY = 35;
+        @Comment("Default amount of horde members needed to be killed in a tier 2 horde on normal difficulty before the horde deactivates with a player victory")
+        public int TIER2ALIVENORMAL = 50;
+        @Comment("Default amount of horde members needed to be killed in a tier 2 horde on hard difficulty before the horde deactivates with a player victory")
+        public int TIER2ALIVEHARD = 65;
+        @Comment("How many horde members will a tier 3 horde attempt to spawn at once. Once this limit is reached, the horde will not spawn more members until the amount of members alive or in range fall below this number")
+        public int TIER3HORDESIZE = 10;
+        @Comment("Default amount of horde members needed to be killed in a tier 3 horde on easy difficulty before the horde deactivates with a player victory")
+        public int TIER3ALIVEEASY = 50;
+        @Comment("Default amount of horde members needed to be killed in a tier 3 horde on normal difficulty before the horde deactivates with a player victory")
+        public int TIER3ALIVENORMAL = 65;
+        @Comment("Default amount of horde members needed to be killed in a tier 3 horde on hard difficulty before the horde deactivates with a player victory")
+        public int TIER3ALIVEHARD = 80;
         @Comment("How often more expensive update ticks occur. This allows new in range players to get the bossbar, and updates the horde with the position of their main target. Higher reduces frequency of these more expensive ticks, but lowers horde responsiveness.")
         public int UPDATETICK = 100;
     }

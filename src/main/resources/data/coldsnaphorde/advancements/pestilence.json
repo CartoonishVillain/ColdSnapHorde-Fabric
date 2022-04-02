@@ -1,0 +1,26 @@
+{
+    "__comment": "Made with TheDestruc7i0n's advancements generator: https://advancements.thedestruc7i0n.ca",
+    "display": {
+        "title": {
+            "text": "The Pestilence",
+            "color": "aqua"
+        },
+        "description": {
+            "text": "Defeat a Tier 3 horde while being in a swamp biome for the full duration.",
+            "color": "aqua"
+        },
+        "icon": {
+            "item": "minecraft:lily_pad"
+        },
+        "frame": "challenge",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "criteria": {
+        "Impossible": {
+            "trigger": "minecraft:impossible"
+        }
+    },
+    "parent": "coldsnaphorde:hail_storm"
+}

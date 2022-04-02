@@ -1,0 +1,26 @@
+{
+    "__comment": "Made with TheDestruc7i0n's advancements generator: https://advancements.thedestruc7i0n.ca",
+    "display": {
+        "title": {
+            "text": "Hail Storm",
+            "color": "aqua"
+        },
+        "description": {
+            "text": "Anger the third tier of the Cold Snap Horde by shaking a Frozen Snow Globe!",
+            "color": "aqua"
+        },
+        "icon": {
+            "item": "coldsnaphorde:freezeball"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "Impossible": {
+            "trigger": "minecraft:impossible"
+        }
+    },
+    "parent": "coldsnaphorde:diced_snowmen"
+}

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": ["coldsnaphorde:snow_wall_charm",
+    "coldsnaphorde:glacier_wall_charm",
+    "coldsnaphorde:reinforced_glacier_wall_charm",
+    "coldsnaphorde:frost_charm",
+    "coldsnaphorde:arctic_wind_charm"]
+}

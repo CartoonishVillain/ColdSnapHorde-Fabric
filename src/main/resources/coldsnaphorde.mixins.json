@@ -8,6 +8,8 @@
     "EntityAccessor",
     "GoatAccessor",
     "LivingDeathMixin",
+    "PlayerAttackMixin",
+    "PlayerHurtMixin",
     "PlayerTickMixin"
   ],
   "client": [

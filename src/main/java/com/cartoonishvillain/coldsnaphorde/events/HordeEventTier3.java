@@ -1,11 +1,10 @@
 package com.cartoonishvillain.coldsnaphorde.events;
 
-
 import com.cartoonishvillain.cartoonishhorde.EntityHordeData;
 import com.cartoonishvillain.cartoonishhorde.Horde;
 import com.cartoonishvillain.coldsnaphorde.ColdSnapHorde;
 import com.cartoonishvillain.coldsnaphorde.Register;
-import com.cartoonishvillain.coldsnaphorde.component.WorldCooldownComponent;
+import com.cartoonishvillain.coldsnaphorde.Utils;
 import com.cartoonishvillain.coldsnaphorde.entities.mobs.basemob.*;
 import com.cartoonishvillain.coldsnaphorde.entities.mobs.hordevariantmanager.EndHorde;
 import com.cartoonishvillain.coldsnaphorde.entities.mobs.hordevariantmanager.NetherHorde;
@@ -13,7 +12,6 @@ import com.cartoonishvillain.coldsnaphorde.entities.mobs.hordevariantmanager.Pla
 import com.cartoonishvillain.coldsnaphorde.entities.mobs.hordevariantmanager.StandardHorde;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -25,7 +23,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.level.biome.Biome;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -33,81 +30,106 @@ import java.util.Random;
 import java.util.UUID;
 
 import static com.cartoonishvillain.coldsnaphorde.ColdSnapHorde.giveAdvancement;
-import static com.cartoonishvillain.coldsnaphorde.component.ComponentStarter.WORLDCOMPONENT;
+import static com.cartoonishvillain.coldsnaphorde.ColdSnapHorde.hordeDataManager;
 
-public class ColdSnapHordeEvent extends Horde {
-    public ColdSnapHordeEvent(MinecraftServer server) {
+
+public class HordeEventTier3 extends Horde {
+    public HordeEventTier3(MinecraftServer server) {
         super(server);
     }
+
+    boolean isSwamp;
+    boolean isEnd;
+    boolean isNether;
 
     @Override
     public void Stop(HordeStopReasons stopReason) {
         switch (stopReason) {
             case VICTORY -> {
                 broadcast(server, new TranslatableComponent("message.coldsnaphorde.hordevictory").withStyle(ChatFormatting.AQUA));
-                for (ServerPlayer player : players) {
-                    giveAdvancement(player, server, new ResourceLocation(ColdSnapHorde.MOD_ID, "sliced_snowmen"));
+                ResourceLocation extraAchievement = null;
+                if (isSwamp) {
+                    extraAchievement = new ResourceLocation(ColdSnapHorde.MOD_ID, "pestilence");
+                } else if (isEnd) {
+                    extraAchievement = new ResourceLocation(ColdSnapHorde.MOD_ID, "horde_end");
+                } else if (isNether) {
+                    extraAchievement = new ResourceLocation(ColdSnapHorde.MOD_ID, "meltdown");
                 }
-                giveAdvancement(hordeAnchorPlayer, server, new ResourceLocation(ColdSnapHorde.MOD_ID, "sliced_snowmen"));
+
+                for (ServerPlayer player : players) {
+                    giveAdvancement(player, server, new ResourceLocation(ColdSnapHorde.MOD_ID, "horde_breaker"));
+                    if (extraAchievement != null) {
+                        giveAdvancement(player, server, extraAchievement);
+                    }
+                }
+
+                giveAdvancement(hordeAnchorPlayer, server, new ResourceLocation(ColdSnapHorde.MOD_ID, "horde_breaker"));
+                giveAdvancement(hordeAnchorPlayer, server, extraAchievement);
+                hordeDataManager.updateHighestLevelBeaten(server, 3);
             }
             case DEFEAT -> broadcast(server, new TranslatableComponent("message.coldsnaphorde.hordedefeat").withStyle(ChatFormatting.RED));
             case PEACEFUL -> broadcast(server, new TranslatableComponent("message.coldsnaphorde.peaceful").withStyle(ChatFormatting.YELLOW));
             case SPAWN_ERROR -> broadcast(server, new TranslatableComponent("message.coldsnaphorde.confused").withStyle(ChatFormatting.RED));
         }
-
-        WorldCooldownComponent h = WORLDCOMPONENT.get(world);
-        h.setCooldownTicks(ColdSnapHorde.config.coldSnapSettings.GLOBALHORDECOOLDOWN * 20);
+        hordeDataManager.setCooldownTicks(ColdSnapHorde.config.coldSnapSettings.GLOBALHORDECOOLDOWN * 20);
+        hordeDataManager.setCurrentHordeLevel(0);
         super.Stop(stopReason);
     }
 
     @Override
     public void setActiveMemberCount() {
-        allowedActive = ColdSnapHorde.config.coldSnapSettings.HORDESIZE;
+        allowedActive = ColdSnapHorde.config.coldSnapSettings.TIER3HORDESIZE;
     }
 
     @Override
     public void SetUpHorde(ServerPlayer serverPlayer) {
         super.SetUpHorde(serverPlayer);
-        WorldCooldownComponent h = WORLDCOMPONENT.get(world);
-        h.setCooldownTicks(-1);
+        hordeDataManager.setCooldownTicks(-1);
+
+        isSwamp = false;
+        isEnd = false;
+        isNether = false;
+
         bossInfo.setCreateWorldFog(true);
         if (hordeAnchorPlayer.level.dimension().toString().contains("end")) {
             bossInfo.setColor(BossEvent.BossBarColor.PURPLE);
-            bossInfo.setName(new TextComponent("Cold Snap Horde").withStyle(ChatFormatting.DARK_PURPLE, ChatFormatting.BOLD));
+            bossInfo.setName(new TextComponent("Cold Snap Horde (Tier 3)").withStyle(ChatFormatting.DARK_PURPLE, ChatFormatting.BOLD));
+            isEnd = true;
         } else if (hordeAnchorPlayer.level.dimension().toString().contains("nether")) {
             bossInfo.setColor(BossEvent.BossBarColor.RED);
-            bossInfo.setName(new TextComponent("Cold Snap Horde").withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+            bossInfo.setName(new TextComponent("Cold Snap Horde (Tier 3)").withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+            isNether = true;
         } else {
-            Holder<Biome> biome =  world.getBiome(center);
-            boolean swamp = Biome.getBiomeCategory(biome).equals(Biome.BiomeCategory.SWAMP);
-            if (swamp) {
+            if (Utils.isSwamp(world.getBiome(center))) {
                 bossInfo.setColor(BossEvent.BossBarColor.GREEN);
-                bossInfo.setName(new TextComponent("Cold Snap Horde").withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD));
+                bossInfo.setName(new TextComponent("Cold Snap Horde (Tier 3)").withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD));
+                isSwamp = true;
             } else {
                 bossInfo.setColor(BossEvent.BossBarColor.BLUE);
-                bossInfo.setName(new TextComponent("Cold Snap Horde").withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD));
+                bossInfo.setName(new TextComponent("Cold Snap Horde (Tier 3)").withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD));
             }
         }
-        giveAdvancement(serverPlayer, server, new ResourceLocation(ColdSnapHorde.MOD_ID, "snow_day"));
+        giveAdvancement(serverPlayer, server, new ResourceLocation(ColdSnapHorde.MOD_ID, "hail_storm"));
         broadcast(server, new TranslatableComponent("message.coldsnaphorde.hordestart", serverPlayer.getDisplayName()).withStyle(ChatFormatting.AQUA));
+        hordeDataManager.setCurrentHordeLevel(3);
     }
 
     @Override
     public void setEasyDifficultyStats() {
-        Alive = ColdSnapHorde.config.coldSnapSettings.ALIVEEASY;
-        initAlive = ColdSnapHorde.config.coldSnapSettings.ALIVEEASY;
+        Alive = ColdSnapHorde.config.coldSnapSettings.TIER3ALIVEEASY;
+        initAlive = ColdSnapHorde.config.coldSnapSettings.TIER3ALIVEEASY;
     }
 
     @Override
     public void setNormalDifficultyStats() {
-        Alive = ColdSnapHorde.config.coldSnapSettings.ALIVENORMAL;
-        initAlive = ColdSnapHorde.config.coldSnapSettings.ALIVENORMAL;
+        Alive = ColdSnapHorde.config.coldSnapSettings.TIER3ALIVENORMAL;
+        initAlive = ColdSnapHorde.config.coldSnapSettings.TIER3ALIVENORMAL;
     }
 
     @Override
     public void setHardDifficultyStats() {
-        Alive = ColdSnapHorde.config.coldSnapSettings.ALIVEHARD;
-        initAlive = ColdSnapHorde.config.coldSnapSettings.ALIVEHARD;
+        Alive = ColdSnapHorde.config.coldSnapSettings.TIER3ALIVEHARD;
+        initAlive = ColdSnapHorde.config.coldSnapSettings.TIER3ALIVEHARD;
     }
 
     @Override
@@ -116,14 +138,13 @@ public class ColdSnapHordeEvent extends Horde {
             center = hordeAnchorPlayer.blockPosition();
             updateCenter = ColdSnapHorde.config.coldSnapSettings.UPDATETICK;
             if (!world.dimension().toString().contains("nether") && !world.dimension().toString().contains("end")) {
-                Holder<Biome> biome =  world.getBiome(center);
-                boolean swamp = Biome.getBiomeCategory(biome).equals(Biome.BiomeCategory.SWAMP);
-                if (swamp) {
+                if (Utils.isSwamp(world.getBiome(center))) {
                     bossInfo.setColor(BossEvent.BossBarColor.GREEN);
-                    bossInfo.setName(new TextComponent("Cold Snap Horde").withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD));
+                    bossInfo.setName(new TextComponent("Cold Snap Horde (Tier 3)").withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD));
                 } else {
                     bossInfo.setColor(BossEvent.BossBarColor.BLUE);
-                    bossInfo.setName(new TextComponent("Cold Snap Horde").withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD));
+                    bossInfo.setName(new TextComponent("Cold Snap Horde (Tier 3)").withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD));
+                    isSwamp = false;
                 }
             }
             updatePlayers();
@@ -135,32 +156,6 @@ public class ColdSnapHordeEvent extends Horde {
 
     private void broadcast(MinecraftServer server, Component translationTextComponent) {
         server.getPlayerList().broadcastMessage(translationTextComponent, ChatType.CHAT, UUID.randomUUID());
-    }
-
-
-    private boolean biomeCheck(ServerLevel world, BlockPos pos) {
-        Holder<Biome> biome =  world.getBiome(pos);
-        boolean swamp = Biome.getBiomeCategory(biome).equals(Biome.BiomeCategory.SWAMP);
-        if (swamp) {
-            return true;
-        }
-        if (!world.dimension().toString().contains("over")) {
-            return true;
-        }
-        int protlvl = ColdSnapHorde.config.spawnconfig.HEATPROT;
-        float temp = world.getBiome(pos).value().getBaseTemperature();
-        int code = -1;
-        if (temp < 0.3) {
-            code = 0;
-        } else if (temp >= 0.3 && temp < 0.9) {
-            code = 1;
-        } else if (temp >= 0.9 && temp < 1.5) {
-            code = 2;
-        } else if (temp >= 1.5) {
-            code = 3;
-        }
-
-        return code <= protlvl;
     }
 
     private boolean trueBiomeCheck(ServerLevel world, BlockPos pos) {
@@ -290,9 +285,7 @@ public class ColdSnapHordeEvent extends Horde {
 
     private ColdSnapGunner gunnerSpawnRules(ServerLevel world, BlockPos pos) {
         ColdSnapGunner coldSnapGunner = null;
-        Holder<Biome> biome =  world.getBiome(pos);
-        boolean swamp = Biome.getBiomeCategory(biome).equals(Biome.BiomeCategory.SWAMP);
-        if (swamp) {
+        if (Utils.isSwamp(world.getBiome(pos))) {
             coldSnapGunner = new PlagueHorde.PlagueGunner(Register.PCOLDSNAPGUNNER, world);
         } else if (world.dimension().toString().contains("end")) {
             coldSnapGunner = new EndHorde.EndGunner(Register.ECOLDSNAPGUNNER, world);
@@ -328,9 +321,7 @@ public class ColdSnapHordeEvent extends Horde {
 
     private ColdSnapStabber stabberSpawnRules(ServerLevel world, BlockPos pos) {
         ColdSnapStabber coldSnapStabber = null;
-        Holder<Biome> biome =  world.getBiome(pos);
-        boolean swamp = Biome.getBiomeCategory(biome).equals(Biome.BiomeCategory.SWAMP);
-        if (swamp) {
+        if (Utils.isSwamp(world.getBiome(pos))) {
             coldSnapStabber = new PlagueHorde.PlagueStabber(Register.PCOLDSNAPSTABBER, world);
         } else if (world.dimension().toString().contains("end")) {
             coldSnapStabber = new EndHorde.EndStabber(Register.ECOLDSNAPSTABBER, world);
@@ -367,9 +358,7 @@ public class ColdSnapHordeEvent extends Horde {
 
     private ColdSnapSnowballer snowballerSpawnRules(ServerLevel world, BlockPos pos) {
         ColdSnapSnowballer coldSnapSnowballer = null;
-        Holder<Biome> biome =  world.getBiome(pos);
-        boolean swamp = Biome.getBiomeCategory(biome).equals(Biome.BiomeCategory.SWAMP);
-        if (swamp) {
+        if (Utils.isSwamp(world.getBiome(pos))) {
             coldSnapSnowballer = new PlagueHorde.PlagueSnowballer(Register.PCOLDSNAPSNOWBALLER, world);
         } else if (world.dimension().toString().contains("end")) {
             coldSnapSnowballer = new EndHorde.EndSnowballer(Register.ECOLDSNAPSNOWBALLER, world);
@@ -405,9 +394,7 @@ public class ColdSnapHordeEvent extends Horde {
 
     private ColdSnapGifter gifterSpawnRules(ServerLevel world, BlockPos pos){
         ColdSnapGifter coldSnapGifter = null;
-        Holder<Biome> biome =  world.getBiome(pos);
-        boolean swamp = Biome.getBiomeCategory(biome).equals(Biome.BiomeCategory.SWAMP);
-        if (swamp) {
+        if (Utils.isSwamp(world.getBiome(pos))){
             coldSnapGifter = new PlagueHorde.PlagueGifter(Register.PCOLDSNAPGIFTER, world);
         }else if(world.dimension().toString().contains("end")){
             coldSnapGifter = new EndHorde.EndGifter(Register.ECOLDSNAPGIFTER, world);
@@ -437,10 +424,7 @@ public class ColdSnapHordeEvent extends Horde {
 
     private ColdSnapZapper zapperSpawnRules(ServerLevel world, BlockPos pos){
         ColdSnapZapper coldSnapZapper = null;
-        Holder<Biome> biome =  world.getBiome(pos);
-        boolean swamp = Biome.getBiomeCategory(biome).equals(Biome.BiomeCategory.SWAMP);
-        if (swamp) {
-            coldSnapZapper = new PlagueHorde.PlagueZapper(Register.PCOLDSNAPZAPPER, world);
+        if (Utils.isSwamp(world.getBiome(pos))){coldSnapZapper = new PlagueHorde.PlagueZapper(Register.PCOLDSNAPZAPPER, world);
         }else if(world.dimension().toString().contains("end")){
             coldSnapZapper = new EndHorde.EndZapper(Register.ECOLDSNAPZAPPER, world);
         }else if(world.dimension().toString().contains("nether")){
@@ -469,9 +453,7 @@ public class ColdSnapHordeEvent extends Horde {
 
     private ColdSnapBrawler brawlerSpawnRules(ServerLevel world, BlockPos pos){
         ColdSnapBrawler coldSnapBrawler = null;
-        Holder<Biome> biome =  world.getBiome(pos);
-        boolean swamp = Biome.getBiomeCategory(biome).equals(Biome.BiomeCategory.SWAMP);
-        if (swamp) {
+        if (Utils.isSwamp(world.getBiome(pos))){
             coldSnapBrawler = new PlagueHorde.PlagueBrawler(Register.PCOLDSNAPBRAWLER, world);
         }else if(world.dimension().toString().contains("end")){
             coldSnapBrawler = new EndHorde.EndBrawler(Register.ECOLDSNAPBRAWLER, world);

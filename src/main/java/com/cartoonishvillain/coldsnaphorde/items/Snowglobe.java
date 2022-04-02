@@ -1,9 +1,8 @@
 package com.cartoonishvillain.coldsnaphorde.items;
 
 import com.cartoonishvillain.coldsnaphorde.ColdSnapHorde;
-import com.cartoonishvillain.coldsnaphorde.component.WorldCooldownComponent;
+import com.cartoonishvillain.coldsnaphorde.Utils;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -20,51 +19,82 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import static com.cartoonishvillain.coldsnaphorde.component.ComponentStarter.WORLDCOMPONENT;
 
 public class Snowglobe extends Item {
-    public Snowglobe(Properties properties) {
+    Tier tier;
+
+    public Snowglobe(Properties properties, Tier tier) {
         super(properties);
+        this.tier = tier;
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
-        if(handIn == InteractionHand.MAIN_HAND && !worldIn.isClientSide() && playerIn != null) {
-            if (biomeCheck(worldIn, playerIn.blockPosition()) || worldIn.getBiome(playerIn.blockPosition()).toString().contains("swamp") || worldIn.dimension().toString().contains("end") || worldIn.dimension().toString().contains("nether")) {
-                AtomicInteger atomicInteger = new AtomicInteger(0);
-                WorldCooldownComponent h = WORLDCOMPONENT.get(worldIn);
-                    if(h.getCooldownTicks() > 0){
-                        atomicInteger.set(h.getCooldownTicks());
-                    }
-
-                if(atomicInteger.get() == 0 && !ColdSnapHorde.Horde.getHordeActive()) {
-                    ColdSnapHorde.Horde.SetUpHorde((ServerPlayer) playerIn);
-                    worldIn.playSound(null, playerIn.blockPosition(), SoundEvents.TRIDENT_RIPTIDE_1, SoundSource.PLAYERS, 0.5f, 1.5f);
-                    playerIn.getMainHandItem().shrink(1);
-                }else if (!ColdSnapHorde.Horde.getHordeActive()){
-                    playerIn.displayClientMessage(new TextComponent("Horde on cooldown! Returning in: " + TimeBuilder(atomicInteger.get())), false);
-                }else if(ColdSnapHorde.Horde.getHordeActive()){
-                    playerIn.displayClientMessage(new TextComponent("The Horde is busy elsewhere. Try again later!"), false);
-                }
-            }else{
-                playerIn.displayClientMessage(new TextComponent("Temperature too hot for the horde to summon!"), false);
-            }
+        if(handIn == InteractionHand.MAIN_HAND && !worldIn.isClientSide() && playerIn != null && tier.equals(Tier.ONE)) {
+            startTier1(worldIn, playerIn);
+        } else if(handIn == InteractionHand.MAIN_HAND && !worldIn.isClientSide() && playerIn != null && tier.equals(Tier.TWO)) {
+            startTier2(worldIn, playerIn);
+        } else if(handIn == InteractionHand.MAIN_HAND && !worldIn.isClientSide() && playerIn != null && tier.equals(Tier.THREE)) {
+            startTier3(worldIn, playerIn);
         }
         return super.use(worldIn, playerIn, handIn);
     }
 
-    private boolean biomeCheck(Level world, BlockPos pos){
-        int protlvl = ColdSnapHorde.config.spawnconfig.HEATPROT;
-        float temp = world.getBiome(pos).value().getBaseTemperature();
-        int code = -1;
-        if (temp < 0.3){code = 0;}
-        else if(temp >= 0.3 && temp < 0.9){code = 1;}
-        else if(temp >= 0.9 && temp < 1.5){code = 2;}
-        else if(temp >= 1.5){code = 3;}
+    private void startTier1(Level worldIn, Player playerIn) {
+        if ((Utils.tier1Valid(worldIn, playerIn.blockPosition()))) {
+            int cooldown = ColdSnapHorde.hordeDataManager.getCooldownTicks();
 
-        return code <= protlvl;
+            if(cooldown == 0 && !ColdSnapHorde.hordeTier1.getHordeActive()) {
+                ColdSnapHorde.hordeTier1.SetUpHorde((ServerPlayer) playerIn);
+                worldIn.playSound(null, playerIn.blockPosition(), SoundEvents.TRIDENT_RIPTIDE_1, SoundSource.PLAYERS, 0.5f, 1.5f);
+                playerIn.getMainHandItem().shrink(1);
+            } else if (cooldown > 0) {
+                playerIn.displayClientMessage(new TextComponent("Horde on cooldown! Returning in: " + TimeBuilder(cooldown)), false);
+            } else if(cooldown < 0) {
+                playerIn.displayClientMessage(new TextComponent("The Horde is busy elsewhere. Try again later!"), false);
+            }
+        } else {
+            playerIn.displayClientMessage(new TextComponent("This tier of horde can not be summoned in this " +
+                    "climate! Can not spawn in swamps, nether, or the end. It may also be too hot in your current biome!"), false);
+        }
+    }
+
+    private void startTier2(Level worldIn, Player playerIn) {
+        if ((Utils.tier2Valid(worldIn, playerIn.blockPosition()))) {
+            int cooldown = ColdSnapHorde.hordeDataManager.getCooldownTicks();
+
+            if(cooldown == 0 && !ColdSnapHorde.hordeTier2.getHordeActive()) {
+                ColdSnapHorde.hordeTier2.SetUpHorde((ServerPlayer) playerIn);
+                worldIn.playSound(null, playerIn.blockPosition(), SoundEvents.TRIDENT_RIPTIDE_1, SoundSource.PLAYERS, 0.5f, 1.5f);
+                playerIn.getMainHandItem().shrink(1);
+            } else if (cooldown > 0) {
+                playerIn.displayClientMessage(new TextComponent("Horde on cooldown! Returning in: " + TimeBuilder(cooldown)), false);
+            } else if(cooldown < 0) {
+                playerIn.displayClientMessage(new TextComponent("The Horde is busy elsewhere. Try again later!"), false);
+            }
+        } else {
+            playerIn.displayClientMessage(new TextComponent("This tier of horde can not be summoned in this " +
+                    "climate! Can not spawn in the nether, or the end. It may also be too hot in your current biome!"), false);
+        }
+    }
+
+    private void startTier3(Level worldIn, Player playerIn) {
+        if ((Utils.tier3Valid(worldIn, playerIn.blockPosition()))) {
+            int cooldown = ColdSnapHorde.hordeDataManager.getCooldownTicks();
+
+            if(cooldown == 0 && !ColdSnapHorde.hordeTier3.getHordeActive()) {
+                ColdSnapHorde.hordeTier3.SetUpHorde((ServerPlayer) playerIn);
+                worldIn.playSound(null, playerIn.blockPosition(), SoundEvents.TRIDENT_RIPTIDE_1, SoundSource.PLAYERS, 0.5f, 1.5f);
+                playerIn.getMainHandItem().shrink(1);
+            } else if (cooldown > 0) {
+                playerIn.displayClientMessage(new TextComponent("Horde on cooldown! Returning in: " + TimeBuilder(cooldown)), false);
+            } else if(cooldown < 0) {
+                playerIn.displayClientMessage(new TextComponent("The Horde is busy elsewhere. Try again later!"), false);
+            }
+        } else {
+            playerIn.displayClientMessage(new TextComponent("This tier of horde can not be summoned in this " +
+                    "climate! Your biome may be too too hot in your current biome!"), false);
+        }
     }
 
     private String TimeBuilder(int duration){
@@ -92,8 +122,24 @@ public class Snowglobe extends Item {
     public void appendHoverText(ItemStack p_41421_, @Nullable Level p_41422_, List<Component> p_41423_, TooltipFlag p_41424_) {
         super.appendHoverText(p_41421_, p_41422_, p_41423_, p_41424_);
         p_41423_.add(new TranslatableComponent("itemtooltip.snowglobe.1").withStyle(ChatFormatting.AQUA));
-        p_41423_.add(new TranslatableComponent("itemtooltip.snowglobe.2").withStyle(ChatFormatting.AQUA));
-        p_41423_.add(new TranslatableComponent("itemtooltip.snowglobe.3").withStyle(ChatFormatting.RED));
-        p_41423_.add(new TranslatableComponent("itemtooltip.snowglobe.4").withStyle(ChatFormatting.RED));
+        switch (tier) {
+            default -> {
+                p_41423_.add(new TranslatableComponent("itemtooltip.snowglobe.2.1").withStyle(ChatFormatting.AQUA));
+                p_41423_.add(new TranslatableComponent("itemtooltip.snowglobe.3").withStyle(ChatFormatting.RED));
+                p_41423_.add(new TranslatableComponent("itemtooltip.coldsnaphorde.tier.1").withStyle(ChatFormatting.AQUA));
+            }
+            case TWO -> {
+                p_41423_.add(new TranslatableComponent("itemtooltip.snowglobe.2.2").withStyle(ChatFormatting.AQUA));
+                p_41423_.add(new TranslatableComponent("itemtooltip.snowglobe.3").withStyle(ChatFormatting.RED));
+                p_41423_.add(new TranslatableComponent("itemtooltip.snowglobe.4.2").withStyle(ChatFormatting.BLUE));
+                p_41423_.add(new TranslatableComponent("itemtooltip.coldsnaphorde.tier.2").withStyle(ChatFormatting.AQUA));
+            }
+            case THREE -> {
+                p_41423_.add(new TranslatableComponent("itemtooltip.snowglobe.2.3").withStyle(ChatFormatting.AQUA));
+                p_41423_.add(new TranslatableComponent("itemtooltip.snowglobe.3").withStyle(ChatFormatting.RED));
+                p_41423_.add(new TranslatableComponent("itemtooltip.snowglobe.4.3").withStyle(ChatFormatting.BLUE));
+                p_41423_.add(new TranslatableComponent("itemtooltip.coldsnaphorde.tier.3").withStyle(ChatFormatting.AQUA));
+            }
+        }
     }
 }

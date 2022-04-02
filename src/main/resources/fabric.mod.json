@@ -14,7 +14,7 @@
 
 
   "name": "Cold Snap Horde",
-  "description": "A frosty band of scoundrels now fill colder lands, attacking villagers, golems, and humans alike. Art by: BottomTextCf28, and Glasus#5741",
+  "description": "A frosty band of scoundrels now fill colder lands, attacking villagers, golems, and humans alike. Art by: BottomTextCf28, and Glasus#5741. Music Credits: https://gist.github.com/CartoonishVillain/29dcc4623906f3d68b6c807ed12f9aaa",
   "authors": [
     "Cartoonish Villain"
   ],
@@ -50,7 +50,8 @@
     "fabric": ">=0.42.0",
     "minecraft": "1.18.x",
     "java": ">=17",
-    "cloth-config2": "*"
+    "cloth-config2": "*",
+    "trinkets": "*"
   },
   "suggests": {
     "another-mod": "*"

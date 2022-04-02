@@ -114,6 +114,8 @@ public class ColdSnapClientInitializer implements ClientModInitializer {
         EntityRendererRegistry.register(Register.ROCKSNOWBALLPROJECTILE, ThrownItemRenderer::new);
         EntityRendererRegistry.register(Register.SNOWIERSNOWBALLPROJECTILE, ThrownItemRenderer::new);
         EntityRendererRegistry.register(Register.THROWNCHORUSPROJECTILE, ThrownItemRenderer::new);
+        EntityRendererRegistry.register(Register.ICEPROJECTILE, ThrownItemRenderer::new);
+        EntityRendererRegistry.register(Register.HEALINGSNOWBALLPROJECTILE, ThrownItemRenderer::new);
 
 
         EntityModelLayerRegistry.registerModelLayer(COLDSNAPSTABBER, ColdSnapStabberModel::createBodyLayer);

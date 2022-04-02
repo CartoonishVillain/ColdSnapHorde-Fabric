@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IfI",
+    " # ",
+    "I#I"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:gold_ingot"
+    },
+    "I": {
+      "item": "coldsnaphorde:iceshard"
+    },
+    "f": {
+      "item": "coldsnaphorde:frostcore"
+    }
+  },
+  "result": {
+    "item": "coldsnaphorde:ice_staff",
+    "count": 1
+  }
+}

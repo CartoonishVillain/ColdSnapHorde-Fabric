@@ -1,0 +1,7 @@
+Arctic Beat is licensed under CC-BY 4.0 by Ted Kerr
+Changes made: Formated to ogg, mono track, volume reduced.
+Source: https://opengameart.org/content/arctic-beat
+
+Novemember Snow is licenced under CC0 by The Cynic Project.
+Changes made: Formated to ogg, mono track, volume reduced.
+Source: https://opengameart.org/content/november-snow

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#Y#",
+    "YIY",
+    "#Y#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:red_wool"
+    },
+    "Y": {
+      "item": "minecraft:yellow_wool"
+    },
+    "I": {
+      "item": "coldsnaphorde:iceshard"
+    }
+  },
+  "result": {
+    "item": "coldsnaphorde:small_present",
+    "count": 1
+  }
+}
