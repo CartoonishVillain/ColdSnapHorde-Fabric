@@ -133,6 +133,6 @@
   "command.coldsnaphorde.stopsuccess": "Horde has been stopped!",
   "command.coldsnaphorde.stopfailure": "Horde failed to end. Is one running?",
   "command.coldsnaphorde.setsuccess": "Successfully set the highest tier of horde defeated to %1$s!",
-  "command.coldsnaphorde.getsuccess": "Highest tier horde defeated: %1$s!"
-
+  "command.coldsnaphorde.getsuccess": "Highest tier horde defeated: %1$s!",
+  "effect.coldsnaphorde.frost_step_effect": "Frost Step"
 }
