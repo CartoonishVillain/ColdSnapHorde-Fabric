@@ -29,9 +29,9 @@ public class FrostWalkStaff extends TieredItem {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (!level.isClientSide && hand.equals(InteractionHand.MAIN_HAND)) {
             if (tier.equals(Tier.THREE)) {
-                player.addEffect(new MobEffectInstance(Register.FROST_EFFECT, 15*20, 1));
+                player.addEffect(new MobEffectInstance(Register.FROST_EFFECT, 15*20, 2));
             } else {
-                player.addEffect(new MobEffectInstance(Register.FROST_EFFECT, 15*20, 0));
+                player.addEffect(new MobEffectInstance(Register.FROST_EFFECT, 15*20, 1));
             }
 
             ItemStack itemStack = player.getItemInHand(hand);
