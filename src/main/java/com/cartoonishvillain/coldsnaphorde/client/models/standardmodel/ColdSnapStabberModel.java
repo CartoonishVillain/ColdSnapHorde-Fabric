@@ -3,6 +3,7 @@ package com.cartoonishvillain.coldsnaphorde.client.models.standardmodel;// Made 
 // Paste this class into your mod and generate all required imports
 
 
+import com.cartoonishvillain.coldsnaphorde.entities.mobs.basemob.ColdSnapStabber;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
@@ -66,6 +67,23 @@ public class ColdSnapStabberModel<T extends LivingEntity> extends EntityModel<T>
         this.head.yRot = netHeadYaw * ((float)Math.PI / 180F);
         this.head.xRot = headPitch * ((float)Math.PI / 180F);
         this.body.yRot = netHeadYaw * ((float)Math.PI / 180F) * 0.25F;
+
+        if (entity instanceof ColdSnapStabber) {
+            float animvalue = ((ColdSnapStabber) entity).getANITIMER();
+            float valuedown;
+            float valueup;
+            if(animvalue >= 10) {
+                this.right_hand.setRotation(0.0F, -0.2618F, 1.4835F);
+            } else if (animvalue < 6) {
+                valuedown = animvalue * -0.2f;
+                this.right_hand.setRotation(0.0F, -0.2618F+valuedown, 1.4835F);
+            } else {
+                valuedown = -1f;
+                valueup = (animvalue-5) * 0.2f;
+                float valuetotal = valuedown + valueup;
+                this.right_hand.setRotation(0.0F, -0.2618F+valuetotal, 1.4835F);
+            }
+        }
     }
 
     @Override

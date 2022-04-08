@@ -1,6 +1,9 @@
 package com.cartoonishvillain.coldsnaphorde.entities.mobs.basemob;
 
 import com.cartoonishvillain.coldsnaphorde.Register;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
@@ -21,10 +24,12 @@ import static com.cartoonishvillain.coldsnaphorde.ColdSnapHorde.TOPHATS;
 
 public class ColdSnapStabber extends GenericHordeMember {
 
+    private static final EntityDataAccessor<Float> ANITIMER = SynchedEntityData.defineId(ColdSnapStabber.class, EntityDataSerializers.FLOAT);
+
+
     public ColdSnapStabber(EntityType<? extends Monster> type, Level worldIn) {
         super(type, worldIn);
     }
-
 
     @Override
     protected void registerGoals() {
@@ -42,6 +47,11 @@ public class ColdSnapStabber extends GenericHordeMember {
 
     }
 
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        getEntityData().define(ANITIMER, 10f);
+    }
 
     public static AttributeSupplier.Builder customAttributes() {
         return Mob.createMobAttributes()
@@ -81,13 +91,24 @@ public class ColdSnapStabber extends GenericHordeMember {
                 }
             }
 
+            if(getANITIMER() >= 10)
+                this.getEntityData().set(ANITIMER, 0f);
+
         }
         return super.doHurtTarget(entityIn);
+    }
+
+    public Float getANITIMER() {
+        return getEntityData().get(ANITIMER);
     }
 
 
     public void aiStep() {
         super.aiStep();
+        if (!this.level.isClientSide()) {
+            float timer = getEntityData().get(ANITIMER);
+            if (timer < 11) this.getEntityData().set(ANITIMER, timer += 1f);
+        }
     }
 
 }
