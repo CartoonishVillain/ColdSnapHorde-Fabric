@@ -1,5 +1,6 @@
-package com.cartoonishvillain.coldsnaphorde.items;
+package com.cartoonishvillain.coldsnaphorde.items.ToolsOrOther;
 
+import com.cartoonishvillain.coldsnaphorde.items.Tier;
 import com.google.common.collect.Multimap;
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketItem;
@@ -34,13 +35,13 @@ public class FrostWallCharm extends TrinketItem {
         var atts = super.getModifiers(stack, slot, entity, uuid);
         switch (tier) {
             default -> {
-                atts.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(uuid, "knockback_res", 0.15, AttributeModifier.Operation.ADDITION));
+                atts.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(uuid, "knockback_res", 0.1, AttributeModifier.Operation.ADDITION));
             }
             case TWO -> {
-                atts.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(uuid, "knockback_res", 0.45, AttributeModifier.Operation.ADDITION));
+                atts.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(uuid, "knockback_res", 0.2, AttributeModifier.Operation.ADDITION));
             }
             case THREE -> {
-                atts.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(uuid, "knockback_res", 1, AttributeModifier.Operation.ADDITION));
+                atts.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(uuid, "knockback_res", 0.35, AttributeModifier.Operation.ADDITION));
             }
         }
         return atts;

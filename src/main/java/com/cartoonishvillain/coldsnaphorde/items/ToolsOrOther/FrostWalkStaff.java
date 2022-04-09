@@ -1,6 +1,7 @@
-package com.cartoonishvillain.coldsnaphorde.items;
+package com.cartoonishvillain.coldsnaphorde.items.ToolsOrOther;
 
 import com.cartoonishvillain.coldsnaphorde.Register;
+import com.cartoonishvillain.coldsnaphorde.items.Tier;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;

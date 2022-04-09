@@ -1,5 +1,6 @@
-package com.cartoonishvillain.coldsnaphorde.items;
+package com.cartoonishvillain.coldsnaphorde.items.ToolsOrOther;
 
+import com.cartoonishvillain.coldsnaphorde.items.Tier;
 import dev.emi.trinkets.api.TrinketItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
