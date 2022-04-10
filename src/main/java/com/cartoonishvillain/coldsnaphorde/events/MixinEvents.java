@@ -6,6 +6,7 @@ import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Tuple;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -62,7 +63,7 @@ public class MixinEvents {
     }
 
     public static void PlayerAttack(Player player, Entity entity) {
-        if (!player.level.isClientSide && entity instanceof LivingEntity target) {
+        if (!player.level.isClientSide && entity instanceof LivingEntity target && player.getItemInHand(InteractionHand.MAIN_HAND).getItem().equals(Register.ICICLE)) { 
             float value = player.getAttackStrengthScale(1);
             if(player.getRandom().nextBoolean() && value == 1) {
                 target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 80, 0));
