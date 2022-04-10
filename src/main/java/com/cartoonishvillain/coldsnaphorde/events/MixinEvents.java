@@ -63,7 +63,7 @@ public class MixinEvents {
     }
 
     public static void PlayerAttack(Player player, Entity entity) {
-        if (!player.level.isClientSide && entity instanceof LivingEntity target && player.getItemInHand(InteractionHand.MAIN_HAND).getItem().equals(Register.ICICLE)) { 
+        if (!player.level.isClientSide && entity instanceof LivingEntity target && player.getItemInHand(InteractionHand.MAIN_HAND).getItem().equals(Register.ICICLE)) {
             float value = player.getAttackStrengthScale(1);
             if(player.getRandom().nextBoolean() && value == 1) {
                 target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 80, 0));
