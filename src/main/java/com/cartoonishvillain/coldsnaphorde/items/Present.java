@@ -29,10 +29,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import static com.cartoonishvillain.coldsnaphorde.ColdSnapHorde.*;
 
@@ -52,53 +49,53 @@ public class Present extends Item {
 
             if(tier == Tier.ONE) {
                 float Total = 0f;
-                for (float totaling : tier1PresentWeights) Total += totaling;
+                for (Map.Entry<String, Float> entry : tier1PresentPossibilities.entrySet()) Total += entry.getValue();
                 float randomized = 0 + worldIn.random.nextFloat() * (Total - 0);
-                int select = 0;
+                String winner = "";
 
-                for (Float percentage : tier1PresentWeights) {
-                    randomized -= percentage;
-                    if (randomized <= 0) break;
-                    else select++;
+                for (Map.Entry<String, Float> entry : tier1PresentPossibilities.entrySet()) {
+                    randomized -= entry.getValue();
+                    if (randomized <= 0) {
+                        winner = entry.getKey();
+                        break;
+                    }
                 }
 
-                if (select == tier1PresentPossibilities.size()) select = select - 1;
-                String selected = tier1PresentPossibilities.get(select);
-                RewardDispenser(worldIn, playerIn, selected);
+                RewardDispenser(worldIn, playerIn, winner);
             }
 
             if (tier == Tier.TWO) {
                 float Total = 0f;
-                for (float totaling : tier2PresentWeights) Total += totaling;
+                for (Map.Entry<String, Float> entry : tier2PresentPossibilities.entrySet()) Total += entry.getValue();
                 float randomized = 0 + worldIn.random.nextFloat() * (Total - 0);
-                int select = 0;
+                String winner = "";
 
-                for (Float percentage : tier2PresentWeights) {
-                    randomized -= percentage;
-                    if (randomized <= 0) break;
-                    else select++;
+                for (Map.Entry<String, Float> entry : tier2PresentPossibilities.entrySet()) {
+                    randomized -= entry.getValue();
+                    if (randomized <= 0) {
+                        winner = entry.getKey();
+                        break;
+                    }
                 }
 
-                if (select == tier2PresentPossibilities.size()) select = select - 1;
-                String selected = tier2PresentPossibilities.get(select);
-                RewardDispenser(worldIn, playerIn, selected);
+                RewardDispenser(worldIn, playerIn, winner);
             }
 
             if (tier == Tier.THREE) {
                 float Total = 0f;
-                for (float totaling : tier3PresentWeights) Total += totaling;
+                for (Map.Entry<String, Float> entry : tier3PresentPossibilities.entrySet()) Total += entry.getValue();
                 float randomized = 0 + worldIn.random.nextFloat() * (Total - 0);
-                int select = 0;
+                String winner = "";
 
-                for (Float percentage : tier3PresentWeights) {
-                    randomized -= percentage;
-                    if (randomized <= 0) break;
-                    else select++;
+                for (Map.Entry<String, Float> entry : tier2PresentPossibilities.entrySet()) {
+                    randomized -= entry.getValue();
+                    if (randomized <= 0) {
+                        winner = entry.getKey();
+                        break;
+                    }
                 }
 
-                if (select == tier3PresentPossibilities.size()) select = select - 1;
-                String selected = tier3PresentPossibilities.get(select);
-                RewardDispenser(worldIn, playerIn, selected);
+                RewardDispenser(worldIn, playerIn, winner);
             }
         }
 

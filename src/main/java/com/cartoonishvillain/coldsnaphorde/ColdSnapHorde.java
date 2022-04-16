@@ -39,10 +39,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.UUID;
+import java.util.*;
 
 import static com.cartoonishvillain.coldsnaphorde.component.ComponentStarter.WORLDCOMPONENT;
 
@@ -60,12 +57,9 @@ public class ColdSnapHorde implements ModInitializer {
 	public static HordeEventTier2 hordeTier2;
 	public static HordeEventTier3 hordeTier3;
 	public static HordeDataManager hordeDataManager = null;
-	public static ArrayList<String> tier1PresentPossibilities = new ArrayList<>();
-	public static ArrayList<Float> tier1PresentWeights = new ArrayList<>();
-	public static ArrayList<String> tier2PresentPossibilities = new ArrayList<>();
-	public static ArrayList<Float> tier2PresentWeights = new ArrayList<>();
-	public static ArrayList<String> tier3PresentPossibilities = new ArrayList<>();
-	public static ArrayList<Float> tier3PresentWeights = new ArrayList<>();
+	public static HashMap<String, Float> tier1PresentPossibilities = new HashMap<>();
+	public static HashMap<String, Float> tier2PresentPossibilities = new HashMap<>();
+	public static HashMap<String, Float> tier3PresentPossibilities = new HashMap<>();
 	public static final CreativeModeTab TAB = FabricItemGroupBuilder.build(new ResourceLocation(ColdSnapHorde.MOD_ID, "coldgroup"), () -> new ItemStack(Register.ROCKYSNOWBALL));
 	public static ColdSnapConfig config;
 
@@ -138,55 +132,55 @@ public class ColdSnapHorde implements ModInitializer {
 
 			hordeDataManager = HordeDataManager.getInstance();
 
-			tier1PresentPossibilities.add("coal"); tier1PresentWeights.add(15f);
-			tier1PresentPossibilities.add("snow"); tier1PresentWeights.add(15f);
-			tier1PresentPossibilities.add("ice"); tier1PresentWeights.add(20f);
-			tier1PresentPossibilities.add("packedice"); tier1PresentWeights.add(15f);
-			tier1PresentPossibilities.add("blueice"); tier1PresentWeights.add(5f);
-			tier1PresentPossibilities.add("candycane"); tier1PresentWeights.add(20f);
-			tier1PresentPossibilities.add("iceshard"); tier1PresentWeights.add(10f);
+			tier1PresentPossibilities.put("coal", 15f);
+			tier1PresentPossibilities.put("snow", 15f);
+			tier1PresentPossibilities.put("ice", 20f);
+			tier1PresentPossibilities.put("packedice", 15f);
+			tier1PresentPossibilities.put("blueice", 5f);
+			tier1PresentPossibilities.put("candycane", 20f);
+			tier1PresentPossibilities.put("iceshard", 10f);
 
-			tier2PresentPossibilities.add("coal"); tier2PresentWeights.add(30f);
-			tier2PresentPossibilities.add("snow"); tier2PresentWeights.add(15f);
-			tier2PresentPossibilities.add("ice"); tier2PresentWeights.add(20f);
-			tier2PresentPossibilities.add("packedice"); tier2PresentWeights.add(15f);
-			tier2PresentPossibilities.add("blueice"); tier2PresentWeights.add(10f);
-			tier2PresentPossibilities.add("doggo"); tier2PresentWeights.add(10f);
-			tier2PresentPossibilities.add("cats"); tier2PresentWeights.add(10f);
-			tier2PresentPossibilities.add("birb"); tier2PresentWeights.add(10f);
-			tier2PresentPossibilities.add("friendsnowman"); tier2PresentWeights.add(10f);
-			tier2PresentPossibilities.add("music"); tier2PresentWeights.add(15f);
-			tier2PresentPossibilities.add("rollercoaster"); tier2PresentWeights.add(10f);
-			tier2PresentPossibilities.add("horse"); tier2PresentWeights.add(10f);
-			tier2PresentPossibilities.add("pig"); tier2PresentWeights.add(10f);
-			tier2PresentPossibilities.add("candycane"); tier2PresentWeights.add(20f);
-			tier2PresentPossibilities.add("axolotl"); tier2PresentWeights.add(10f);
-			tier2PresentPossibilities.add("screamgoat"); tier2PresentWeights.add(5f);
-			tier2PresentPossibilities.add("panda"); tier2PresentWeights.add(5f);
-			tier2PresentPossibilities.add("icesword"); tier2PresentWeights.add(10f);
-			tier2PresentPossibilities.add("transposerpiece"); tier2PresentWeights.add(10f);
-			tier2PresentPossibilities.add("iceshard"); tier2PresentWeights.add(15f);
-			tier2PresentPossibilities.add("transposer"); tier2PresentWeights.add(5f);
-			tier2PresentPossibilities.add("frostcore"); tier2PresentWeights.add(5f);
+			tier2PresentPossibilities.put("coal", 30f);
+			tier2PresentPossibilities.put("snow", 15f);
+			tier2PresentPossibilities.put("ice", 20f);
+			tier2PresentPossibilities.put("packedice", 15f);
+			tier2PresentPossibilities.put("blueice", 10f);
+			tier2PresentPossibilities.put("doggo", 10f);
+			tier2PresentPossibilities.put("cats", 10f);
+			tier2PresentPossibilities.put("birb", 10f);
+			tier2PresentPossibilities.put("friendsnowman", 10f);
+			tier2PresentPossibilities.put("music", 15f);
+			tier2PresentPossibilities.put("rollercoaster", 10f);
+			tier2PresentPossibilities.put("horse", 10f);
+			tier2PresentPossibilities.put("pig", 10f);
+			tier2PresentPossibilities.put("candycane", 20f);
+			tier2PresentPossibilities.put("axolotl", 10f);
+			tier2PresentPossibilities.put("screamgoat", 5f);
+			tier2PresentPossibilities.put("panda", 5f);
+			tier2PresentPossibilities.put("icesword", 10f);
+			tier2PresentPossibilities.put("transposerpiece", 10f);
+			tier2PresentPossibilities.put("iceshard", 15f);
+			tier2PresentPossibilities.put("transposer", 5f);
+			tier2PresentPossibilities.put("frostcore", 5f);
 
-			tier3PresentPossibilities.add("blueice"); tier3PresentWeights.add(20f);
-			tier3PresentPossibilities.add("doggo"); tier3PresentWeights.add(10f);
-			tier3PresentPossibilities.add("cats"); tier3PresentWeights.add(10f);
-			tier3PresentPossibilities.add("birb"); tier3PresentWeights.add(10f);
-			tier3PresentPossibilities.add("friendsnowman"); tier3PresentWeights.add(10f);
-			tier3PresentPossibilities.add("music"); tier3PresentWeights.add(15f);
-			tier3PresentPossibilities.add("rollercoaster"); tier3PresentWeights.add(10f);
-			tier3PresentPossibilities.add("horse"); tier3PresentWeights.add(10f);
-			tier3PresentPossibilities.add("pig"); tier3PresentWeights.add(10f);
-			tier3PresentPossibilities.add("candycane"); tier3PresentWeights.add(20f);
-			tier3PresentPossibilities.add("axolotl"); tier3PresentWeights.add(10f);
-			tier3PresentPossibilities.add("screamgoat"); tier3PresentWeights.add(5f);
-			tier3PresentPossibilities.add("panda"); tier3PresentWeights.add(5f);
-			tier3PresentPossibilities.add("icesword"); tier3PresentWeights.add(10f);
-			tier3PresentPossibilities.add("transposerpiece"); tier3PresentWeights.add(10f);
-			tier3PresentPossibilities.add("iceshard"); tier3PresentWeights.add(15f);
-			tier3PresentPossibilities.add("transposer"); tier3PresentWeights.add(5f);
-			tier3PresentPossibilities.add("frostcore"); tier3PresentWeights.add(10f);
+			tier3PresentPossibilities.put("blueice", 10f);
+			tier3PresentPossibilities.put("doggo", 10f);
+			tier3PresentPossibilities.put("cats", 10f);
+			tier3PresentPossibilities.put("birb", 10f);
+			tier3PresentPossibilities.put("friendsnowman", 10f);
+			tier3PresentPossibilities.put("music", 15f);
+			tier3PresentPossibilities.put("rollercoaster", 10f);
+			tier3PresentPossibilities.put("horse", 10f);
+			tier3PresentPossibilities.put("pig", 10f);
+			tier3PresentPossibilities.put("candycane", 20f);
+			tier3PresentPossibilities.put("axolotl", 10f);
+			tier3PresentPossibilities.put("screamgoat", 5f);
+			tier3PresentPossibilities.put("panda", 5f);
+			tier3PresentPossibilities.put("icesword", 10f);
+			tier3PresentPossibilities.put("transposerpiece", 10f);
+			tier3PresentPossibilities.put("iceshard", 15f);
+			tier3PresentPossibilities.put("transposer", 5f);
+			tier3PresentPossibilities.put("frostcore", 10f);
 		}
 	}
 
